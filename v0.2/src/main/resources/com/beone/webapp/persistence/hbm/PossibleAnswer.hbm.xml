@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="PossibleAnswer" table="PossibleAnswer">
+		<id name="possibleAnswerId" column="PossibleAnswerId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">PossibleAnswer_PossibleAnswerId_seq</param>
+			</generator>
+		</id>
+
+		<property name="textLanguageId" type="integer" column="TextLanguageId"/>
+		<property name="questionId" type="integer" column="QuestionId"/>
+		<property name="translatedText" type="string" column="TranslatedText"/>
+    </class>
+</hibernate-mapping>
