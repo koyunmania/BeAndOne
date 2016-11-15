@@ -1,0 +1,51 @@
+#################################################
+# Setting up dev environment on aws EC2 instance
+#################################################
+
+##Connecting to EC2 from linux/cygwin##
+connecting using our private key .pem
+$ssh -i  "C:\BeOne\keys\BeAndOneDevelopmentServerKeyPair.pem" ubuntu@ec2-54-93-164-79.eu-central-1.compute.amazonaws.com
+Last login: Sun Nov 13 14:35:51 2016 from 122.172.82.174
+ubuntu@ip-172-31-16-131:~$ 
+
+Run below commands:
+
+ubuntu@ip-172-31-16-131:~$ pwd
+/home/ubuntu
+
+ubuntu@ip-172-31-16-131:~$ java -version
+openjdk version "1.8.0_111"
+ 
+#installing tomcat7 and checking status#
+ubuntu@ip-172-31-16-131:~$sudo apt-get install tomcat7
+install manager-gui admin-gui
+ubuntu@ip-172-31-16-131:~$sudo apt-get install tomcat7-docs tomcat7-admin tomcat7-examples
+
+* to start tomcat7
+ubuntu@ip-172-31-16-131:~$sudo service tomcat7 start
+* to stop tomcat7
+ubuntu@ip-172-31-16-131:~$sudo service tomcat7 stop
+* to check status of tomcat7
+ubuntu@ip-172-31-16-131:~$sudo service tomcat7 status
+
+Once tomcat7 is started at 8080:
+go to http://ec2-54-93-164-79.eu-central-1.compute.amazonaws.com:8080
+
+click on Manager webapp:
+-- upload Beone webapp.war with name ROOT.war (or else make entry in context/server.xml to by pass /webapp/)
+We can also use "scp" command from terminal to copy to ubuntu machine. Then move ROOT.war/webapp.war to 
+/var/lib/tomcat7/webapps/
+
+now try above link again our BeOne application is up and running. 
+
+##Configuring Database##
+
+
+
+
+
+
+
+
+
+

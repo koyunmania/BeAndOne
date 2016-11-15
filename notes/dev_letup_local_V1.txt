@@ -1,0 +1,75 @@
+#############################################
+# Development on local computer
+#############################################
+
+SET JAVA_HOME=C:\Program Files\Java\jdk1.7.0_09
+SET PATH=D:\Work\Work\Freelance Projects\apache-maven-3.1.1-bin\apache-maven-3.1.1\bin;%PATH%
+cd "D:\Work\BeOne\webapp\v0.2" -- right pom.xml is here for BeOne app
+
+Use Eclipse/ IntelliJ IDEA to import as maven project
+		mvn clean install -DskipTests=true
+
+##Adding webapp server: tomcat7##
+Eclipse steps: to start app as http://localhost:8080/
+1. Add server --> select tomcat7 --> select tomcat7 home --> select webapp.war
+2. project-->properties -->web project settings --> update context root value / 
+3. restart tomcat
+
+IntelliJ IDEA:
+1. Edit configuration -->select tomcat --> local --> select tomcat7 home directory
+2. next tab deployment --> add artifacts by clicking on + symbol -->choose webapp.war
+3. leave context as blank /
+3. start tomcat
+
+OR
+#start tomcat7 as services#
+Download the binaries of Apache Tomcat
+Extract to a location
+Open a commandline window and navigate to the "bin" folder where you extracted the binaries
+Then run the program "startup.bat"
+This will start the Tomcat server.
+You need to do this each time when you start developing.
+To stop the Tomcat Server, run the command "shutdown.bat".
+
+##Database Installation and Configuration##
+Download the PostgreSQL Binaries: postgresql-9.3.5-1-windows-x64-binaries from: "http://get.enterprisedb.com/postgresql/postgresql-9.3.5-1-windows-x64-binaries.zip"
+Extract the binaries to a location, such as "D:\Work\Tools\postgresql-9.3.5-1-windows-x64-binaries"
+Open a command line window and navigate to the folder "bin" in the extraction folder.
+Run the following command:
+initdb -D ..\local_data
+
+Then run the command to start the database instance:
+postgres.exe -D "D:\Work\BeOne\test\postgresql-9.3.5-1-windows-x64-binaries\pgsql\local_data"
+Each time before you start developing, you need to start the database server
+
+
+Open a Windows Explorer and navigate to the "bin" folder of the extraction folder.
+There is a program "pgAdmin3.exe", run the programm. This is an administration tool for PostgreSQL
+On the left side, create a connection to the local database. A small configuration window opens.
+Enter values as follows:
+- Name: Give a representative name, maybe "BeAndOne"
+- Host: localhost
+- Port: 5432
+- Username: Your Windows username (careful with capital letters)
+- Password: Your Windows password
+- Maintenance DB: postgres
+Click on Enter, this opens a connection to the maintenance database.
+
+Now we will create the database for our application.
+Click on the "+" sign beside database instance
+Then "Databases", then select "postgres".
+On the top menu of the window you see the symbol with text: "SQL" 
+Click on that, this opens another window to enter SQL commands.
+In our project folder "D:\Work\BeOne\webapp\v0.2\database" we have a file "create_user.sql". (this is the path at my computer)
+Open this file and execute it. This will create the initial username.
+Close that SQL window.
+Then you create another db connection with pgAdminIII with the username "beoneuser" with the password: "1234"
+Similarly find this new database and click on "SQL" symbol at the top of the window.
+In our project folder "D:\Work\BeOne\webapp\v0.2\database" we have a file "create_user.sql". (this is the path at my computer)
+Open this file and execute it. This will create the tables for the new database.
+
+You will find these tables at: "Databases->beone->Schema->public->tables"
+
+
+
+		
