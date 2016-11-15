@@ -27,10 +27,10 @@
 	<bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource">
 		<property name="databaseName" value="beone" />
 		<property name="serverName" value="localhost" />
-		<property name="portNumber" value="5432" />
-		<property name="user" value="beoneuser" />
+		<property name="portNumber" value="5433" />
+		<property name="user" value="postgres" />
 		<!--property name="user" value="Selcuk" /-->
-		<property name="password" value="Qwert1234" />
+		<property name="password" value="admin" />
 	</bean>
 
 	<bean id="connectionFactoryLocator"
