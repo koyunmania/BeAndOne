@@ -14,6 +14,7 @@ CREATE TABLE users (
 	provider character varying(20),
 	createdAt timestamp,
 	updatedAt timestamp,
+	locale character(2),
   CONSTRAINT users_pkey PRIMARY KEY (userid)
 )
 WITH (
