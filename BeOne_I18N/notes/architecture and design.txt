@@ -1,0 +1,81 @@
+SET JAVA_HOME=C:\Program Files\Java\jdk1.7.0_09
+SET PATH=D:\Work\Work\Freelance Projects\apache-maven-3.1.1-bin\apache-maven-3.1.1\bin;%PATH%
+D:
+cd Work\BeOne\webapp\v0.2
+
+
+
+Register:
+Firstname
+Lastname
+Email
+Password
+
+Login:
+Email
+Password
+
+
+Admin - Add Calendar
+
+Admin - Edit Calendar
+
+Show Calendar
+
+Data Models:
+--User--
+UserId
+Firstname
+Lastname
+Email
+Password
+CurrentProfilePhotoFilename
+
+--Calendar--
+CalendarId
+CalendarName
+Description
+
+--Calendar Events--
+EventId
+EventName
+EventDate: Select from a calendar in the add view
+EventDescription
+
+
+--User Calendars-- To which calendars the user has subscribed
+UserCalendarId
+UserId
+CalendarId
+
+Use Case:
+A user subscribes to a calendar
+User logs in to system
+System reads the calendars user is subscribed
+If there is an event for today(selected date) for the calendars, then it is displayed in Happenings
+
+CAUTION: this might be used maybe later
+--User Calendar Events--
+
+
+-- User Experiences --
+UserExperienceId
+UserId
+ExperienceDescription
+
+-- User Experiences Comments --
+CommentId
+UserId
+UserExperienceId
+CommentedExperienceId
+CommentText
+
+-- User Experiences Likes --
+ExperienceLikeId
+UserId
+
+-- Dailies --
+DailyId
+DailyTitle
+DailyCategory
+DailyText

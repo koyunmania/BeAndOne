@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="ProfileEntry" table="ProfileEntry">
+    	<id name="entryId" column="EntryId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">profileentry_entryid_seq</param>
+			</generator>
+		</id>
+   		<property name="userId" type="integer" column="UserId"/>
+		<property name="fieldName" type="string" column="FieldName"/>
+		<property name="fieldValue" type="integer" column="FieldValue"/>
+		<property name="createdAt" type="timestamp" column="CreatedAt"/>
+		<property name="updatedAt" type="timestamp" column="UpdatedAt"/>
+    </class>
+</hibernate-mapping>
