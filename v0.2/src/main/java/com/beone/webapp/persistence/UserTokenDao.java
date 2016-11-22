@@ -64,4 +64,16 @@ public class UserTokenDao extends AbstractDao
 		return (result != null && result.size() > 0);
  		// End of user code
 	}
+
+	public boolean getUserByTokenAndUser(UserToken token) {
+		//Start of mail verification based on token
+		@SuppressWarnings("rawtypes")
+		List result = this.localSessionFactory.getCurrentSession()
+				.createQuery("from UserToken where token=:token and userid=:userid")
+				.setParameter("token", token.getToken())
+				.setParameter("userid",token.getUser().getUserId())
+				.list();
+		return (result != null && result.size() > 0);
+		// End of user code
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
 
+import com.beone.webapp.model.Email;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +19,9 @@ import org.springframework.social.connect.ConnectionFactoryLocator;
 
 import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserProfile;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class UserDao extends AbstractDao {
 	private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
 	
@@ -78,17 +80,21 @@ public class UserDao extends AbstractDao {
 //		}
 //	}
 	
-	public void checkExistingInsertNewFromProfile (User user) throws EntityExistsException {
+	public boolean checkExistingInsertNewFromProfile (User user) throws EntityExistsException {
 		Session session = this.localSessionFactory.getCurrentSession();
 		List items = session.createQuery("from User where (username=:username or email=:email) and provider=:provider")
 				.setParameter("username", user.getUsername())
 				.setParameter("email", user.getEmail())
 				.setParameter("provider", user.getProvider())
 				.list();
+
+		boolean querySuccess=false;
 		
 		if(items == null || items.size() == 0) {
 			//session.saveOrUpdate(user);
+			user.setStatus("pending"); //setting the default value to active user as false for email verification
 			session.save(user);
+			querySuccess=true;
 		}
 		
 		if(user.getExternalConnections() != null && user.getExternalConnections().size() > 0) {
@@ -96,7 +102,9 @@ public class UserDao extends AbstractDao {
 				pro.setUser(user);
 				session.save(pro);
 			}
+			querySuccess=true;
 		}
+		return querySuccess;
 	}
 	
 	public void addExternalProfileToUser (User user) throws EntryDoesNotExistException {

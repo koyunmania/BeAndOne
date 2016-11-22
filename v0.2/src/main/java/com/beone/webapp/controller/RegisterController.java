@@ -64,7 +64,7 @@ public class RegisterController extends AbstractController {
 			try {
 				user.setProvider(User.USER_PROVIDER_BEONE);
 				profileService.registerUser(user);
-				logger.info("User has been created");
+				logger.info("User has been created. Verification mail is sent.");
 				model.addAttribute(
 						"creationResultMessage", 
 						MessageTranslator.getStatusMessageTranslation(StatusCode.REGISTRATION_SUCCESSFUL, locale));
@@ -85,7 +85,7 @@ public class RegisterController extends AbstractController {
 			model.addAttribute("validationErrors", validationErrors);
 		}
 		
-		return "redirect:/login";
+		return "register";
 	}
 	
 	private List<ValidationError> validateFields(Model model, User user, Locale locale) {

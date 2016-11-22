@@ -10,8 +10,9 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	<context:component-scan base-package="com.beone.webapp" />
-	
+	<context:component-scan base-package="com.beone" />
+	<context:annotation-config/>
+
 	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
          <beans:property name="locations">
             <beans:value>classpath:/application.properties</beans:value>
