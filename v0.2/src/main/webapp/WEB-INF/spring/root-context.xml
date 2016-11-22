@@ -170,6 +170,12 @@
 		<property name="userDao" ref="userDao" />
 		<property name="tokenDao" ref="userTokenDao" />
 	</bean>
+
+	<bean id="emailService" class="com.${application.package.name}.webapp.controller.service.EmailService">
+		<property name="registerTokenDao" ref="registerTokenDao"/>
+		<property name="userDao" ref="userDao"/>
+	</bean>
+
 	<bean id="profileService" class="com.${application.package.name}.webapp.controller.service.ProfileService">
 		<property name="profileEntryDao" ref="profileEntryDao" />
 		<property name="userDao" ref="userDao" />
@@ -225,12 +231,8 @@
 	<bean id = "userAlbumService" class = "com.${application.package.name}.webapp.controller.service.UserAlbumService">
 		<property name="photoAlbumDao" ref="photoAlbumDao"/>
 	</bean>
-	<bean id="emailService" class="com.${application.package.name}.webapp.controller.service.EmailService">
-		<property name="registerTokenDao" ref="registerTokenDao"/>
-		<property name="userDao" ref="userDao"/>
-	</bean>
-	
-	
+
+
 	<bean id="securityAspect" class="com.${application.package.name}.webapp.app.secure.Secure" />
     <bean id="tokenUtils" class="com.${application.package.name}.webapp.app.secure.TokenUtils">
     	<property name="userTokenDao" ref="userTokenDao"/>
