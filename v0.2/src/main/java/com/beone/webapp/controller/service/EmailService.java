@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by panded4 on 11/19/2016.
  */
-
-@Service
 public class EmailService {
 
     @Autowired
@@ -46,27 +46,30 @@ public class EmailService {
         this.registerTokenDao = registerTokenDao;
     }
 
-    public String sendVerificationEmail(Email email) {
+    @Transactional
+    public String sendVerificationEmail(User user,Email email) {
         String token = SecurityUtils.generateToken();
-        User user = userDao.findByEmailAndProvider(email.getTo(), User.USER_PROVIDER_BEONE);
-        RegisterToken userToken = new RegisterToken();
-        userToken.setUser(user);
-        userToken.setToken(token);
-        registerTokenDao.insertNew(userToken);
+        RegisterToken registerToken = new RegisterToken();
+        registerToken.setUser(user);
+        registerToken.setToken(token);
+        registerTokenDao.insertNew(registerToken);
         String url = "http://localhost:8085" + "/verify/" + user.getUserId() + "/" + token;
 
         MailUtils.sendEmail(email,url);
         return null;
     }
-
-    public boolean verify(String email, String key) {
-        User user = userDao.findByEmailAndProvider(email, User.USER_PROVIDER_BEONE);
-        UserToken userToken = new UserToken();
-        userToken.setUser(user);
-        userToken.setToken(key);
-        if (registerTokenDao.getUserByTokenAndUser(userToken)) {
+    @Transactional
+    public boolean verify(int userid, String key) {
+        User user = userDao.findByKey(userid);
+        RegisterToken registerToken=new RegisterToken();
+        registerToken.setToken(key);
+        if (null!=registerTokenDao.getUserByToken(registerToken)) {
             user.setStatus("active");
             userDao.insertNew(user);
+            RegisterToken registerToken1=new RegisterToken();
+            registerToken1.setToken(SecurityUtils.generateToken());
+            registerToken1.setUser(user);
+            registerTokenDao.update(registerToken1);
             return true;
         } else {
             return false;
