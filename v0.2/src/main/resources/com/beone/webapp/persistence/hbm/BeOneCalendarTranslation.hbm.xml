@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="BeOneCalendarTranslation" table="BeOneCalendarTranslations">
+		<id name="translationId" column="TranslationId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">BeOneCalendarTranslations_TranslationId_seq</param>
+			</generator>
+		</id>
+
+		<property name="calendarId" type="integer" column="calendarId"/>
+		<property name="languageId" type="integer" column="languageId"/>
+		<property name="transDescription" type="string" column="TransDescription"/>
+		<property name="transName" type="string" column="TransName"/>
+    </class>
+</hibernate-mapping>

@@ -6,6 +6,8 @@ import java.util.Set;
 
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
+import com.beone.webapp.model.BeOneCalendarSubCategoryTranslation;
+import com.beone.webapp.model.BeOneCalendarTranslation;
 
 public class CalendarSubCategoryDao extends AbstractDao {
 	/*public Set<BeOneCalendarSubCategory> getSubcategoriesOfUserCalendars(){
@@ -29,10 +31,15 @@ public class CalendarSubCategoryDao extends AbstractDao {
 	 * @param calendarName
 	 * @return
 	 */
-	public BeOneCalendarSubCategory findByCalendarAndName (BeOneCalendar calendar, String subCategoryName) {
+	public BeOneCalendarSubCategory findByCalendarAndName (
+			BeOneCalendar calendar, String subCategoryName) {
 		List result = this.localSessionFactory.getCurrentSession()
-				.createQuery("Select cat from BeOneCalendarSubCategory cat inner join cat.calendar cal "
-						+  "where upper(cat.calendarSubCategory)=upper(:subCategoryName) and cal.calendarId=:calendarId")
+				.createQuery("Select cat from BeOneCalendarSubCategory cat "
+						+ "inner join cat.calendar cal "
+						+ "inner join cat.translations tran "
+						+ "where "
+						+ "cal.calendarId=:calendarId and "
+						+ "upper(tran.calendarSubCategoryTrans)=upper(:subCategoryName)")
                 .setParameter("subCategoryName", subCategoryName)
                 .setParameter("calendarId", calendar.getCalendarId())
                 .list();
@@ -92,5 +99,27 @@ public class CalendarSubCategoryDao extends AbstractDao {
 			.setParameter("calendarId", calendar.getCalendarId())
 			.list());
 		return result;
+	}
+
+	public BeOneCalendarSubCategoryTranslation getSubCategoryTranslation(
+			BeOneCalendarSubCategoryTranslation subCatTrans) {
+		List result = this.localSessionFactory.getCurrentSession()
+				.createQuery("from BeOneCalendarSubCategoryTranslation tr "
+						+ "where tr.languageId=:languageId and tr.subcategoryId=:subcategoryId")
+                .setParameter("subcategoryId", subCatTrans.getSubcategoryId())
+                .setParameter("languageId", subCatTrans.getLanguageId())
+                .list();
+		
+		if(result.size() > 0) {
+			return (BeOneCalendarSubCategoryTranslation)result.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void insertNewTranslation(
+			BeOneCalendarSubCategoryTranslation subCatTrans) {
+		
+		this.localSessionFactory.getCurrentSession().saveOrUpdate(subCatTrans);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarEvent;
+import com.beone.webapp.model.BeOneCalendarEventTranslation;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
 import com.beone.webapp.model.UserCalendar;
 import com.beone.webapp.model.UserCalendarSubCategory;
@@ -59,11 +60,20 @@ public class CalendarEventDao extends AbstractDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public BeOneCalendarEvent findBySubcategoryAndEventName(BeOneCalendarSubCategory subCategory, String eventName) {
+	public BeOneCalendarEvent findBySubcategoryAndEventName(
+			BeOneCalendarSubCategory subCategory, String eventNameTr, String eventNameEn) {
 		List<BeOneCalendarEvent> result = (List<BeOneCalendarEvent>)this.localSessionFactory.getCurrentSession()
-				.createQuery("from BeOneCalendarEvent ev where ev.subCategory=:subCategory and upper(ev.eventName)=upper(:eventName)")
+				.createQuery("select ev from BeOneCalendarEvent ev "
+						+ "inner join ev.translations tran "
+						+ "where "
+						+ "ev.subCategory=:subCategory and "
+						+ "("
+						+ "	upper(tran.eventName)=upper(:eventNameTr) or "
+						+ "	upper(tran.eventName)=upper(:eventNameEn)"
+						+ ")")
                 .setParameter("subCategory", subCategory)
-                .setParameter("eventName", eventName)
+                .setParameter("eventNameTr", eventNameTr)
+                .setParameter("eventNameEn", eventNameEn)
                 .list();
 
 		if(result.size() > 0) {
@@ -121,33 +131,76 @@ public class CalendarEventDao extends AbstractDao {
 		return result;
 	}
 	
-	public Set<BeOneCalendarEvent> findEventsByUserIdAndDate(Set<UserCalendarSubCategory> subs, String userCity, int userId, Timestamp startDate, Timestamp endDate) {
+	@SuppressWarnings("unchecked")
+	public Set<BeOneCalendarEvent> findEventsByUserIdAndDate(
+			Set<UserCalendarSubCategory> subs, 
+			String userCity, 
+			int userId, 
+			Timestamp startDate, 
+			Timestamp endDate) {
 		Set<BeOneCalendarEvent> result = new HashSet<BeOneCalendarEvent>();
 		
 		String query = new String();
 		int counter = 0;
-		if(subs.size() > 0){
-			query = "(";
-			for(UserCalendarSubCategory sub: subs){
-				counter++;
-				if(counter < subs.size()){
-					query = query + "subCat.subcategoryId = " + sub.getBeOneCalendarSubCategory().getSubcategoryId() + " OR ";
-				} else {
-					query = query + "subCat.subcategoryId = " + sub.getBeOneCalendarSubCategory().getSubcategoryId() + ") AND ";
-				}
-			}
+//		if(subs.size() > 0){
+			
+//			query = "(";
+//			for(UserCalendarSubCategory sub: subs){
+//				counter++;
+//				if(counter < subs.size()){
+//					query = query + "subCat.subcategoryId = " + sub.getBeOneCalendarSubCategory().getSubcategoryId() + " OR ";
+//				} else {
+//					query = query + "subCat.subcategoryId = " + sub.getBeOneCalendarSubCategory().getSubcategoryId() + ") AND ";
+//				}
+//			}
 			
 	        result.addAll(this.localSessionFactory.getCurrentSession().createQuery(
-	            	"SELECT ev FROM BeOneCalendarEvent AS ev INNER JOIN ev.subCategory as subCat INNER JOIN subCat.calendar AS cal WHERE "
+	            	"SELECT ev FROM UserCalendarSubCategory userSub, BeOneCalendarEvent ev "
+	            	+ "INNER JOIN userSub.beOneCalendarSubCategory subCat "
+//	            	+ "INNER JOIN subCat.translations subTrans "
+	            	+ "INNER JOIN ev.translations evTrans "
+	            	+ "INNER JOIN ev.subCategory as evSubCat "
+	            	+ "WHERE "
 	        			+ query
-	        			+ "(eventLocation = :userCity OR eventLocation = 'Universal') AND "
-	        			+ "eventDate >= :eventStart AND eventDate < :eventEnd "
-	        			+ "ORDER BY cal.calendarName, subCat.calendarSubCategory ")
+	        			+ "(evTrans.eventLocation = :userCity OR evTrans.eventLocation = 'Universal') AND "
+	        			+ "ev.eventDate >= :eventStart AND ev.eventDate < :eventEnd AND "
+	        			+ "userSub.user.userId=:userId AND subCat.subcategoryId=evSubCat.subcategoryId"
+//	        			+ "ORDER BY trans.transName, subTrans.calendarSubCategoryTrans"
+	        			)
 	        			.setParameter("eventStart", startDate)
 	        			.setParameter("eventEnd", endDate)
 	        			.setParameter("userCity", userCity)
+	        			.setParameter("userId", userId)
 	        			.list());
-		}
+//		}
         return result;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public BeOneCalendarEventTranslation findEventTranslation(BeOneCalendarEventTranslation eventTrans) {
+		List result = this.localSessionFactory.getCurrentSession().createQuery(
+			"select tran from BeOneCalendarEvent ev "
+			+ "inner join ev.translations tran "
+				+ "where ev.eventId=:eventId and "
+				+ "tran.eventName=:eventName and "
+				+ "tran.languageId=:languageId ")
+			.setParameter("eventId", eventTrans.getEventId())
+			.setParameter("eventName", eventTrans.getEventName())
+			.setParameter("languageId", eventTrans.getLanguageId())
+			.list();
+
+		if(result.size() > 0) {
+			return (BeOneCalendarEventTranslation)result.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void insertNewTranslation(BeOneCalendarEventTranslation eventTrans) {
+		this.localSessionFactory.getCurrentSession().saveOrUpdate(eventTrans);
+	}
+
+	public void updateTranslation(BeOneCalendarEventTranslation existingTrans) {
+		this.localSessionFactory.getCurrentSession().saveOrUpdate(existingTrans);
 	}
 }

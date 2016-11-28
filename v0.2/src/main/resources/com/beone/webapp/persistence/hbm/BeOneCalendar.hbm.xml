@@ -12,11 +12,16 @@
 			</generator>
 		</id>
 
-		<property name="calendarName" type="string" column="CalendarName"/>
-		<property name="description" type="string" column="description"/>
+		<!-- <property name="calendarName" type="string" column="CalendarName"/>
+		<property name="description" type="string" column="description"/> -->
 		<property name="colorCode" type="string" column="ColorCode"/>
 		<property name="calendarIcon" type="string" column="CalendarIcon"/>
 		<property name="buttonClass" type="string" column="ButtonClass"/>
 		<property name="sortOrder" type="integer" column="SortOrder"/>
+		
+		<set name="translations" fetch="join" inverse="true" lazy="false">
+			<key column="calendarId"/>
+			<one-to-many class="com.beone.webapp.model.BeOneCalendarTranslation"/>
+		</set>
     </class>
 </hibernate-mapping>

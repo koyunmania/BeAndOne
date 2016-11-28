@@ -57,7 +57,8 @@ public class User implements Serializable {
 	
 	private City currentCity;
 	private Country currentCountry;
-
+	private int language;
+	
 	/**
 	 * User's sport social connections
 	 */
@@ -210,6 +211,14 @@ public class User implements Serializable {
 
 	public void setCurrentCountry(Country currentCountry) {
 		this.currentCountry = currentCountry;
+	}
+
+	public int getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(int language) {
+		this.language = language;
 	}
 
 	public String getLocale() {

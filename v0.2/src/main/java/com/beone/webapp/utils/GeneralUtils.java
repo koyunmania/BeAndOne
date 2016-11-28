@@ -6,7 +6,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.ui.Model;
+import org.thymeleaf.util.StringUtils;
 
 import com.beone.webapp.model.StatusCode;
 import com.beone.webapp.model.UserToken;
@@ -31,6 +33,18 @@ public class GeneralUtils {
 		Timestamp result = Timestamp.valueOf(date);
 		
 		return result;
+	}
+
+	public static String trimAndGetStringValue(Cell cell) {
+		if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+			return "" + (int)cell.getNumericCellValue();
+		} else if(cell.getCellType() == Cell.CELL_TYPE_STRING){
+			return StringUtils.trim(cell.getStringCellValue());
+		} else if(cell.getCellType() == Cell.CELL_TYPE_BOOLEAN){
+			return "" + cell.getBooleanCellValue();
+		} else {
+			return "";
+		}
 	}
 
 //	/**

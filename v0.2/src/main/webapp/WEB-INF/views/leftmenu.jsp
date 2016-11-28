@@ -113,7 +113,7 @@
 				ng-class="{true: calendar.buttonClass, false: 'btn-default'}[isCalendarAUserCalendar(calendar.calendarId)]"> {{calendar.calendarName}}</button> -->
 			<button type="button" class="btn btn-lg btn-block btn-calendar" 
 				ng-click="openSubCategoryModal(calendar, $index)" 
-				ng-class="{true: calendar.buttonClass, false: 'btn-default'}[isCalendarAUserCalendar(calendar.calendarId)]"><span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span>&nbsp;{{calendar.calendarName}}</button>
+				ng-class="calendar.buttonClass">{{calendar.calendarName}}</button>
 			<div id="subCategoryModal{{$index}}" class="modal fade" role="dialog">
 				<div class="modal-dialog" style="width: 400px;">
 					<!-- Modal content-->

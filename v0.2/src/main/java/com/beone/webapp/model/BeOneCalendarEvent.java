@@ -1,35 +1,37 @@
 package com.beone.webapp.model;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 public class BeOneCalendarEvent {
-	private String eventName;
+//	private String eventName;
 	private Timestamp eventDate;
-	private String eventDescription;
+//	private String eventDescription;
 	private String eventLocation;
 	private String eventType;
 	private int eventId;
 	private BeOneCalendarSubCategory subCategory;
-	private String eventHappeningPhotoFilename;
+//	private String eventHappeningPhotoFilename;
+	private Set<BeOneCalendarEventTranslation> translations;
 	
-	public String getEventName() {
-		return eventName;
-	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
-	}
+//	public String getEventName() {
+//		return eventName;
+//	}
+//	public void setEventName(String eventName) {
+//		this.eventName = eventName;
+//	}
 	public Timestamp getEventDate() {
 		return eventDate;
 	}
 	public void setEventDate(Timestamp eventDate) {
 		this.eventDate = eventDate;
 	}
-	public String getEventDescription() {
-		return eventDescription;
-	}
-	public void setEventDescription(String eventDescription) {
-		this.eventDescription = eventDescription;
-	}
+//	public String getEventDescription() {
+//		return eventDescription;
+//	}
+//	public void setEventDescription(String eventDescription) {
+//		this.eventDescription = eventDescription;
+//	}
 	public String getEventLocation() {
 		return eventLocation;
 	}
@@ -54,10 +56,16 @@ public class BeOneCalendarEvent {
 	public void setSubCategory(BeOneCalendarSubCategory subCategory) {
 		this.subCategory = subCategory;
 	}
-	public String getEventHappeningPhotoFilename() {
-		return eventHappeningPhotoFilename;
+//	public String getEventHappeningPhotoFilename() {
+//		return eventHappeningPhotoFilename;
+//	}
+//	public void setEventHappeningPhotoFilename(String eventHappeningPhotoFilename) {
+//		this.eventHappeningPhotoFilename = eventHappeningPhotoFilename;
+//	}
+	public Set<BeOneCalendarEventTranslation> getTranslations() {
+		return translations;
 	}
-	public void setEventHappeningPhotoFilename(String eventHappeningPhotoFilename) {
-		this.eventHappeningPhotoFilename = eventHappeningPhotoFilename;
+	public void setTranslations(Set<BeOneCalendarEventTranslation> translations) {
+		this.translations = translations;
 	}
 }

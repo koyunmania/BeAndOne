@@ -155,7 +155,7 @@ public class ProfileService {
                     email.setSubject("New user verification mail");
                     email.setLocale(user.getLocale());
                     email.setUserName(user.getUsername());
-                    emailService.sendVerificationEmail(email);
+                    emailService.sendVerificationEmail(user, email);
                 }
                 logger.info("User has been created, assigning him all of the subcategories.");
 

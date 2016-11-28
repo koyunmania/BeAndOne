@@ -27,10 +27,10 @@
 	<bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource">
 		<property name="databaseName" value="beone" />
 		<property name="serverName" value="localhost" />
-		<property name="portNumber" value="5433" />
-		<property name="user" value="postgres" />
+		<property name="portNumber" value="5432" />
+		<property name="user" value="beoneuser" />
 		<!--property name="user" value="Selcuk" /-->
-		<property name="password" value="admin" />
+		<property name="password" value="Qwert1234" />
 	</bean>
 
 	<bean id="connectionFactoryLocator"
@@ -86,8 +86,11 @@
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserWish.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserWishDailyCheck.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendar.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarTranslation.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarSubCategory.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarSubCategoryTranslation.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarEvent.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarEventTranslation.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/PossibleAnswer.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/Question.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserAnswer.hbm.xml</value>

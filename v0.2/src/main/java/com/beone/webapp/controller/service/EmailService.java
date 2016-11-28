@@ -58,6 +58,7 @@ public class EmailService {
         MailUtils.sendEmail(email,url);
         return null;
     }
+    
     @Transactional
     public boolean verify(int userid, String key) {
         User user = userDao.findByKey(userid);

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
+import com.beone.webapp.model.BeOneCalendarSubCategoryTranslation;
+import com.beone.webapp.model.BeOneLanguage;
 import com.beone.webapp.persistence.CalendarSubCategoryDao;
 
 public class BeOneCalendarSubCategoryService {
@@ -31,14 +33,22 @@ public class BeOneCalendarSubCategoryService {
 	}
 	
 	@Transactional
-	public void addSubCategoryIfNotExists(BeOneCalendarSubCategory subCategory) {
+	public BeOneCalendarSubCategory addSubCategoryIfNotExists(
+			BeOneCalendarSubCategory subCategory, 
+			String subCatName) {
+		
 		BeOneCalendarSubCategory existingSubCategory =
-				calendarSubCategoryDao.findByCalendarAndName(subCategory.getCalendar(), subCategory.getCalendarSubCategory());
+				calendarSubCategoryDao.findByCalendarAndName(
+						subCategory.getCalendar(), 
+						subCatName);
+		
 		if(existingSubCategory == null) {
 			logger.debug("The calendar subCategory does not exist, creating it.");
 			calendarSubCategoryDao.insertNew(subCategory);
+			return subCategory;
 		} else {
 			logger.debug("Calendar subCategory already exists.");
+			return existingSubCategory;
 		}
 	}
 	 
@@ -62,9 +72,25 @@ public class BeOneCalendarSubCategoryService {
 	}
 	
 	@Transactional
-	public BeOneCalendarSubCategory getSubCategoryByCalendarAndName(BeOneCalendarSubCategory subCategory) {
+	public BeOneCalendarSubCategory getSubCategoryByCalendarAndName(BeOneCalendar calendar, String subCategoryName) {
 		BeOneCalendarSubCategory existingSubCategory =
-				calendarSubCategoryDao.findByCalendarAndName(subCategory.getCalendar(), subCategory.getCalendarSubCategory());
+				calendarSubCategoryDao.findByCalendarAndName(
+						calendar, 
+						subCategoryName);
 		return existingSubCategory;
+	}
+	
+	@Transactional
+	public void addTranslationIfNotExists(
+			BeOneCalendarSubCategoryTranslation subCatTrans) {
+		
+		BeOneCalendarSubCategoryTranslation existingSubCategoryTrans =
+				calendarSubCategoryDao.getSubCategoryTranslation(subCatTrans);
+		
+		if(existingSubCategoryTrans != null) {
+			//
+		} else {
+			calendarSubCategoryDao.insertNewTranslation(subCatTrans);
+		}
 	}
 }

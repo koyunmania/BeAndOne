@@ -1,27 +1,32 @@
 package com.beone.webapp.model;
 
+import java.util.Set;
+
 public class BeOneCalendar {
 	
-	private String calendarName;
-	private String description;
+	public static final String CALENDAR_NAME_TRANSLATION_MISSING = "Name Missing";
+	public static final String CALENDAR_DESC_TRANSLATION_MISSING = "Translation Missing";
+	//	private String calendarName;
+//	private String description;
 	private int calendarId;
 	private String colorCode;
 	private String calendarIcon;
 	private String buttonClass;
 	private int sortOrder;
+	private Set<BeOneCalendarTranslation> translations;
 	
-	public String getCalendarName() {
-		return calendarName;
-	}
-	public void setCalendarName(String calendarName) {
-		this.calendarName = calendarName;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+//	public String getCalendarName() {
+//		return calendarName;
+//	}
+//	public void setCalendarName(String calendarName) {
+//		this.calendarName = calendarName;
+//	}
+//	public String getDescription() {
+//		return description;
+//	}
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
 	public int getCalendarId() {
 		return calendarId;
 	}
@@ -51,6 +56,12 @@ public class BeOneCalendar {
 	}
 	public void setSortOrder(int sortOrder) {
 		this.sortOrder = sortOrder;
+	}
+	public Set<BeOneCalendarTranslation> getTranslations() {
+		return translations;
+	}
+	public void setTranslations(Set<BeOneCalendarTranslation> translations) {
+		this.translations = translations;
 	}
 	
 	

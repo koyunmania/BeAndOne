@@ -97,7 +97,7 @@ beoneApp.service('ProfileService', function($http, $q) {
 		);
 		return deferred.promise;
 	};
-
+/*
 	this.getUserCalendars = function() {
 		var deferred = $q.defer();
 		$http({
@@ -113,7 +113,7 @@ beoneApp.service('ProfileService', function($http, $q) {
 		);
 		return deferred.promise;
 	};
-	
+*/	
 	this.getAllCalendars = function() {
 		var deferred = $q.defer();
 		$http({
@@ -161,7 +161,7 @@ beoneApp.service('ProfileService', function($http, $q) {
 		);
 		return deferred.promise;
 	};
-	
+/*	
 	this.subscribeCalendars = function(selectedCalendars) {
 		var deferred = $q.defer();
 		$http({
@@ -215,7 +215,7 @@ beoneApp.service('ProfileService', function($http, $q) {
 		);
 		return deferred.promise;
 	};
-	
+*/	
 	this.editProfile = function(profile) {
 		var deferred = $q.defer();
 		$http({

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="BeOneCalendarEventTranslation" table="BeOneCalendarEventTranslations">
+		<id name="translationId" column="TranslationId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">BeOneCalendarEventTranslations_TranslationId_seq</param>
+			</generator>
+		</id>
+
+		<property name="languageId" type="integer" column="LanguageId"/>
+		<property name="eventId" type="integer" column="EventId"/>
+		<property name="eventName" type="string" column="EventName"/>
+		<property name="eventDescription" type="string" column="EventDescription"/>
+		<property name="eventLocation" type="string" column="EventLocation"/>
+		
+		<property name="designNumber" type="string" column="DesignNumber"/>
+		<property name="plusCMessageNumber" type="string" column="PlusCMessageNumber"/>
+		<property name="plusCToWeb" type="string" column="PlusCToWeb"/>
+		<property name="plusCToWall" type="string" column="PlusCToWall"/>
+		<property name="plusCToPrint" type="string" column="PlusCToPrint"/>
+		<property name="plusCToApp" type="string" column="PlusCToApp"/>
+		
+    </class>
+</hibernate-mapping>

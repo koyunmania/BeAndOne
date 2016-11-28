@@ -6,7 +6,7 @@
 <link rel='stylesheet'
 	href="/resources/js/facebookSDK/angular-socialshare.css">
 
-<body onLoad="window.scroll(0, 150)">
+<body onLoad="window.scroll(0, 170)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
 			<div class="title-page col-md-12">
@@ -83,8 +83,8 @@
 					</div>
 					<div class="col-md-5">
 						<h2 id="experiences-header">Positif G&uuml;nl&uuml;k</h2>
-						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()">
-							<div class="panel-heading">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
+						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; border:0px;">
+							<div class="panel-heading" style="border:0px; background-color:initial !important; ">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
 							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
@@ -177,7 +177,7 @@
 									</div>
 								</div>
 								<div class="item panel panel-default">
-									<div class="panel-heading">Bugun neler diliyorsun?</div>
+									<div class="panel-heading">Bug&uuml;n neler diliyorsun?</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
@@ -199,6 +199,31 @@
 										</div>
 									</div>
 								</div>
+								<!-- 
+								<div class="item panel panel-default">
+									<div class="panel-heading">Bugun neler yapacaksin?</div>
+									<div class="panel-body">
+									<c:if test="${usersCurrentDate.equals(selectedDate)}">
+										<form>
+											<textarea class="form-control" rows="2" cols="30"
+												ng-model="whatIsYourWishQuestion.answerText"></textarea>
+											<br />
+											<button class="btn btn-default" type="submit"
+												ng-click="saveWhatIsYourWishAnswer(whatIsYourWishQuestion.answerText, 2)">Save</button>
+										</form>
+									</c:if>
+										<div ng-repeat="userAnswer in whatIsYourWishQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" style="margin-bottom:15px;">
+											<div class="col col-lg-8">
+												{{userAnswer.userAnswerText}}
+											</div>
+											<div class="col col-lg-4" style="text-align:right;">
+												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
+												<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								-->
 							</div>
 							<div>
 								<!-- Left and right controls -->
