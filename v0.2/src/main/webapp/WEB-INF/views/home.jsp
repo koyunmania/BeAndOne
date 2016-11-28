@@ -10,16 +10,29 @@
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
 			<div class="title-page col-md-12">
+				<div class="b-logo">
+					<span>B</span>
+				</div>
+				<div class="mood">
+					<h3>Keyfin Nasil?</h3>
+					<a class="emoji" href=''>&#x1F603</a>
+					<a class="emoji" href=''>&#x1F60A</a>
+					<a class="emoji" href=''>&#x1F614</a>
+					<a class="emoji" href=''>&#x1F615</a>
+					<a class="emoji" href=''>&#x1F627</a>
+				</div>
+				<div class="instagram fa fa-instagram">
+					@benowmehere
+				</div>
 			</div>
+
 			<div class="col-md-2">
 				<%@include file="leftmenu.jsp"%>
 			</div>
 			<div class="col-md-10">
-				<div class="row"><span class="profile-label">{{greeting}} {{profile.firstname}} ({{profile.currentCity.cityName}})</span>
-				</div>
 				<div class="row">
 					<div class="col-md-7" ng-controller="HappeningCtrl" ng-init="initHappenings()">
-						<h2 id="happenings-header">Bug&uuml;nk&uuml;ler</h2>
+						<h2 id="happenings-header">Bugunkuler</h2>
 						<div ng-repeat="calendar in $parent.userCalendars">
 							<div class="row panel panel-body" ng-repeat="happening in calendar.happenings" style="{{calendar.colorCode}}; font-size:40px; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
 								<div style="{{calendar.colorCode}}" class="col-md-2"><span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings'"></span></div>
@@ -82,9 +95,9 @@
 						</div>
 					</div>
 					<div class="col-md-5">
-						<h2 id="experiences-header">Positif G&uuml;nl&uuml;k</h2>
+						<h2 id="experiences-header">Positif Gunluk</h2>
 						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()">
-							<div class="panel-heading">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
+							<div class="panel-heading">Bugun ne gibi gzellikler yasadin?</div>
 							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
@@ -113,7 +126,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title happening">G&uuml;zellikleri paylas</h4> 
+											<h4 class="modal-title happening">Guzellikleri paylas</h4> 
 										</div>
 										<div class="modal-body happening"
 											style="min-height: 300px; background-repeat: no-repeat;">
@@ -145,7 +158,7 @@
 							</div>
 						</div>
 						
-						<h2 id="experiences-header">G&uuml;nl&uuml;k Sorular</h2>
+						<h2 id="experiences-header">Gunluk Sorular</h2>
 						<div id="myCarousel" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
 								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -153,7 +166,7 @@
 							</ol>
 							<div ng-controller="QuestionAnswerCtrl" ng-init="initQuestionAnswer('${selectedDate}')" class="carousel-inner" role="listbox">
 								<div class="item panel panel-default active">
-									<div class="panel-heading">Bugün neler ögrendin?</div>
+									<div class="panel-heading">Bugun neler ogrendin?</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>

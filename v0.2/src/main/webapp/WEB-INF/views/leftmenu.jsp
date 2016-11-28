@@ -107,13 +107,11 @@
 	</div>
 
 	<div class="list-group">
+		<div class="profile-label">{{greeting}} {{profile.firstname}}</div>
 		<div ng-repeat="(parentIndex, calendar) in allCalendars">
-			<!-- <button type="button" class="btn btn-lg btn-block" 
-				ng-click="processMembership(calendar)" 
-				ng-class="{true: calendar.buttonClass, false: 'btn-default'}[isCalendarAUserCalendar(calendar.calendarId)]"> {{calendar.calendarName}}</button> -->
 			<button type="button" class="btn btn-lg btn-block btn-calendar" 
 				ng-click="openSubCategoryModal(calendar, $index)" 
-				ng-class="{true: calendar.buttonClass, false: 'btn-default'}[isCalendarAUserCalendar(calendar.calendarId)]"><span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span>&nbsp;{{calendar.calendarName}}</button>
+				ng-class="{true: calendar.buttonClass, false: 'btn-default'}[isCalendarAUserCalendar(calendar.calendarId)]"><span style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span><!--<span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span>-->&nbsp;{{calendar.calendarName}}</button>
 			<div id="subCategoryModal{{$index}}" class="modal fade" role="dialog">
 				<div class="modal-dialog" style="width: 400px;">
 					<!-- Modal content-->

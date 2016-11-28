@@ -10,6 +10,7 @@ beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileSe
 	$scope.checkboxValues = [];
 	$scope.userCalendarSubCategories = [];
 	$scope.selectAll = false;
+	$scope.greeting = "";
 
     $scope.initProfile = function(){
 		$scope.greeting();
@@ -25,13 +26,13 @@ beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileSe
 		var d = new Date();
 		var h = d.getHours();
 		if( ( h >= 20 && h < 24 ) || ( h >= 0 && h < 6 ) ){
-			$scope.$parent.greeting = "Good Night";
+			$scope.greeting = "Good Night";
 		} else if( h >= 6 && h < 12 ){
-			$scope.$parent.greeting = "Good Morning";
+			$scope.greeting = "Good Morning";
 		} else if( h >= 12 && h < 17 ){
-			$scope.$parent.greeting = "Good Afternoon";
+			$scope.greeting = "Good Afternoon";
 		} else if( h >= 17 && h < 20 ){
-			$scope.$parent.greeting = "Good Evening";
+			$scope.greeting = "Good Evening";
 		} else {
 			
 		}
@@ -300,8 +301,6 @@ beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileSe
 				} else {
 					$scope.$parent.profile = result;
 					$scope.$parent.profile.fullname = $scope.profile.firstname + " " + $scope.profile.lastname;
-//					$scope.profile.firstname = $scope.profile.firstname
-//					$scope.profile.lastname = $scope.profile.lastname
 					
 					var countries = $scope.allCountries;
 					for( var i = 0; i < countries.length; i++ ) {
