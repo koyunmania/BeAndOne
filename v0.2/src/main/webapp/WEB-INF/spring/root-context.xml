@@ -94,6 +94,7 @@
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserCalendarSubCategory.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserAlbum.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserPhoto.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/RegisterToken.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -156,8 +157,12 @@
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
 	<bean id="photoAlbumDao" class="com.${application.package.name}.webapp.persistence.UserAlbumDao">
+		<property name="localSessionFactory" ref="localSessionFactory"/>
+	</bean>
+	<bean id="registerTokenDao" class="com.${application.package.name}.webapp.persistence.RegisterTokenDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
+
 	
 	
 	
@@ -165,12 +170,19 @@
 		<property name="userDao" ref="userDao" />
 		<property name="tokenDao" ref="userTokenDao" />
 	</bean>
+
+	<bean id="emailService" class="com.${application.package.name}.webapp.controller.service.EmailService">
+		<property name="registerTokenDao" ref="registerTokenDao"/>
+		<property name="userDao" ref="userDao"/>
+	</bean>
+
 	<bean id="profileService" class="com.${application.package.name}.webapp.controller.service.ProfileService">
 		<property name="profileEntryDao" ref="profileEntryDao" />
 		<property name="userDao" ref="userDao" />
 		<property name="tokenDao" ref="userTokenDao" />
 		<property name="cityDao" ref="cityDao" />
 		<property name="countryDao" ref="countryDao" />
+		<property name="emailService" ref="emailService"/>
 		<!-- <property name="userCalendarSubCategoryDao" ref="userCalendarSubCategoryDao" /> -->
 	</bean>
 	<bean id="experienceService" class="com.${application.package.name}.webapp.controller.service.ExperienceService">
@@ -219,8 +231,8 @@
 	<bean id = "userAlbumService" class = "com.${application.package.name}.webapp.controller.service.UserAlbumService">
 		<property name="photoAlbumDao" ref="photoAlbumDao"/>
 	</bean>
-	
-	
+
+
 	<bean id="securityAspect" class="com.${application.package.name}.webapp.app.secure.Secure" />
     <bean id="tokenUtils" class="com.${application.package.name}.webapp.app.secure.TokenUtils">
     	<property name="userTokenDao" ref="userTokenDao"/>
