@@ -83,7 +83,7 @@
 					</div>
 					<div class="col-md-5">
 						<h2 id="experiences-header">Positif G&uuml;nl&uuml;k</h2>
-						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; border:0px;">
+						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; border:0px; padding-left:25px;">
 							<div class="panel-heading" style="border:0px; background-color:initial !important; ">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
 							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
