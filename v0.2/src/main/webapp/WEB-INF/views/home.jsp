@@ -158,10 +158,17 @@
 						</div>
 						
 						<h2 id="experiences-header">G&uuml;nl&uuml;k Sorular</h2>
-						<div id="myCarousel" class="carousel slide">
+						<div id="myCarousel" class="carousel slide" data-interval="false">
 							<div ng-controller="QuestionAnswerCtrl" ng-init="initQuestionAnswer('${selectedDate}')" class="carousel-inner" role="listbox">
 								<div class="item panel panel-default active" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
-									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugün neler ögrendin?</div>
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugün neler ögrendin?
+										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
+											<span>&gt;&gt;</span>
+										</a>
+										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;">
+											<span>&lt;&lt;</span>
+										</a>
+									</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
@@ -185,7 +192,14 @@
 									</div>
 								</div>
 								<div class="item panel panel-default" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
-									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n neler diliyorsun?</div>
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n neler diliyorsun?
+										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
+											<span>&gt;&gt;</span>
+										</a>
+										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;">
+											<span>&lt;&lt;</span>
+										</a>
+									</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
@@ -207,40 +221,6 @@
 										</div>
 									</div>
 								</div>
-								<!-- 
-								<div class="item panel panel-default">
-									<div class="panel-heading">Bugun neler yapacaksin?</div>
-									<div class="panel-body">
-									<c:if test="${usersCurrentDate.equals(selectedDate)}">
-										<form>
-											<textarea class="form-control" rows="2" cols="30"
-												ng-model="whatIsYourWishQuestion.answerText"></textarea>
-											<br />
-											<button class="btn btn-default" type="submit"
-												ng-click="saveWhatIsYourWishAnswer(whatIsYourWishQuestion.answerText, 2)">Save</button>
-										</form>
-									</c:if>
-										<div ng-repeat="userAnswer in whatIsYourWishQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" style="margin-bottom:15px;">
-											<div class="col col-lg-8">
-												{{userAnswer.userAnswerText}}
-											</div>
-											<div class="col col-lg-4" style="text-align:right;">
-												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
-												<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								-->
-							</div>
-							<div>
-								<!-- Left and right controls -->
-								<a href="#myCarousel" role="button" data-slide="prev" style="float:left;">
-									<span>&lt;&lt;</span>
-								</a>
-								<a href="#myCarousel" role="button" data-slide="next" style="float:right;">
-									<span>&gt;&gt;</span>
-								</a>
 							</div>
 						</div>
 					</div>
