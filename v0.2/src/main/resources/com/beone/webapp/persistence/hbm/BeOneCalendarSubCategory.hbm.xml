@@ -15,7 +15,7 @@
 		<!-- <property name="calendarSubCategory" type="string" column="CalendarSubCategory"/>
 		<property name="description" type="string" column="description"/> -->
 		
-		<many-to-one name="calendar" class="com.beone.webapp.model.BeOneCalendar">
+		<many-to-one name="calendar" class="com.beone.webapp.model.BeOneCalendar" fetch="join">
 			<column name="calendarId"></column>
 		</many-to-one>
 		

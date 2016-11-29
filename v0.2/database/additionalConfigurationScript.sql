@@ -1,14 +1,4 @@
 ﻿
-
-
-insert into beonecalendars values (1, 'Astro Olaylar', '', 'color:#71719e;', 'glyphicon glyphicon-adjust','btn-astro',1);
-insert into beonecalendars values (2, 'Doga Olaylari', '', 'color:#71719e;', 'glyphicon glyphicon-adjust','btn-astro',1);
-insert into beonecalendars values (3, 'Kutsal Günler', '', 'color:#71719e;', 'glyphicon glyphicon-adjust','btn-astro',1);
-insert into beonecalendars values (4, 'Uluslararasi Günler', '', 'color:#71719e;', 'glyphicon glyphicon-adjust','btn-astro',1);
-insert into beonecalendars values (5, 'Ulusal Günler', '', 'color:#71719e;', 'glyphicon glyphicon-adjust','btn-astro',1);
-insert into beonecalendars values (6, 'Bagimsizlik Günleri', '', 'color:#71719e;', 'glyphicon glyphicon-adjust','btn-astro',1);
-
-
 -- The content of this file is to be executed after the data is imported.
 
 UPDATE beonecalendars SET colorcode='color:#71719e;', buttonClass='btn-astro', calendaricon='glyphicon glyphicon-adjust', sortOrder=1  WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Astro Olaylar');
