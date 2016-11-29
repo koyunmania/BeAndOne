@@ -53,7 +53,7 @@ public class EmailService {
         registerToken.setUser(user);
         registerToken.setToken(token);
         registerTokenDao.insertNew(registerToken);
-        String url = "http://localhost:8085" + "/verify/" + user.getUserId() + "/" + token;
+        String url = "https://www.beandone.com/verify/" + user.getUserId() + "/" + token;
 
         MailUtils.sendEmail(email,url);
         return null;

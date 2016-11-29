@@ -160,11 +160,11 @@ public class ProfileService {
                 if (userDao.checkExistingInsertNewFromProfile(user)) {
                     logger.info("Sending verification mail to user");
                     Email email = new Email();
-                    email.setFrom("deepakpandey1234@gmail.com");
-                    email.setTo("deepakpandey1234@gmail.com");
+                    email.setFrom("no-reply@beandone.com");
+                    email.setTo(user.getEmail());
                     email.setSubject("New user verification mail");
                     email.setLocale(user.getLocale());
-                    email.setUserName(user.getUsername());
+                    email.setUserName(user.getFirstname());
                     emailService.sendVerificationEmail(user, email);
                 }
                 logger.info("User has been created, assigning him all of the subcategories.");
