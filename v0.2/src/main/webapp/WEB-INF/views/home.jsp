@@ -84,7 +84,7 @@
 					<div class="col-md-5">
 						<h2 id="experiences-header">Positif G&uuml;nl&uuml;k</h2>
 						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
-							<div class="panel-heading" style="border:0px; background-color:initial !important; ">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
+							<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
 							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
@@ -158,14 +158,10 @@
 						</div>
 						
 						<h2 id="experiences-header">G&uuml;nl&uuml;k Sorular</h2>
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-								<li data-target="#myCarousel" data-slide-to="1"></li>
-							</ol>
+						<div id="myCarousel" class="carousel slide">
 							<div ng-controller="QuestionAnswerCtrl" ng-init="initQuestionAnswer('${selectedDate}')" class="carousel-inner" role="listbox">
-								<div class="item panel panel-default active">
-									<div class="panel-heading">Bugün neler ögrendin?</div>
+								<div class="item panel panel-default active" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugün neler ögrendin?</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
@@ -188,8 +184,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="item panel panel-default">
-									<div class="panel-heading">Bug&uuml;n neler diliyorsun?</div>
+								<div class="item panel panel-default" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n neler diliyorsun?</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
