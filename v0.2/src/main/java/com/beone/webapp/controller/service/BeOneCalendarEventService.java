@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beone.webapp.model.BeOneCalendarEvent;
+import com.beone.webapp.model.BeOneCalendarEventTranslation;
 import com.beone.webapp.persistence.CalendarEventDao;
 
 public class BeOneCalendarEventService {
@@ -24,27 +25,56 @@ public class BeOneCalendarEventService {
 	}
 
 	@Transactional
-	public BeOneCalendarEvent insertOrUpdateEvent(BeOneCalendarEvent event) {
-		BeOneCalendarEvent existingEvent = 
-				calendarEventDao.findBySubcategoryAndEventName(event.getSubCategory(), event.getEventName());
+	public BeOneCalendarEvent insertOrUpdateEvent(BeOneCalendarEvent event, String eventNameTr, String eventNameEn) {
+//		BeOneCalendarEvent existingEvent = 
+//				calendarEventDao.findBySubcategoryAndEventName(event.getSubCategory(), eventNameTr, eventNameEn);
 		
 		logger.debug("Event given to insert or update");
 		
-		if(existingEvent == null) {
+//		if(existingEvent == null) {
 			calendarEventDao.insertNew(event);
-			existingEvent = event;
+//			existingEvent = event;
+			logger.debug("Event inserted successfully.");
+//		} else {
+//			logger.debug("Provided event already exists, not inserting but updating");
+//			existingEvent.setEventDate(event.getEventDate());
+//			existingEvent.setEventLocation(event.getEventLocation());
+//			existingEvent.setEventType(event.getEventType());
+//			
+//			calendarEventDao.update(existingEvent);
+//		}
+//		
+//		return existingEvent;
+			return event;
+	}
+
+	@Transactional
+	public BeOneCalendarEventTranslation insertOrUpdateEventTranslation(BeOneCalendarEventTranslation eventTrans) {
+		BeOneCalendarEventTranslation existingTrans = 
+				calendarEventDao.findEventTranslation(eventTrans);
+		
+		logger.debug("EventTranslation given to insert or update");
+		
+		if(existingTrans == null) {
+			calendarEventDao.insertNewTranslation(eventTrans);
+			existingTrans = eventTrans;
 			logger.debug("Event inserted successfully.");
 		} else {
-			logger.debug("Provided event already exists, not inserting or updating");
-			existingEvent.setEventDate(event.getEventDate());
-			existingEvent.setEventDescription(event.getEventDescription());
-			existingEvent.setEventLocation(event.getEventLocation());
-			existingEvent.setEventType(event.getEventType());
+			logger.debug("Provided event already exists, not inserting but updating");
+			existingTrans.setDesignNumber(eventTrans.getDesignNumber());
+			existingTrans.setEventDescription(eventTrans.getEventDescription());
+			existingTrans.setEventLocation(eventTrans.getEventLocation());
+			existingTrans.setEventName(eventTrans.getEventName());
+			existingTrans.setPlusCMessageNumber(eventTrans.getPlusCMessageNumber());
+			existingTrans.setPlusCToApp(eventTrans.getPlusCToApp());
+			existingTrans.setPlusCToPrint(eventTrans.getPlusCToPrint());
+			existingTrans.setPlusCToWall(eventTrans.getPlusCToWall());
+			existingTrans.setPlusCToWeb(eventTrans.getPlusCToWeb());
 			
-			calendarEventDao.update(existingEvent);
+			calendarEventDao.updateTranslation(existingTrans);
 		}
 		
-		return existingEvent;
+		return existingTrans;
 	}
 	
 	

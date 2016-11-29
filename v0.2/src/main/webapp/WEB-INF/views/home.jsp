@@ -6,7 +6,7 @@
 <link rel='stylesheet'
 	href="/resources/js/facebookSDK/angular-socialshare.css">
 
-<body onLoad="window.scroll(0, 150)">
+<body onLoad="window.scroll(0, 170)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
 			<div class="title-page col-md-12">
@@ -96,12 +96,12 @@
 					</div>
 					<div class="col-md-5">
 						<h2 id="experiences-header">Positif Gunluk</h2>
-						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()">
-							<div class="panel-heading">Bugun ne gibi gzellikler yasadin?</div>
+						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+							<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
 							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
-									<textarea class="form-control" rows="2" id="experienceTextArea" cols="30"
+									<textarea class="form-control" rows="1" id="experienceTextArea" cols="30"
 										ng-model="newExperienceText"
 										ng-keypress="addExperienceOnKeypress($event, newExperienceText, selectedDate)"></textarea>
 									<br />
@@ -109,14 +109,26 @@
 										ng-click="addExperience(newExperienceText, selectedDate)">Save</button>
 								</form>
 							</c:if>
-								<div ng-repeat="exper in experiences track by exper.experienceId" class="row" style="margin-bottom:15px;">
-									<div class="col col-lg-7 experienceText">
-										{{exper.experienceDescription}}
-									</div>
-									<div class="col col-lg-5" style="text-align:right;">
-										<button type="button" ng-click="toggleModal(exper)" class="btn btn-small btn-default">+C</button>
-										<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil" ng-click="updateExperience(exper, $index)"></button>
-										<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteExperience(exper, $index)"></button>
+								<div style="overflow-y:scroll; overflow-x:hidden; height:100px;">
+									<div ng-repeat="exper in experiences track by exper.experienceId" class="row" style="margin-bottom:15px;">
+										<div style="border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px; max-width:400px;">
+											<div class="col col-lg-9 experienceText">
+											{{exper.experienceDescription}}
+											</div>
+											<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
+												<div class="row">
+													<div class="col-lg-12" style="padding-left:10px;">
+														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil" ng-click="updateExperience(exper, $index)"></button>
+														<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteExperience(exper, $index)"></button>
+													</div>
+												</div>
+												<div class="row" style="margin-top:5px;">
+													<div class="col-lg-12" style="padding-left:10px;">
+														<button type="button" ng-click="toggleModal(exper)" class="btn btn-block btn-default">+C</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -158,15 +170,18 @@
 							</div>
 						</div>
 						
-						<h2 id="experiences-header">Gunluk Sorular</h2>
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-								<li data-target="#myCarousel" data-slide-to="1"></li>
-							</ol>
+						<h2 id="experiences-header">G&uuml;nl&uuml;k Sorular</h2>
+						<div id="myCarousel" class="carousel slide" data-interval="false">
 							<div ng-controller="QuestionAnswerCtrl" ng-init="initQuestionAnswer('${selectedDate}')" class="carousel-inner" role="listbox">
-								<div class="item panel panel-default active">
-									<div class="panel-heading">Bugun neler ogrendin?</div>
+								<div class="item panel panel-default active" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugün neler ögrendin?
+										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
+											<span>&gt;&gt;</span>
+										</a>
+										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;">
+											<span>&lt;&lt;</span>
+										</a>
+									</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
@@ -189,8 +204,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="item panel panel-default">
-									<div class="panel-heading">Bugun neler diliyorsun?</div>
+								<div class="item panel panel-default" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n neler diliyorsun?
+										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
+											<span>&gt;&gt;</span>
+										</a>
+										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;">
+											<span>&lt;&lt;</span>
+										</a>
+									</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
@@ -212,15 +234,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div>
-								<!-- Left and right controls -->
-								<a href="#myCarousel" role="button" data-slide="prev" style="float:left;">
-									<span>&lt;&lt;</span>
-								</a>
-								<a href="#myCarousel" role="button" data-slide="next" style="float:right;">
-									<span>&gt;&gt;</span>
-								</a>
 							</div>
 						</div>
 					</div>

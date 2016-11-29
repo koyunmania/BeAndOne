@@ -4,47 +4,6 @@
 <%@ include file="header.jsp"%>
 <body>
     <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-				    <div class="input-append date" data-date="${selectedDate}" style="float:left; display:inline-block; vertical-align:bottom;">
-						<input class="datepicker datepicker-input btn btn-default" type="text" value="${selectedDate}">
-					</div>
-                </div>
-				<div style="float:right; margin-top:10px; margin-bottom:10px; padding:4px; display:inline;" ng-controller="WishCtrl">
-					<ul class="homepage-wishes">
-						<li><button ng-click="toggleModal()" class="btn btn-default">Open modal</button></li>
-						<li ng-repeat="wish in wishes track by wish.userWishId">{{wish.wishText}}</li>
-					</ul>
-					
-					<div id="myModal" class="modal fade" role="dialog">
-						<div class="modal-dialog">
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">What is your wish?</h4>
-								</div>
-								<div class="modal-body">
-									<div class="alert" ng-class="wishAddAlertClass" role="alert">
-									{{wishAddResultText}}
-									</div>
-									<div class="form-group">
-										<label for=wish>Your wish</label>
-										<input type="text" class="form-control" ng-model="wishToAdd" placeholder="Enter your wish">
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-success" ng-click="saveWish()">Save</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-            </div>
-        </nav>
-        
 		<form action="/upload-calendar" enctype="multipart/form-data" method="POST">
 			<div class="row">
 				<div class="col-md-3 col-md-offset-3">
@@ -63,6 +22,15 @@
 					<h2>Select City</h2>
 					<select name="city" id="city">
 						<option value="-1">Select a country first...</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<h2>Select Language</h2>
+					<select name="language" id="language">
+						<option value="-1">Select a language</option>
+						<option value="${com.beone.webapp.model.BeOneLanguage.TURKISH.ordinal()}">Turkish</option>
+						<option value="${com.beone.webapp.model.BeOneLanguage.ENGLISH.ordinal()}">English</option>
+						<option value="${com.beone.webapp.model.BeOneLanguage.GERMAN.ordinal()}">German</option>
 					</select>
 				</div>
 			</div>

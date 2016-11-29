@@ -3,6 +3,8 @@ package com.beone.webapp.persistence;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
@@ -21,6 +23,7 @@ import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserProfile;
 import com.beone.webapp.model.UserToken;
 import com.beone.webapp.model.exceptions.ControllerServiceException;
+import com.beone.webapp.utils.SecurityUtils;
 
 /**
  * An important entry point for the social network authentication.
@@ -213,7 +216,7 @@ public class SocialConnectionRepository implements ConnectionRepository{
 		
 		UserToken token = new UserToken();
 		token.setUser(localUsers.get(0));
-		token.setToken("TestToken");
+		token.setToken(SecurityUtils.generateToken());
 		userTokenDao.insertNew(token);
 	}
 

@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
-import com.beone.webapp.app.BeOneConnectController;
 import com.beone.webapp.controller.service.BeOneCalendarEventService;
 import com.beone.webapp.controller.service.BeOneCalendarService;
 import com.beone.webapp.controller.service.BeOneCalendarSubCategoryService;
@@ -36,12 +35,17 @@ import com.beone.webapp.controller.service.CityService;
 import com.beone.webapp.controller.service.CountryService;
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarEvent;
+import com.beone.webapp.model.BeOneCalendarEventTranslation;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
+import com.beone.webapp.model.BeOneCalendarSubCategoryTranslation;
+import com.beone.webapp.model.BeOneCalendarTranslation;
+import com.beone.webapp.model.BeOneLanguage;
 import com.beone.webapp.model.City;
 import com.beone.webapp.model.Country;
 import com.beone.webapp.model.StatusCode;
 import com.beone.webapp.model.exceptions.ControllerServiceException;
 import com.beone.webapp.utils.BeOneCalendarUtil;
+import com.beone.webapp.utils.GeneralUtils;
 
 @Controller
 public class DataUploadController {
@@ -125,9 +129,17 @@ public class DataUploadController {
 	public String upload_calendar(
 			@RequestParam("city") String cityId,
 			@RequestParam("uploadFile") MultipartFile file,
+			@RequestParam("language") String languageId,
 			Locale locale,
 			Model model) {
 		logger.info("upload_calendar-post is called");
+		
+		int i_languageId = BeOneLanguage.ENGLISH.ordinal();
+		try {
+			i_languageId = Integer.parseInt(languageId);
+		} catch(NumberFormatException e) {
+			logger.warn("Provided language Id is not compatible: " + languageId);
+		}
 		
 		// countries
 		ArrayList<Country> allCountries = countryService.getAllCountries();
@@ -145,9 +157,34 @@ public class DataUploadController {
 		ArrayList<String> resultMessages = new ArrayList<String>();
 		
 		// Zero based indexes
-		int columnIndexWhereDatesStart = 20;
-		int columnIndexWherePlusCResides = 15;
-		int columnIndexWhereGoogleIt = 16;
+		int columnIndexWhereDatesStart = 40;
+		int columnIndexWherePlusCResidesTr = 34;
+		int columnIndexWherePlusCResidesEn = 35;
+		int columnIndexWhereGoogleIt = 36;
+		
+		int indexOfTimeZoneCell = 13;
+    	
+    	
+    	int indexOfCategoryEnCell = 6;
+    	int indexOfCategoryTrCell = 7;
+    	int indexOfSubCategoryEnCell = 8;
+    	int indexOfSubCategoryTrCell = 9;
+    	int indexOfEventNameEnCell = 10;
+    	int indexOfEventNameTrCell = 11;
+    	
+    	int indexOfPlusCDesignNumberTrCell = 17;
+    	int indexOfPlusCMessageNumberTrCell = 18;
+    	int indexOfPlusC2WebTrCell = 19;
+    	int indexOfPlusC2WallTrCell = 20;
+    	int indexOfPlusC2PrintTrCell = 21;
+    	int indexOfPlusC2AppTrCell = 22;
+    	
+    	int indexOfPlusCDesignNumberEnCell = 17;
+    	int indexOfPlusCMessageNumberEnCell = 24;
+    	int indexOfPlusC2WebEnCell = 25;
+    	int indexOfPlusC2WallEnCell = 26;
+    	int indexOfPlusC2PrintEnCell = 27;
+    	int indexOfPlusC2AppEnCell = 28;
 		
 		if(file == null) {
 			model.addAttribute("error", "No file could be uploaded");
@@ -217,49 +254,103 @@ public class DataUploadController {
 		        	throw new ControllerServiceException(StatusCode.MISSING_MANDATORY_FIELD, 
 		        			"Header row dates are not compatible in column: " + colIndex);
 		        }
-		        
+		        int lineNumber = 2;
 		        while (iterator.hasNext()) {
+		        	logger.info("Working on line: " + lineNumber);
 		        	Row currentRow = iterator.next();
+		        	lineNumber++;
 		        	logger.debug("Retrieved the next line. ");
 		        	
-		        	Cell timeZoneCell = currentRow.getCell(10);
-		        	Cell categoryCell = currentRow.getCell(6);
-		        	Cell subCategoryCell = currentRow.getCell(7);
-		        	Cell eventNameCell = currentRow.getCell(8);
-		        	Cell eventLocationCell = currentRow.getCell(10);
+					Cell timeZoneCell = currentRow.getCell(indexOfTimeZoneCell);
+					Cell categoryTrCell = currentRow.getCell(indexOfCategoryTrCell);
+					Cell categoryEnCell = currentRow.getCell(indexOfCategoryEnCell);
+					Cell subCategoryTrCell = currentRow.getCell(indexOfSubCategoryTrCell);
+					Cell subCategoryEnCell = currentRow.getCell(indexOfSubCategoryEnCell);
+					Cell eventNameTrCell = currentRow.getCell(indexOfEventNameTrCell);
+					Cell eventNameEnCell = currentRow.getCell(indexOfEventNameEnCell);
+		        	Cell eventLocationCell = currentRow.getCell(indexOfTimeZoneCell);
 //		        	Cell i love u selcuk beyhan yakashikular
-		        	Cell eventDescriptionCell = currentRow.getCell(columnIndexWherePlusCResides);
-		        	Cell plusCNumberToMakeFilenameCell = currentRow.getCell(14);
+//		        	Cell eventDescriptionCell = currentRow.getCell(columnIndexWherePlusCResides);
+//		        	Cell plusCNumberToMakeFilenameCell = currentRow.getCell(14);
 		        	
-		        	logger.debug(String.format("Retrieved line category: %s, subCategory: %s, eventName: %s, location: %s", 
-		        			categoryCell.toString(),
-		        			subCategoryCell.toString(),
-		        			eventNameCell.toString(),
+		        	
+		        	Cell plusCDesignNumberTrCell = currentRow.getCell(indexOfPlusCDesignNumberTrCell);
+		        	Cell plusCMessageNumberTrCell = currentRow.getCell(indexOfPlusCMessageNumberTrCell);
+		        	Cell plusC2WebTrCell = currentRow.getCell(indexOfPlusC2WebTrCell);
+		        	Cell plusC2WallTrCell = currentRow.getCell(indexOfPlusC2WallTrCell);
+		        	Cell plusC2PrintTrCell = currentRow.getCell(indexOfPlusC2PrintTrCell);
+		        	Cell plusC2AppTrCell = currentRow.getCell(indexOfPlusC2AppTrCell);
+		        	Cell eventDescriptionTrCell = currentRow.getCell(columnIndexWherePlusCResidesTr);
+		        	
+		        	Cell plusCDesignNumberEnCell = currentRow.getCell(indexOfPlusCDesignNumberEnCell);
+		        	Cell plusCMessageNumberEnCell = currentRow.getCell(indexOfPlusCMessageNumberEnCell);
+		        	Cell plusC2WebEnCell = currentRow.getCell(indexOfPlusC2WebEnCell);
+		        	Cell plusC2WallEnCell = currentRow.getCell(indexOfPlusC2WallEnCell);
+		        	Cell plusC2PrintEnCell = currentRow.getCell(indexOfPlusC2PrintEnCell);
+		        	Cell plusC2AppEnCell = currentRow.getCell(indexOfPlusC2AppEnCell);
+		        	Cell eventDescriptionEnCell = currentRow.getCell(columnIndexWherePlusCResidesEn);
+		        	
+		        	
+		        	logger.debug(String.format("Retrieved line category-TR: %s, subCategory-TR: %s, eventName-TR: %s, location: %s", 
+		        			categoryTrCell.toString(),
+		        			subCategoryTrCell.toString(),
+		        			eventNameTrCell.toString(),
+		        			eventLocationCell.toString()));
+		        	logger.debug(String.format("Retrieved line category-EN: %s, subCategory-EN: %s, eventName-EN: %s, location: %s", 
+		        			categoryEnCell.toString(),
+		        			subCategoryEnCell.toString(),
+		        			eventNameEnCell.toString(),
 		        			eventLocationCell.toString()));
 		        	
-		        	if( timeZoneCell.getCellType() == Cell.CELL_TYPE_STRING &&
-		        		categoryCell.getCellType() == Cell.CELL_TYPE_STRING &&
-		        		subCategoryCell.getCellType() == Cell.CELL_TYPE_STRING &&
-		        		eventNameCell.getCellType() == Cell.CELL_TYPE_STRING) {
+		        	if( //timeZoneCell.getCellType() == Cell.CELL_TYPE_STRING &&
+		        		categoryTrCell.getCellType() == Cell.CELL_TYPE_STRING &&
+		        		subCategoryTrCell.getCellType() == Cell.CELL_TYPE_STRING &&
+		        		eventNameTrCell.getCellType() == Cell.CELL_TYPE_STRING &&
 		        		
-		        		logger.debug(String.format("Initializing the calendar category: %s subcategory: %s eventName: %s", 
-		        				categoryCell.getStringCellValue(), 
-		        				subCategoryCell.getStringCellValue(),
-		        				eventNameCell.getStringCellValue()));
+		        		categoryEnCell.getCellType() == Cell.CELL_TYPE_STRING &&
+		        		subCategoryEnCell.getCellType() == Cell.CELL_TYPE_STRING &&
+		        		eventNameEnCell.getCellType() == Cell.CELL_TYPE_STRING) {
 		        		
-		        		String calendarName = StringUtils.trim(categoryCell.getStringCellValue());
+		        		logger.debug(String.format("Initializing the calendar category-TR: %s subcategory-TR: %s eventName-TR: %s", 
+		        				categoryTrCell.getStringCellValue(), 
+		        				subCategoryTrCell.getStringCellValue(),
+		        				eventNameTrCell.getStringCellValue()));
+		        		
+		        		logger.debug(String.format("Initializing the calendar category-EN: %s subcategory-EN: %s eventName-EN: %s", 
+		        				categoryEnCell.getStringCellValue(), 
+		        				subCategoryEnCell.getStringCellValue(),
+		        				eventNameEnCell.getStringCellValue()));
+		        		
+		        		String calendarNameTurkish = StringUtils.trim(categoryTrCell.getStringCellValue());
+		        		String calendarNameEnglish = StringUtils.trim(categoryEnCell.getStringCellValue());
 		        		
 		        		BeOneCalendar cal = new BeOneCalendar();
-		        		cal.setCalendarName(calendarName);
-		        		cal.setColorCode(BeOneCalendarUtil.getOrGenerateColorCode(categoryCell.getStringCellValue()));
-		        		cal.setCalendarIcon(BeOneCalendarUtil.getOrGenerateCalendarIcon(categoryCell.getStringCellValue()));
+//		        		cal.setCalendarName(calendarName);
+		        		cal.setColorCode(BeOneCalendarUtil.getOrGenerateColorCode(categoryTrCell.getStringCellValue()));
+		        		cal.setCalendarIcon(BeOneCalendarUtil.getOrGenerateCalendarIcon(categoryTrCell.getStringCellValue()));
 		        		// try adding the calendar if it does not exist.
 		        		// it doesn't cause any issue when called
 		        		// this assures non-existing calendars created in advance
-		        		calendarService.addCalendarIfNotExists(cal);
+		        		BeOneCalendar insertedOrExistingCalendar = 
+		        				calendarService.addCalendarIfNotExistsOrReturn(cal, calendarNameTurkish);
 		        		
-		        		// now get the calendar item
-		        		BeOneCalendar insertedOrExistingCalendar = calendarService.getCalendarByName(calendarName);
+		        		BeOneCalendarTranslation transTr = new BeOneCalendarTranslation();
+		        		transTr.setCalendarId(insertedOrExistingCalendar.getCalendarId());
+		    			transTr.setLanguageId(BeOneLanguage.TURKISH.ordinal());
+		    			transTr.setTransName(calendarNameTurkish);
+		    			transTr.setCalendarId(insertedOrExistingCalendar.getCalendarId());
+		    			calendarService.addTranslationIfNotExists(transTr);
+		    			
+		    			BeOneCalendarTranslation transEn = new BeOneCalendarTranslation();
+		    			transEn.setCalendarId(insertedOrExistingCalendar.getCalendarId());
+		    			transEn.setLanguageId(BeOneLanguage.ENGLISH.ordinal());
+		    			transEn.setTransName(calendarNameEnglish);
+		    			transEn.setCalendarId(insertedOrExistingCalendar.getCalendarId());
+		    			calendarService.addTranslationIfNotExists(transEn);
+		        		
+//		        		// now get the calendar item
+//		        		BeOneCalendar insertedOrExistingCalendar = 
+//		        				calendarService.getCalendarByName(calendarName, i_languageId);
 		        		
 		        		// assuming the non-existing calendar is created and the pre-existing
 		        		// calendar retrieved, we add that one to the list for later usage
@@ -267,15 +358,31 @@ public class DataUploadController {
 		        		
 		        		logger.debug("Now adding the subcategory of the calendar");
 		        		
-		        		String subCategoryName = StringUtils.trim(subCategoryCell.getStringCellValue());
+		        		String subCategoryNameTr = StringUtils.trim(subCategoryTrCell.getStringCellValue());
+		        		String subCategoryNameEn = StringUtils.trim(subCategoryEnCell.getStringCellValue());
 		        		BeOneCalendarSubCategory subCategory = new BeOneCalendarSubCategory();
 		        		subCategory.setCalendar(insertedOrExistingCalendar);
-		        		subCategory.setCalendarSubCategory(subCategoryName);
-		        		subCategory.setDescription("Initial content. Not taken from Excel file.");
-		        		subcategoryService.addSubCategoryIfNotExists(subCategory);
+//		        		subCategory.setCalendarSubCategory(subCategoryName);
+//		        		subCategory.setDescription("Initial content. Not taken from Excel file.");
+		        		BeOneCalendarSubCategory insertedOrExistingSubCategory = 
+		        				subcategoryService.addSubCategoryIfNotExists(subCategory, subCategoryNameTr);
 		        		
-		        		BeOneCalendarSubCategory insertedOrExistingSubCategory =
-		        				subcategoryService.getSubCategoryByCalendarAndName(subCategory);
+//		        		BeOneCalendarSubCategory insertedOrExistingSubCategory =
+//		        				subcategoryService.getSubCategoryByCalendarAndName(subCategory);
+		        		
+		        		BeOneCalendarSubCategoryTranslation subCatTransTr = new BeOneCalendarSubCategoryTranslation();
+		        		subCatTransTr.setLanguageId(BeOneLanguage.TURKISH.ordinal());
+		        		subCatTransTr.setDescriptionTrans("Inital content. Not taken from Excel file.");
+		        		subCatTransTr.setCalendarSubCategoryTrans(subCategoryNameTr);
+		        		subCatTransTr.setSubcategoryId(subCategory.getSubcategoryId());
+		        		subcategoryService.addTranslationIfNotExists(subCatTransTr);
+		        		
+		        		BeOneCalendarSubCategoryTranslation subCatTransEn = new BeOneCalendarSubCategoryTranslation();
+		        		subCatTransEn.setLanguageId(BeOneLanguage.ENGLISH.ordinal());
+		        		subCatTransEn.setDescriptionTrans("Inital content. Not taken from Excel file.");
+		        		subCatTransEn.setCalendarSubCategoryTrans(subCategoryNameEn);
+		        		subCatTransEn.setSubcategoryId(subCategory.getSubcategoryId());
+		        		subcategoryService.addTranslationIfNotExists(subCatTransEn);
 		        		
 		        		logger.debug("Iterating through the cells to add the events");
 
@@ -315,9 +422,9 @@ public class DataUploadController {
 			        					int minute = currentCalendarInLocation.get(Calendar.MINUTE);
 			        					cellValueOfEventDate = 
 			        							"" + 
-			        							(hour < 10 ? "0"+hour : hour) + 
+			        							(hour < indexOfTimeZoneCell ? "0"+hour : hour) + 
 			        							":" +
-			        							(minute < 10 ? "0"+minute : minute)+
+			        							(minute < indexOfTimeZoneCell ? "0"+minute : minute)+
 			        							":00";
 			        				} else {
 			        					// then it is a numeric field containing a value like 1 or 2
@@ -343,14 +450,13 @@ public class DataUploadController {
 									event.setEventType("FullDayEvent");
 				        			event.setEventDate(new Timestamp(dateOfTheEventFromHeader.getTime()));
 								} else {
-									
 									String dateToUse = ""+
 										convertedDateOfTheEventFromHeader.get(Calendar.YEAR) + "-" +
-										((convertedDateOfTheEventFromHeader.get(Calendar.MONTH)+1) < 10 
+										((convertedDateOfTheEventFromHeader.get(Calendar.MONTH)+1) < indexOfTimeZoneCell 
 											? ("0"+(convertedDateOfTheEventFromHeader.get(Calendar.MONTH)+1))
 											: (convertedDateOfTheEventFromHeader.get(Calendar.MONTH)+1)
 										) +"-"+
-										(convertedDateOfTheEventFromHeader.get(Calendar.DAY_OF_MONTH) < 10
+										(convertedDateOfTheEventFromHeader.get(Calendar.DAY_OF_MONTH) < indexOfTimeZoneCell
 											? ("0"+convertedDateOfTheEventFromHeader.get(Calendar.DAY_OF_MONTH))
 											: (convertedDateOfTheEventFromHeader.get(Calendar.DAY_OF_MONTH))
 										);
@@ -367,32 +473,78 @@ public class DataUploadController {
 				        			event.setEventDate(new Timestamp(parsedDateTime.getTime()));
 								}
 
-								String eventName = StringUtils.trim(eventNameCell.getStringCellValue());
 				        		event.setSubCategory(insertedOrExistingSubCategory);
 				        		event.setEventLocation(eventLocationCell.getStringCellValue());
-			        			event.setEventName(eventName);
-			        			if(eventDescriptionCell.getCellType() == Cell.CELL_TYPE_STRING && eventDescriptionCell.getStringCellValue() != null &&
-		        					eventDescriptionCell.getStringCellValue() != "") {
-			        				event.setEventDescription(eventDescriptionCell.getStringCellValue());
-			        			} else if (eventDescriptionCell.getCellType() == Cell.CELL_TYPE_NUMERIC){
-			        				event.setEventDescription(""+eventDescriptionCell.getNumericCellValue());
-			        			} else {
-			        				event.setEventDescription("Explanation missing");
-			        			}
-			        			
-			        			
-			        			// get the +C number to calculate the image
-			        			if(plusCNumberToMakeFilenameCell.getCellType() == Cell.CELL_TYPE_STRING && plusCNumberToMakeFilenameCell.getStringCellValue() != null &&
-			        					plusCNumberToMakeFilenameCell.getStringCellValue() != "") {
-			        				event.setEventHappeningPhotoFilename(""+plusCNumberToMakeFilenameCell.getStringCellValue());
-			        			} else if (plusCNumberToMakeFilenameCell.getCellType() == Cell.CELL_TYPE_NUMERIC){
-			        				event.setEventHappeningPhotoFilename(""+plusCNumberToMakeFilenameCell.getNumericCellValue());
-			        			} else {
-			        				event.setEventHappeningPhotoFilename("default"+(i%2)+".jpg");
-			        			}
+				        		String eventTrName = StringUtils.trim(eventNameTrCell.getStringCellValue());
+				        		String eventEnName = StringUtils.trim(eventNameEnCell.getStringCellValue());
+				        		calendarEventService.insertOrUpdateEvent(event, eventTrName, eventEnName);
 				        		
-				        		calendarEventService.insertOrUpdateEvent(event);
+//			        			event.setEventName(eventName);
+//			        			if(eventDescriptionCell.getCellType() == Cell.CELL_TYPE_STRING && eventDescriptionCell.getStringCellValue() != null &&
+//		        					eventDescriptionCell.getStringCellValue() != "") {
+//			        				event.setEventDescription(eventDescriptionCell.getStringCellValue());
+//			        			} else if (eventDescriptionCell.getCellType() == Cell.CELL_TYPE_NUMERIC){
+//			        				event.setEventDescription(""+eventDescriptionCell.getNumericCellValue());
+//			        			} else {
+//			        				event.setEventDescription("Explanation missing");
+//			        			}
+//			        			
+//			        			// get the +C number to calculate the image
+//			        			if(plusCNumberToMakeFilenameCell.getCellType() == Cell.CELL_TYPE_STRING && plusCNumberToMakeFilenameCell.getStringCellValue() != null &&
+//			        					plusCNumberToMakeFilenameCell.getStringCellValue() != "") {
+//			        				event.setEventHappeningPhotoFilename(""+plusCNumberToMakeFilenameCell.getStringCellValue());
+//			        			} else if (plusCNumberToMakeFilenameCell.getCellType() == Cell.CELL_TYPE_NUMERIC){
+//			        				event.setEventHappeningPhotoFilename(""+plusCNumberToMakeFilenameCell.getNumericCellValue());
+//			        			} else {
+//			        				event.setEventHappeningPhotoFilename("default"+(i%2)+".jpg");
+//			        			}
+				        		String designNumberTr = GeneralUtils.trimAndGetStringValue(plusCDesignNumberTrCell);
+				        		String eventLocationTr = GeneralUtils.trimAndGetStringValue(eventLocationCell);
+				        		String plusCMessageNumberTr = GeneralUtils.trimAndGetStringValue(plusCMessageNumberTrCell);
+				        		String plusCToAppTr = GeneralUtils.trimAndGetStringValue(plusC2AppTrCell);
+				        		String plusCToPrintTr = GeneralUtils.trimAndGetStringValue(plusC2PrintTrCell);
+				        		String plusCToWallTr = GeneralUtils.trimAndGetStringValue(plusC2WallTrCell);
+				        		String plusCToWebTr = GeneralUtils.trimAndGetStringValue(plusC2WebTrCell);
+				        		String eventDescriptionTr = GeneralUtils.trimAndGetStringValue(eventDescriptionTrCell);
 				        		
+								BeOneCalendarEventTranslation eventTransTr = new BeOneCalendarEventTranslation();
+								eventTransTr.setLanguageId(BeOneLanguage.TURKISH.ordinal());
+								eventTransTr.setEventName(eventTrName);
+								eventTransTr.setDesignNumber(designNumberTr);
+								eventTransTr.setEventLocation(eventLocationTr);
+								eventTransTr.setPlusCMessageNumber(plusCMessageNumberTr);
+								eventTransTr.setPlusCToApp(plusCToAppTr);
+								eventTransTr.setPlusCToPrint(plusCToPrintTr);
+								eventTransTr.setPlusCToWall(plusCToWallTr);
+								eventTransTr.setPlusCToWeb(plusCToWebTr);
+								eventTransTr.setEventId(event.getEventId());
+								eventTransTr.setEventDescription(eventDescriptionTr);
+								calendarEventService.insertOrUpdateEventTranslation(eventTransTr);
+
+								
+								String designNumberEn = GeneralUtils.trimAndGetStringValue(plusCDesignNumberEnCell);
+				        		String eventLocationEn = GeneralUtils.trimAndGetStringValue(eventLocationCell);
+				        		String plusCMessageNumberEn = GeneralUtils.trimAndGetStringValue(plusCMessageNumberEnCell);
+				        		String plusCToAppEn = GeneralUtils.trimAndGetStringValue(plusC2AppEnCell);
+				        		String plusCToPrintEn = GeneralUtils.trimAndGetStringValue(plusC2PrintEnCell);
+				        		String plusCToWallEn = GeneralUtils.trimAndGetStringValue(plusC2WallEnCell);
+				        		String plusCToWebEn = GeneralUtils.trimAndGetStringValue(plusC2WebEnCell);
+				        		String eventDescriptionEn = GeneralUtils.trimAndGetStringValue(eventDescriptionEnCell);
+				        		
+								BeOneCalendarEventTranslation eventTransEn = new BeOneCalendarEventTranslation();
+								eventTransEn.setLanguageId(BeOneLanguage.ENGLISH.ordinal());
+								eventTransEn.setEventName(eventEnName);
+								eventTransEn.setDesignNumber(designNumberEn);
+								eventTransEn.setEventLocation(eventLocationEn);
+								eventTransEn.setPlusCMessageNumber(plusCMessageNumberEn);
+								eventTransEn.setPlusCToApp(plusCToAppEn);
+								eventTransEn.setPlusCToPrint(plusCToPrintEn);
+								eventTransEn.setPlusCToWall(plusCToWallEn);
+								eventTransEn.setPlusCToWeb(plusCToWebEn);
+								eventTransEn.setEventId(event.getEventId());
+								eventTransEn.setEventDescription(eventDescriptionEn);
+								calendarEventService.insertOrUpdateEventTranslation(eventTransEn);
+								
 				        		resultMessages.add("Row "+rowIndex + " Calendar and event added");
 			        		}
 			        	}

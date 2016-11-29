@@ -20,7 +20,10 @@
 		<property name="gender" type="string" column="Gender"/>
 		<property name="birthday" type="string" column="Birthday"/>
 		<property name="provider" type="string" column="Provider"/>
-		
+		<property name="language" type="integer" column="Language"/>
+		<property name="locale" type="string" column="Locale"/>
+		<property name="status" type="string" column="Status"/>
+
 		<set name="externalConnections" table="Userconnection" lazy="false" fetch="join">
 			<key>
 				<column name="UserId" not-null="true"/>

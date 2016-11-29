@@ -169,6 +169,7 @@ public class SocialConfiguration {
 		logger.info("providerSignInController is called.");
 		SimpleSignInAdapter signInAdapter = new SimpleSignInAdapter();
 		signInAdapter.setUserDao(usersDao);
+		signInAdapter.setTokenDao(userTokenDao);
 		ProviderSignInController cont = new ProviderSignInController(
 		    	connectionFactoryLocator, 
 		    	usersConnectionRepository(), 

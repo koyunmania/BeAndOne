@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- 
+It should be mixed with a regular profile of the user.
+This configuration maps a Social Sping UserConnection with Application's so called UserProfile
+ -->
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="RegisterToken" table="RegisterToken">
+    	<id name="entryId" column="EntryId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">registertoken_entryid_seq</param>
+			</generator>
+		</id>
+		
+		<property name="token" type="string" column="Token"/>
+		<many-to-one name="user" class="com.beone.webapp.model.User" fetch="join" lazy="false">
+			<column name="UserId"/>
+		</many-to-one>
+		
+    </class>
+</hibernate-mapping>

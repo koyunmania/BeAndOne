@@ -11,6 +11,9 @@ CREATE TABLE users (
 	gender character varying(20),
 	currentCityId integer,
 	currentCountryId integer,
+	language integer,
+	locale character varying(20),
+	status character varying(20),
 	provider character varying(20),
 	createdAt timestamp,
 	updatedAt timestamp,
@@ -18,6 +21,14 @@ CREATE TABLE users (
 )
 WITH (
   OIDS=FALSE
+);
+
+DROP TABLE IF EXISTS registertoken;
+CREATE TABLE registertoken(
+	entryId SERIAL NOT NULL,
+	userId integer NOT NULL,
+	token character varying(100),
+	CONSTRAINT registertoken_pkey PRIMARY KEY(entryId)
 );
 
 -- Table: userconnection
@@ -125,8 +136,6 @@ CREATE TABLE userlikednews(
 DROP TABLE IF EXISTS beonecalendars;
 CREATE TABLE beonecalendars (
 	calendarId SERIAL NOT NULL,
-	calendarName character varying(200),
-	description character varying(500),
 	colorcode character varying(500),
 	calendaricon character varying(500),
 	buttonClass character varying(50),
@@ -134,27 +143,64 @@ CREATE TABLE beonecalendars (
 	CONSTRAINT beonecalendars_pkey PRIMARY KEY (calendarId)
 );
 
+DROP TABLE IF EXISTS beonecalendartranslations;
+CREATE TABLE beonecalendartranslations (
+	translationid SERIAL NOT NULL,
+	transname character varying(200),
+	transdescription character varying(500),
+	languageid integer not null,
+	calendarid integer not null,
+	CONSTRAINT beonecalendartranslations_pkey PRIMARY KEY (translationid)
+);
+
 DROP TABLE IF EXISTS beonecalendarsubcategories;
 CREATE TABLE beonecalendarsubcategories
 (
 	subcategoryId serial NOT NULL,
 	calendarid integer,
-	calendarsubcategory character varying(200),
 	description character varying(500),
 	CONSTRAINT beonecalendarsubcategories_pkey PRIMARY KEY (subcategoryId)
+);
+
+DROP TABLE IF EXISTS beonecalendarsubcategorytranslations;
+CREATE TABLE beonecalendarsubcategorytranslations
+(
+	translationid serial NOT NULL,
+	subcategoryid integer,
+	calendarsubcategorytrans character varying(200),
+	descriptiontrans character varying(500),
+	languageid integer not null,
+	CONSTRAINT beonecalendarsubcategorytranslations_pkey PRIMARY KEY (translationid)
 );
 
 DROP TABLE IF EXISTS beonecalendarevents;
 CREATE TABLE beonecalendarevents (
 	eventId SERIAL NOT NULL,
 	subcategoryId integer NOT NULL,
-	eventName character varying(200) NOT NULL,
+--	eventName character varying(200) NOT NULL,
 	eventDate timestamp NOT NULL,
-	eventDescription text NOT NULL,
-	eventLocation character varying(500) NOT NULL,
+--	eventDescription text NOT NULL,
+--	eventLocation character varying(500) NOT NULL,
 	eventType character varying(500) NOT NULL,
-	eventHappeningPhotoFilename character varying(50) NOT NULL,
+--	eventHappeningPhotoFilename character varying(50) NOT NULL,
 	CONSTRAINT beonecalendarevents_pkey PRIMARY KEY (eventId)
+);
+
+DROP TABLE IF EXISTS beonecalendareventtranslations;
+CREATE TABLE beonecalendareventtranslations (
+	translationid SERIAL NOT NULL,
+	eventId integer NOT NULL,
+	languageid integer not null,
+	eventName character varying(200) NOT NULL,
+	eventDescription text NOT NULL,
+	eventLocation character varying(200) NOT NULL,
+	designNumber character varying(10) NOT NULL,
+	plusCMessageNumber character varying(10) NOT NULL,
+	plusCToWeb character varying(10) NOT NULL,
+	plusCToWall character varying(10) NOT NULL,
+	plusCToPrint character varying(10) NOT NULL,
+	plusCToApp character varying(10) NOT NULL,
+	CONSTRAINT beonecalendareventtranslations_pkey PRIMARY KEY (translationid)
 );
 
 DROP TABLE IF EXISTS usercalendarsubcategories;

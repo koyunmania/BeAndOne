@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.beone.webapp.model.BeOneCalendar;
+import com.beone.webapp.model.BeOneCalendarTranslation;
 import com.beone.webapp.model.UserCalendar;
 import com.beone.webapp.model.User;
 
@@ -30,7 +31,9 @@ public class CalendarDao extends AbstractDao {
 	 */
 	public BeOneCalendar findByName (String calendarName) {
 		List result = this.localSessionFactory.getCurrentSession()
-				.createQuery("from BeOneCalendar ca where upper(ca.calendarName)=upper(:calendarName)")
+				.createQuery("select ca from BeOneCalendar ca "
+						+ "inner join ca.translations tra "
+						+ "where tra.transName=:calendarName")
                 .setParameter("calendarName", calendarName)
                 .list();
 		if(result.size() == 1) {
@@ -138,4 +141,25 @@ public class CalendarDao extends AbstractDao {
 				.list().get(0); 
 		return result;	
 		}
+
+	public BeOneCalendarTranslation getCalendarTranslation(
+			BeOneCalendarTranslation trans) {
+		
+		List result = this.localSessionFactory.getCurrentSession()
+				.createQuery("from BeOneCalendarTranslation tr "
+						+ "where tr.languageId=:languageId and tr.calendarId=:calendarId")
+                .setParameter("calendarId", trans.getCalendarId())
+                .setParameter("languageId", trans.getLanguageId())
+                .list();
+		
+		if(result.size() > 0) {
+			return (BeOneCalendarTranslation)result.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void insertNewTranslation(BeOneCalendarTranslation trans) {
+		this.localSessionFactory.getCurrentSession().saveOrUpdate(trans);
+	}
 }

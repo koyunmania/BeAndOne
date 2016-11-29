@@ -6,6 +6,9 @@ import java.util.Set;
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarEvent;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
+import com.beone.webapp.model.BeOneCalendarEventTranslation;
+import com.beone.webapp.model.BeOneCalendarTranslation;
+import com.beone.webapp.model.BeOneLanguage;
 import com.beone.webapp.model.UserCalendar;
 import com.beone.webapp.services.v1.model.BeOneCalendarEventTO;
 import com.beone.webapp.services.v1.model.BeOneCalendarSubCategoryTO;
@@ -14,63 +17,89 @@ import com.beone.webapp.services.v1.model.UserCalendarTO;
 
 public class BeOneCalendarUtil {
 
-	public static Set<BeOneCalendarTO> convertToTOSet(Set<BeOneCalendar> allUserCalendars) {
+	public static Set<BeOneCalendarTO> convertToTOSet(
+			Set<BeOneCalendar> allUserCalendars, BeOneLanguage language) {
 		Set<BeOneCalendarTO> converted = new HashSet<BeOneCalendarTO>();
 		for(BeOneCalendar cal : allUserCalendars) {
-			BeOneCalendarTO con = convertToTO(cal);
+			BeOneCalendarTO con = convertToTO(cal, language);
 			converted.add(con);
 		}
 		
 		return converted;
 	}
 
-	public static BeOneCalendarTO convertToTO(BeOneCalendar cal) {
+	public static BeOneCalendarTO convertToTO(BeOneCalendar cal, BeOneLanguage language) {
 		BeOneCalendarTO converted = new BeOneCalendarTO();
+		BeOneCalendarTranslation trans = null;
+		for(BeOneCalendarTranslation tr : cal.getTranslations()) {
+			if(tr.getLanguageId() == language.ordinal()) {
+				trans = tr;
+			}
+		}
 		
 		converted.setCalendarId(cal.getCalendarId());
-		converted.setCalendarName(cal.getCalendarName());
-		converted.setDescription(cal.getDescription());
+		converted.setCalendarName(trans == null ? BeOneCalendar.CALENDAR_NAME_TRANSLATION_MISSING : trans.getTransName());
+		converted.setDescription(trans == null ? BeOneCalendar.CALENDAR_DESC_TRANSLATION_MISSING : trans.getTransName());
 		converted.setColorCode(cal.getColorCode());
 		converted.setCalendarIcon(cal.getCalendarIcon());
 		converted.setSortOrder(cal.getSortOrder());
+		converted.setButtonClass(cal.getButtonClass());
 		
 		return converted;
 	}
 
-	public static Set<BeOneCalendarEventTO> convertEventToTOSet(Set<BeOneCalendarEvent> allUserCalendarEvents) {
+	public static Set<BeOneCalendarEventTO> convertEventToTOSet(
+			Set<BeOneCalendarEvent> allUserCalendarEvents, BeOneLanguage language) {
 		Set<BeOneCalendarEventTO> converted = new HashSet<BeOneCalendarEventTO>();
 		for(BeOneCalendarEvent cal : allUserCalendarEvents) {
-			BeOneCalendarEventTO con = convertEventToTO(cal);
+			BeOneCalendarEventTO con = convertEventToTO(cal, language);
 			converted.add(con);
 		}
 		
 		return converted;
 	}
 
-	public static BeOneCalendarEventTO convertEventToTO(BeOneCalendarEvent cal) {
+	public static BeOneCalendarEventTO convertEventToTO(BeOneCalendarEvent cal, BeOneLanguage language) {
+		Set<BeOneCalendarEventTranslation> translations = cal.getTranslations();
+		BeOneCalendarEventTranslation trans = null;
+		for(BeOneCalendarEventTranslation tr : translations) {
+			if(tr.getLanguageId() == language.ordinal()) {
+				trans = tr;
+			}
+		}
+		
 		BeOneCalendarEventTO converted = new BeOneCalendarEventTO();
 		
 		converted.setEventDate(cal.getEventDate());
-		converted.setEventDescription(cal.getEventDescription());
+		converted.setEventDescription(trans == null ? "Translation missing" : trans.getEventDescription());
 		converted.setEventId(cal.getEventId());
 		converted.setEventLocation(cal.getEventLocation());
-		converted.setEventName(cal.getEventName());
+		converted.setEventName(trans == null ? "Translation missing" : trans.getEventName());
 		converted.setEventType(cal.getEventType());
-		converted.setSubCategory(convertSubCategoryToTO(cal.getSubCategory()));
-		converted.setEventHappeningPhotoFilename(cal.getEventHappeningPhotoFilename());
+		converted.setSubCategory(BeOneCalendarSubCategoryUtil.convertToTO(cal.getSubCategory(), language));
+		converted.setEventHappeningPhotoFilename("missing");
 		
 		return converted;
 	}
 
-	public static BeOneCalendarSubCategoryTO convertSubCategoryToTO(BeOneCalendarSubCategory subCat) {
-		BeOneCalendarSubCategoryTO converted = new BeOneCalendarSubCategoryTO();
-		converted.setCalendarSubCategory(subCat.getCalendarSubCategory());
-		converted.setDescription(subCat.getDescription());
-		converted.setSubcategoryId(subCat.getSubcategoryId());
-		converted.setCalendar(convertToTO(subCat.getCalendar()));
-		
-		return converted;
-	}
+//	public static BeOneCalendarSubCategoryTO convertSubCategoryToTO(
+//			BeOneCalendarSubCategory subCat, BeOneLanguage language) {
+//		Set<BeOneCalendarSubCategoryTranslation> translations = subCat.getTranslations();
+//		BeOneCalendarSubCategoryTranslation trans = null;
+//		for(BeOneCalendarSubCategoryTranslation tr : translations) {
+//			if(tr.getLanguageId() == language.ordinal()) {
+//				trans = tr;
+//			}
+//		}
+//		
+//		BeOneCalendarSubCategoryTO converted = new BeOneCalendarSubCategoryTO();
+//		converted.setCalendarSubCategory(trans == null ? "Missing Translation" : trans.getTransName());
+//		converted.setDescription(trans == null ? "Missing Translation" : trans.getTransDescription());
+//		converted.setSubcategoryId(subCat.getSubcategoryId());
+//		converted.setCalendar(convertToTO(subCat.getCalendar(), language));
+//		
+//		return converted;
+//	}
 
 	public static String getOrGenerateColorCode(String calendarName) {
 		if(calendarName.contains("Astro")) {
@@ -88,9 +117,9 @@ public class BeOneCalendarUtil {
 		}
 	}
 
-	public static UserCalendarTO convertUserCalendarToTO(UserCalendar userCalendar) {
+	public static UserCalendarTO convertUserCalendarToTO(UserCalendar userCalendar, BeOneLanguage language) {
 		UserCalendarTO converted = new UserCalendarTO();
-		converted.setCalendar(convertToTO(userCalendar.getCalendar()));
+		converted.setCalendar(convertToTO(userCalendar.getCalendar(), language));
 		converted.setUser(BeOneUserUtil.convertToTO(userCalendar.getUser()));
 		converted.setCreatedAt(userCalendar.getCreatedAt());
 		converted.setUpdatedAt(userCalendar.getUpdatedAt());

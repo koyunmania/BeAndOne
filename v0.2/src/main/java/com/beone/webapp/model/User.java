@@ -50,10 +50,14 @@ public class User implements Serializable {
 	private String birthday;
 	private String gender;
 	private String provider;
+	private String locale;
+	private String status;
+
 	private Set<UserProfile> externalConnections;
 	
 	private City currentCity;
 	private Country currentCountry;
+	private int language;
 	
 	/**
 	 * User's sport social connections
@@ -132,7 +136,8 @@ public class User implements Serializable {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+
+
 	public String getLogRepresentation() {
 		StringBuilder rep = new StringBuilder();
 		
@@ -206,5 +211,29 @@ public class User implements Serializable {
 
 	public void setCurrentCountry(Country currentCountry) {
 		this.currentCountry = currentCountry;
+	}
+
+	public int getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(int language) {
+		this.language = language;
+	}
+
+	public String getLocale() {
+		return locale;
+	}
+
+	public void setLocale(String locale) {
+		this.locale = locale;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

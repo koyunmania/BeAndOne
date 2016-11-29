@@ -12,12 +12,16 @@
 			</generator>
 		</id>
 
-		<property name="calendarSubCategory" type="string" column="CalendarSubCategory"/>
-		<property name="description" type="string" column="description"/>
+		<!-- <property name="calendarSubCategory" type="string" column="CalendarSubCategory"/>
+		<property name="description" type="string" column="description"/> -->
 		
 		<many-to-one name="calendar" class="com.beone.webapp.model.BeOneCalendar">
 			<column name="calendarId"></column>
 		</many-to-one>
 		
+		<set name="translations" fetch="join" inverse="true" lazy="false">
+			<key column="subcategoryId"/>
+			<one-to-many class="com.beone.webapp.model.BeOneCalendarSubCategoryTranslation"/>
+		</set>
     </class>
 </hibernate-mapping>

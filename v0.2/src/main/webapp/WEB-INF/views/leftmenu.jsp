@@ -106,6 +106,7 @@
 		</div>
 	</div>
 
+				<!--  ng-class="calendar.buttonClass">{{calendar.calendarName}}</button> -->
 	<div class="list-group">
 		<div class="profile-label">{{greeting}} {{profile.firstname}}</div>
 		<div ng-repeat="(parentIndex, calendar) in allCalendars">

@@ -6,7 +6,7 @@ beoneApp.controller('HomeCtrl', function($http, $scope, $sce) {
 		method: 'GET',
 		url: '/api/v1/experiences/'+userSelectedDate,
 		headers: {
-			'token':'TestToken'
+			'token':loginToken
 		}
 	}).success(function(result) {
 		console.log("Experiences result returned");

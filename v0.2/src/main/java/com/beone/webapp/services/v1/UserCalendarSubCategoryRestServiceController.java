@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -20,10 +21,12 @@ import com.beone.webapp.controller.service.BeOneCalendarSubCategoryService;
 import com.beone.webapp.controller.service.UserCalendarSubCategoryService;
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
+import com.beone.webapp.model.BeOneLanguage;
 import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserCalendarSubCategory;
 import com.beone.webapp.services.v1.model.UserCalendarSubCategoryTO;
 import com.beone.webapp.utils.BeOneCalendarSubCategoryUtil;
+import com.beone.webapp.utils.MessageTranslator;
 import com.beone.webapp.utils.UserCalendarSubCategoryUtil;
 
 @RestController
@@ -45,16 +48,19 @@ public class UserCalendarSubCategoryRestServiceController extends AbstractContro
 			produces = "application/json",
 			method= RequestMethod.GET
 			)
-	public RestResult getAllUserCalendarSubCategories(){
+	public RestResult getAllUserCalendarSubCategories(Locale locale){
 		RestResult result = new RestResult();
 		logger.info("UserCalendarSubCategoryRestServiceController: getAllUserCalendarSubCategories method called...");
 		
 		currentUser = getCurrentAuthUser();
+		BeOneLanguage language = MessageTranslator.getLanguageOfUserOrCaller(currentUser, locale);
 		
 		Set<UserCalendarSubCategoryTO> subs = new HashSet<UserCalendarSubCategoryTO>(); 
 		
 		try {
-			subs = UserCalendarSubCategoryUtil.convertToTOSet(userCalendarSubCategoryService.getAllUserCalendarSubCategories(currentUser));
+			subs = UserCalendarSubCategoryUtil.convertToTOSet(
+					userCalendarSubCategoryService.getAllUserCalendarSubCategories(currentUser),
+					language);
 			if(subs == null || subs.size() == 0) {
 				result.setData(null);
 				result.setMessage("UserCalendarSubCategoryRestServiceController: getAllUserCalendarSubCategories returned empty...");

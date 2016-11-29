@@ -85,7 +85,7 @@ public class RegisterController extends AbstractController {
 			model.addAttribute("validationErrors", validationErrors);
 		}
 		
-		return "redirect:/login";
+		return "register";
 	}
 	
 	private List<ValidationError> validateFields(Model model, User user, Locale locale) {

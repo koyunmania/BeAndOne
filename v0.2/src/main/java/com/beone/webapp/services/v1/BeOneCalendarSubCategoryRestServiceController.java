@@ -1,6 +1,7 @@
 package com.beone.webapp.services.v1;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -11,14 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.beone.webapp.controller.AbstractController;
 import com.beone.webapp.controller.service.BeOneCalendarService;
 import com.beone.webapp.controller.service.BeOneCalendarSubCategoryService;
 import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
+import com.beone.webapp.model.BeOneLanguage;
 import com.beone.webapp.utils.BeOneCalendarSubCategoryUtil;
+import com.beone.webapp.utils.MessageTranslator;
 
 @RestController
-public class BeOneCalendarSubCategoryRestServiceController {
+public class BeOneCalendarSubCategoryRestServiceController extends AbstractController {
 	private static final Logger logger = LoggerFactory.getLogger(BeOneCalendarSubCategoryRestServiceController.class); 
 	
 	@Autowired
@@ -44,9 +48,12 @@ public class BeOneCalendarSubCategoryRestServiceController {
 			produces = "application/json",
 			method = RequestMethod.GET
 			)
-	public RestResult getAllSubCategories(){
+	public RestResult getAllSubCategories(Locale locale){
 		RestResult result = new RestResult();
 		logger.info("BeOneCalendarSubCategoryRestServiceController: getAllSubCategories is called...");
+		
+		currentUser = getCurrentAuthUser();
+		BeOneLanguage language = MessageTranslator.getLanguageOfUserOrCaller(currentUser, locale);
 		
 		Set<BeOneCalendarSubCategory> subCategories = new HashSet<BeOneCalendarSubCategory>();
 		
@@ -57,7 +64,7 @@ public class BeOneCalendarSubCategoryRestServiceController {
 				result.setMessage("BeOneCalendarSubCategoryRestServiceController: no subcategory could not be found...");
 				result.setStatus(false);
 			} else {
-				result.setData(BeOneCalendarSubCategoryUtil.convertToTOSet(subCategories));
+				result.setData(BeOneCalendarSubCategoryUtil.convertToTOSet(subCategories, language));
 				result.setMessage("BeOneCalendarSubCategoryRestServiceController: CalendarSubCategories got successfully...");
 				result.setStatus(true);
 			}
@@ -77,9 +84,12 @@ public class BeOneCalendarSubCategoryRestServiceController {
 			params = {"calendarId"},
 			method = RequestMethod.GET)
 	public RestResult getAllSubCategoriesOfCalendar(
-			@RequestParam(value = "calendarId") int calendarId){
+			@RequestParam(value = "calendarId") int calendarId, Locale locale){
 		RestResult result = new RestResult();
 		logger.info("BeOneCalendarSubCategoryRestServiceController: getAllSubCategoriesOfCalendar is called");
+		
+		currentUser = getCurrentAuthUser();
+		BeOneLanguage language = MessageTranslator.getLanguageOfUserOrCaller(currentUser, locale);
 		
 		BeOneCalendar calendar = new BeOneCalendar();
 		
@@ -96,7 +106,7 @@ public class BeOneCalendarSubCategoryRestServiceController {
 					result.setMessage("BeOneCalendarSubCategoryRestServiceController: no subcategory could not be found for calendarId:" + calendarId);
 					result.setStatus(false);				
 				} else {
-					result.setData(BeOneCalendarSubCategoryUtil.convertToTOSet(calendarSubCategorySet));
+					result.setData(BeOneCalendarSubCategoryUtil.convertToTOSet(calendarSubCategorySet, language));
 					result.setMessage("BeOneCalendarSubCategoryRestServiceController: CalendarSubCategories got successfully...");
 					result.setStatus(true);				
 				}

@@ -2,6 +2,8 @@ package com.beone.webapp.persistence;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,7 @@ public class UserTokenDao extends AbstractDao
 {
 	private static final Logger logger = LoggerFactory.getLogger(UserTokenDao.class);
 	
+	@Transactional
 	public void insertNew (UserToken token) {
 		// Start of user code special Implementation insertNew
 		this.localSessionFactory.getCurrentSession().saveOrUpdate(token);
@@ -63,5 +66,17 @@ public class UserTokenDao extends AbstractDao
                 .list();
 		return (result != null && result.size() > 0);
  		// End of user code
+	}
+
+	public boolean getUserByTokenAndUser(UserToken token) {
+		//Start of mail verification based on token
+		@SuppressWarnings("rawtypes")
+		List result = this.localSessionFactory.getCurrentSession()
+				.createQuery("from UserToken where token=:token and userid=:userid")
+				.setParameter("token", token.getToken())
+				.setParameter("userid",token.getUser().getUserId())
+				.list();
+		return (result != null && result.size() > 0);
+		// End of user code
 	}
 }

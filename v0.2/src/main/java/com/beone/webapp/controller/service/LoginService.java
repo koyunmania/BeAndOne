@@ -67,7 +67,10 @@ public class LoginService {
 				User.USER_PROVIDER_BEONE);
 		if(foundUser != null) {
 			logger.info("Login with credentials is successful, loading user.");
-			
+			boolean status=checkUserStatus(user);
+			if(!status){
+				logger.info("Checking status of user. Send verification mail");
+			}
 			logger.debug("Creating token for user");
 			UserToken token = new UserToken();
 			token.setUser(foundUser);
@@ -127,7 +130,7 @@ public class LoginService {
 				
 				UserToken token = new UserToken();
 				token.setUser(foundUser);
-				token.setToken("TestToken");
+				token.setToken(SecurityUtils.generateToken());
 				tokenDao.insertNew(token);
 				
 				// token is inserted into header
@@ -266,5 +269,10 @@ public class LoginService {
 			logger.warn("There is an error occured.");
 			logger.error("The just inserted remote user could not be found again.");
 		}
+	}
+
+	public boolean checkUserStatus(User user){
+		//TODO
+		return false;
 	}
 }
