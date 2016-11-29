@@ -1,5 +1,6 @@
 package com.beone.webapp.persistence;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserProfile;
 import com.beone.webapp.model.UserToken;
 import com.beone.webapp.model.exceptions.ControllerServiceException;
+import com.beone.webapp.utils.GeneralUtils;
 import com.beone.webapp.utils.SecurityUtils;
 
 /**
@@ -160,6 +162,9 @@ public class SocialConnectionRepository implements ConnectionRepository{
 		user.setEmail(socialProfile.getEmail());
 		user.setPassword("NOT_AVAILABLE_FOR_REMOTE_USERS");
 		user.setPasswordRepeat("NOT_AVAILABLE_FOR_REMOTE_USERS");
+		Timestamp current = GeneralUtils.getCurrentTimestamp(null);
+    	user.setCreatedAt(current);
+    	user.setUpdatedAt(current);
 		
 		if(connection instanceof OAuth2Connection) {
 			Facebook fbData = (Facebook)connection.getApi();

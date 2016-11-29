@@ -1,20 +1,26 @@
 package com.beone.webapp.controller.service;
 
+import java.sql.Timestamp;
+
 import javax.persistence.EntityExistsException;
 
-import com.beone.webapp.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.beone.webapp.model.City;
+import com.beone.webapp.model.Country;
+import com.beone.webapp.model.Email;
+import com.beone.webapp.model.StatusCode;
+import com.beone.webapp.model.User;
 import com.beone.webapp.model.exceptions.ControllerServiceException;
 import com.beone.webapp.persistence.CityDao;
 import com.beone.webapp.persistence.CountryDao;
 import com.beone.webapp.persistence.ProfileEntryDao;
-import com.beone.webapp.persistence.UserCalendarSubCategoryDao;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
+import com.beone.webapp.utils.GeneralUtils;
 
 public class ProfileService {
     private static final Logger logger = LoggerFactory.getLogger(ProfileService.class);
@@ -104,6 +110,10 @@ public class ProfileService {
         logger.info("registerUser has been called with user data: {}", user.getLogRepresentation());
 
         if (validateRegistrationFields(user)) {
+        	Timestamp current = GeneralUtils.getCurrentTimestamp(null);
+        	user.setCreatedAt(current);
+        	user.setUpdatedAt(current);
+        	
             try {
                 if (user.getCurrentCity() == null) {
                     Country defaultCountry = new Country();

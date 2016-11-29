@@ -15,6 +15,7 @@
  */
 package com.beone.webapp.app;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserToken;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
+import com.beone.webapp.utils.GeneralUtils;
 import com.beone.webapp.utils.SecurityUtils;
 
 /**
@@ -113,6 +115,9 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 			token.setUser(localUser);
 			String securityToken = SecurityUtils.generateToken();
 			token.setToken(securityToken);
+			Timestamp currentTime = GeneralUtils.getCurrentTimestamp(null);
+			token.setCreatedAt(currentTime);
+			token.setUpdatedAt(currentTime);
 			
 			tokenDao.insertNew(token);
 			request.getNativeResponse(HttpServletResponse.class).setHeader("LoginAuthToken", securityToken);

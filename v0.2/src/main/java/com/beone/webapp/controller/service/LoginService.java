@@ -1,7 +1,9 @@
 package com.beone.webapp.controller.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,7 @@ import com.beone.webapp.model.exceptions.ControllerServiceException;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
 import com.beone.webapp.services.v1.RestResult;
+import com.beone.webapp.utils.GeneralUtils;
 import com.beone.webapp.utils.SecurityUtils;
 
 public class LoginService {
@@ -59,7 +62,8 @@ public class LoginService {
 			User user,
 			HttpServletRequest request,
 			HttpServletResponse response,
-			Model model) throws ControllerServiceException {
+			Model model,
+			TimeZone timezone) throws ControllerServiceException {
 		
 		User foundUser = userDao.checkLoginAndReturnUser(
 				user.getEmail(), 
@@ -76,6 +80,9 @@ public class LoginService {
 			token.setUser(foundUser);
 			String securityToken = SecurityUtils.generateToken();
 			token.setToken(securityToken);
+			Timestamp currentTime = GeneralUtils.getCurrentTimestamp(timezone);
+			token.setCreatedAt(currentTime);
+			token.setUpdatedAt(currentTime);
 			
 			tokenDao.insertNew(token);
 			response.setHeader("LoginAuthToken", securityToken);

@@ -6,7 +6,7 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li><a href ng-click="openProfileModal();">Profile</a></li>
-				<li><a href="/logout">Logout</a></li>
+				<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
 			</ul>
 		</li>
 	</ul>
