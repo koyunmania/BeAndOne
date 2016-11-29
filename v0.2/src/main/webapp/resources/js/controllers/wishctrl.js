@@ -11,7 +11,7 @@ beoneApp.controller('WishCtrl', function($http, $scope, $sce) {
 		method: 'GET',
 		url: '/api/v1/wishes/'+userSelectedDateTransformed,
 		headers: {
-			'token':'TestToken'
+			'token':loginToken
 		}
 	}).success(function(result) {
 		console.log("Wishes result returned");
@@ -51,7 +51,7 @@ beoneApp.controller('WishCtrl', function($http, $scope, $sce) {
 	            },
 	            headers: {
 	                //'Content-Type': 'application/x-www-form-urlencoded',
-	                'token': 'TestToken'
+	                'token': loginToken
 	            }
 	        }).success(function (result) {
 	            console.log("Wish item add result returned");

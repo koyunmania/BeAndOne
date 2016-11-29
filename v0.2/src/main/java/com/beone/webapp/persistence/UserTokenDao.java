@@ -2,6 +2,8 @@ package com.beone.webapp.persistence;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,7 @@ public class UserTokenDao extends AbstractDao
 {
 	private static final Logger logger = LoggerFactory.getLogger(UserTokenDao.class);
 	
+	@Transactional
 	public void insertNew (UserToken token) {
 		// Start of user code special Implementation insertNew
 		this.localSessionFactory.getCurrentSession().saveOrUpdate(token);

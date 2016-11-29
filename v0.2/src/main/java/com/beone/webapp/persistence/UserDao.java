@@ -21,7 +21,7 @@ import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserProfile;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class UserDao extends AbstractDao {
 	private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
 	
@@ -188,6 +188,7 @@ public class UserDao extends AbstractDao {
 		return localUsers;
 	}
 	
+	@Transactional
 	public List<User> getLocalUsersForConnection (
 			String providerId,
 			String providerUserId) {

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -34,7 +35,10 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.beone.webapp.model.User;
+import com.beone.webapp.model.UserToken;
 import com.beone.webapp.persistence.UserDao;
+import com.beone.webapp.persistence.UserTokenDao;
+import com.beone.webapp.utils.SecurityUtils;
 
 /**
  * Checks whether a local user exists and if yes then create a session for that
@@ -52,6 +56,16 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 	
 	private UserDao userDao;
 	
+	private UserTokenDao tokenDao;
+	
+	public UserTokenDao getTokenDao() {
+		return tokenDao;
+	}
+
+	public void setTokenDao(UserTokenDao tokenDao) {
+		this.tokenDao = tokenDao;
+	}
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -94,6 +108,18 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 			userCookieGenerator.addCookie(
 				userId, 
 				request.getNativeResponse(HttpServletResponse.class));
+			
+			UserToken token = new UserToken();
+			token.setUser(localUser);
+			String securityToken = SecurityUtils.generateToken();
+			token.setToken(securityToken);
+			
+			tokenDao.insertNew(token);
+			request.getNativeResponse(HttpServletResponse.class).setHeader("LoginAuthToken", securityToken);
+
+			logger.info("Authentication with social account successful. Returning to home page.");
+			
+			return "/home?token="+token.getToken();
 		}
 		logger.info("signIn exiting");
 		

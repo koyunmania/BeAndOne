@@ -130,7 +130,7 @@ public class LoginService {
 				
 				UserToken token = new UserToken();
 				token.setUser(foundUser);
-				token.setToken("TestToken");
+				token.setToken(SecurityUtils.generateToken());
 				tokenDao.insertNew(token);
 				
 				// token is inserted into header
