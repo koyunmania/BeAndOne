@@ -271,6 +271,9 @@ public class LoginService {
 			UserToken token = new UserToken();
 			token.setUser(localUser);
 			token.setToken(securityToken);
+			Timestamp current = GeneralUtils.getCurrentTimestamp(null);
+			token.setCreatedAt(current);
+			token.setUpdatedAt(current);
 			tokenDao.insertNew(token);
 		} else {
 			logger.warn("There is an error occured.");

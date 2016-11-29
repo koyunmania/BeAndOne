@@ -222,6 +222,9 @@ public class SocialConnectionRepository implements ConnectionRepository{
 		UserToken token = new UserToken();
 		token.setUser(localUsers.get(0));
 		token.setToken(SecurityUtils.generateToken());
+		Timestamp current = GeneralUtils.getCurrentTimestamp(null);
+    	token.setCreatedAt(current);
+    	token.setUpdatedAt(current);
 		userTokenDao.insertNew(token);
 	}
 
