@@ -30,7 +30,7 @@
 		<property name="portNumber" value="5432" />
 		<property name="user" value="beoneuser" />
 		<!--property name="user" value="Selcuk" /-->
-		<property name="password" value="Qwert1234" />
+		<property name="password" value="1234" />
 	</bean>
 
 	<bean id="connectionFactoryLocator"

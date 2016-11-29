@@ -10,16 +10,29 @@
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
 			<div class="title-page col-md-12">
+				<div class="b-logo">
+					<span>B</span>
+				</div>
+				<div class="mood">
+					<h3>Keyfin Nasil?</h3>
+					<a class="emoji" href=''>&#x1F603</a>
+					<a class="emoji" href=''>&#x1F60A</a>
+					<a class="emoji" href=''>&#x1F614</a>
+					<a class="emoji" href=''>&#x1F615</a>
+					<a class="emoji" href=''>&#x1F627</a>
+				</div>
+				<div class="instagram fa fa-instagram">
+					@benowmehere
+				</div>
 			</div>
+
 			<div class="col-md-2">
 				<%@include file="leftmenu.jsp"%>
 			</div>
 			<div class="col-md-10">
-				<div class="row"><span class="profile-label">{{greeting}} {{profile.firstname}} ({{profile.currentCity.cityName}})</span>
-				</div>
 				<div class="row">
 					<div class="col-md-7" ng-controller="HappeningCtrl" ng-init="initHappenings()">
-						<h2 id="happenings-header">Bug&uuml;nk&uuml;ler</h2>
+						<h2 id="happenings-header">Bugunkuler</h2>
 						<div ng-repeat="calendar in $parent.userCalendars">
 							<div class="row panel panel-body" ng-repeat="happening in calendar.happenings" style="{{calendar.colorCode}}; font-size:40px; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
 								<div style="{{calendar.colorCode}}" class="col-md-2"><span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings'"></span></div>
@@ -82,7 +95,7 @@
 						</div>
 					</div>
 					<div class="col-md-5">
-						<h2 id="experiences-header">Positif G&uuml;nl&uuml;k</h2>
+						<h2 id="experiences-header">Positif Gunluk</h2>
 						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
 							<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
 							<div class="panel-body">
@@ -125,7 +138,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title happening">G&uuml;zellikleri paylas</h4> 
+											<h4 class="modal-title happening">Guzellikleri paylas</h4> 
 										</div>
 										<div class="modal-body happening"
 											style="min-height: 300px; background-repeat: no-repeat;">

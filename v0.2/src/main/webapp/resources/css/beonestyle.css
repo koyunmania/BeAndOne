@@ -8,8 +8,15 @@ body {
 	background-color:#f5f5f5;
 }
 
+.info-bar {
+  width: 700px;
+  height: 60px;
+  background-color: #5a5a5a
+}
+
 .profile-area {
 	margin-top: -110px;
+	padding: 54px 40px 0px 40px !important;
 }
 
 .profile-area .profile-img {
@@ -20,9 +27,10 @@ body {
 	height: 167px;
 }
 
-.profile-area .profile-label {
-	display: block;
-	padding-top: 10px;
+.profile-label {
+  text-align: center;
+  font-size: 18px;
+  padding: 15px 0 30px 0;
 }
 
 .answerText {
@@ -107,9 +115,40 @@ body {
 }
 
 .title-page {
-	background: url('/resources/images/BeAndOne.jpg') no-repeat center center;	
+	background: url('/resources/images/webapp_cover.png') no-repeat center center;	
 	background-size:cover;
-	height: 400px;
+	height: 250px;
+}
+
+.title-page .b-logo {
+  height: 72px;
+  width: 85px;
+  margin-left: 65px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: white;
+  font-size: 40px;
+  color: #4d5155;
+  line-height: 72px;
+  text-align: center;
+}
+
+.title-page .mood {
+  text-align: center;
+  color: white;
+}
+
+.title-page .instagram {
+  text-align: center;
+  color: white;
+  float: right;
+  font-size: 15px;
+  margin: 75px 20px 0 0;
+}
+
+.title-page .mood a {
+  color: white;
+  text-decoration: none;
 }
 
 .header-bar {
@@ -158,7 +197,6 @@ body {
 .btn-international {
   color: #fff;
   background-color: #5fc2c4;
-  border-color: #357ebd;
 }
 .btn-international:hover,
 .btn-international:focus,
@@ -200,7 +238,6 @@ fieldset[disabled] .btn-international.active {
 .btn-independence {
   color: #fff;
   background-color: #f7d752;
-  border-color: #357ebd;
 }
 .btn-independence:hover,
 .btn-independence:focus,
@@ -242,7 +279,6 @@ fieldset[disabled] .btn-independence.active {
 .btn-national {
   color: #fff;
   background-color: #df6c4f;
-  border-color: #357ebd;
 }
 .btn-national:hover,
 .btn-national:focus,
@@ -285,7 +321,6 @@ fieldset[disabled] .btn-national.active {
 .btn-holy {
   color: #fff;
   background-color: #efa759;
-  border-color: #357ebd;
 }
 .btn-holy:hover,
 .btn-holy:focus,
@@ -325,10 +360,13 @@ fieldset[disabled] .btn-holy.active {
 }
 
 /*********/
+.btn-calendar {
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
 .btn-astro {
   color: #fff;
   background-color: #71719e;
-  border-color: #357ebd;
 }
 .btn-astro:hover,
 .btn-astro:focus,
@@ -371,7 +409,6 @@ fieldset[disabled] .btn-astro.active {
 .btn-nature {
   color: #fff;
   background-color: #5fc49f;
-  border-color: #357ebd;
 }
 .btn-nature:hover,
 .btn-nature:focus,
