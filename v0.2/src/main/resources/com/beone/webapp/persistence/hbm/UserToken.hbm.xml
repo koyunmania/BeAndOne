@@ -13,6 +13,9 @@
 		</id>
 
 		<property name="token" type="string" column="Token"/>
+		<property name="createdAt" type="timestamp" column="CreatedAt"/>
+		<property name="updatedAt" type="timestamp" column="UpdatedAt"/>
+		
 		<many-to-one name="user" class="com.beone.webapp.model.User" fetch="join" lazy="false">
 			<column name="UserId"/>
 		</many-to-one>

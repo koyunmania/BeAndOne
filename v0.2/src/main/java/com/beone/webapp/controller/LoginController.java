@@ -184,7 +184,7 @@ public class LoginController extends AbstractController {
 			return "login";
 		} else {
 			try {
-				UserToken securityToken = this.loginService.authenticate(user, request, response, model);
+				UserToken securityToken = this.loginService.authenticate(user, request, response, model, timezone);
 				logger.info("User has been authenticated successfully: " + user.getEmail());
 				
 //				GeneralUtils.addSuccessfulLoginAttributesToModel(locale, model, timezone,

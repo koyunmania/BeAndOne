@@ -16,6 +16,7 @@
 package com.beone.webapp.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -52,6 +53,25 @@ public class User implements Serializable {
 	private String provider;
 	private String locale;
 	private String status;
+	private Timestamp createdAt;
+	
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	private Timestamp updatedAt;
 
 	private Set<UserProfile> externalConnections;
 	

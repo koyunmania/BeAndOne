@@ -16,7 +16,12 @@ import com.beone.webapp.model.UserToken;
 public class GeneralUtils {
 
 	public static Timestamp getCurrentDaysTimestamp(TimeZone userTimezone) {
-		Calendar cal = GregorianCalendar.getInstance(userTimezone);	
+		Calendar cal = null;
+		if(userTimezone == null) {
+			cal = GregorianCalendar.getInstance();	
+		} else {
+			cal = GregorianCalendar.getInstance(userTimezone);
+		}
 		
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH);
@@ -31,6 +36,19 @@ public class GeneralUtils {
 			+ " 00:00:00";
 		
 		Timestamp result = Timestamp.valueOf(date);
+		
+		return result;
+	}
+	
+	public static Timestamp getCurrentTimestamp(TimeZone userTimezone) {
+		Calendar cal = null;
+		if(userTimezone == null) {
+			cal = GregorianCalendar.getInstance();	
+		} else {
+			cal = GregorianCalendar.getInstance(userTimezone);
+		}
+		
+		Timestamp result = new Timestamp(cal.getTimeInMillis());
 		
 		return result;
 	}
