@@ -76,9 +76,9 @@ beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileSe
 					$scope.selectedCalendarSubcategories = [];
 				} else {
 					$scope.userCalendarSubCategories = result.slice();
-					/*for(var i = 0; i < $scope.userCalendarSubCategories.length; i++){
+					for(var i = 0; i < $scope.userCalendarSubCategories.length; i++){
 						$scope.selectedCalendarSubcategories[i] = $scope.userCalendarSubCategories[i].beOneCalendarSubCategory;
-					}*/
+					}
 				}
 			},
 			function(response){
