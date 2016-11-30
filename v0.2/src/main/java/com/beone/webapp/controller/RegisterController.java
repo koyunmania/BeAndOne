@@ -3,27 +3,25 @@ package com.beone.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.beone.webapp.controller.service.CityService;
+import com.beone.webapp.controller.service.CountryService;
 import com.beone.webapp.controller.service.ProfileService;
 import com.beone.webapp.model.StatusCode;
 import com.beone.webapp.model.User;
 import com.beone.webapp.model.exceptions.ControllerServiceException;
 import com.beone.webapp.model.exceptions.ValidationError;
 import com.beone.webapp.utils.MessageTranslator;
-import com.beone.webapp.model.Country;
-import com.beone.webapp.controller.service.CountryService;
-import com.beone.webapp.model.City;
-import com.beone.webapp.controller.service.CityService;
 
 
 @Controller
@@ -39,6 +37,9 @@ public class RegisterController extends AbstractController {
 	
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private ReloadableResourceBundleMessageSource messageSource;
 
 
 	public ProfileService getProfileService() {
@@ -67,20 +68,20 @@ public class RegisterController extends AbstractController {
 				logger.info("User has been created");
 				model.addAttribute(
 						"creationResultMessage", 
-						MessageTranslator.getStatusMessageTranslation(StatusCode.REGISTRATION_SUCCESSFUL, locale));
+						MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.REGISTRATION_SUCCESSFUL, locale));
 				model.addAttribute("creationResultIsSuccess", true);
 				
 			} catch (ControllerServiceException e) {
 				logger.warn("Error occured during registration");
 				model.addAttribute(
 						"creationResultMessage",
-						MessageTranslator.getStatusMessageTranslation(e.getStatusCode(), locale));
+						MessageTranslator.getStatusMessageTranslation(messageSource, e.getStatusCode(), locale));
 				model.addAttribute("creationResultIsSuccess", false);
 			}
 		} else {
 			model.addAttribute(
 					"creationResultMessage",
-					MessageTranslator.getStatusMessageTranslation(StatusCode.REGISTRATION_FAILED, locale));
+					MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.REGISTRATION_FAILED, locale));
 			model.addAttribute("creationResultIsSuccess", false);
 			model.addAttribute("validationErrors", validationErrors);
 		}
@@ -94,25 +95,26 @@ public class RegisterController extends AbstractController {
 		if(user.getEmail() == null || user.getEmail().length() == 0) {
 			ValidationError error = new ValidationError();
 			error.setFieldName("email");
-			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(StatusCode.MISSING_MANDATORY_FIELD, locale));
+			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			validationErrors.add(error);
 		}
 		if(user.getUsername() == null || user.getUsername().length() == 0) {
 			ValidationError error = new ValidationError();
 			error.setFieldName("username");
-			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(StatusCode.MISSING_MANDATORY_FIELD, locale));
+			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			validationErrors.add(error);
 		}
 		if(user.getPassword() == null || user.getPassword().length() == 0) {
 			ValidationError error = new ValidationError();
 			error.setFieldName("password");
-			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(StatusCode.MISSING_MANDATORY_FIELD, locale));
+			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			validationErrors.add(error);
 		}
 		if(user.getPassword() == null || !user.getPassword().equals(user.getPasswordRepeat())) {
 			ValidationError error = new ValidationError();
 			error.setFieldName("email");
 			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(
+					messageSource, 
 					StatusCode.PASSWORD_REPETITION_DOESNT_MATCH, 
 					locale));
 			validationErrors.add(error);

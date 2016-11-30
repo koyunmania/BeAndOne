@@ -17,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -78,6 +79,9 @@ public class LoginController extends AbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ReloadableResourceBundleMessageSource messageSource;
 	
 	public UserAlbumService getAlbumService() {
 		return albumService;
@@ -170,7 +174,7 @@ public class LoginController extends AbstractController {
 			
 			ValidationError err = new ValidationError();
 			err.setFieldName("email");
-			err.setValidationMessage(MessageTranslator.getStatusMessageTranslation(StatusCode.MISSING_MANDATORY_FIELD, locale));
+			err.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 			validationErrors.add(err);
 			model.addAttribute("validationErrors", validationErrors);
@@ -182,7 +186,7 @@ public class LoginController extends AbstractController {
 			
 			ValidationError err = new ValidationError();
 			err.setFieldName("password");
-			err.setValidationMessage(MessageTranslator.getStatusMessageTranslation(StatusCode.MISSING_MANDATORY_FIELD, locale));
+			err.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 			validationErrors.add(err);
 			model.addAttribute("validationErrors", validationErrors);
@@ -207,7 +211,7 @@ public class LoginController extends AbstractController {
 				logger.warn("User authentication failed: " + user.getEmail());
 				model.addAttribute(
 						"loginResultMessage",
-						MessageTranslator.getStatusMessageTranslation(e.getStatusCode(), locale));
+						MessageTranslator.getStatusMessageTranslation(messageSource, e.getStatusCode(), locale));
 				model.addAttribute("loginResultIsSuccess", false);
 				url = Constants.LOGIN;
 				return url;

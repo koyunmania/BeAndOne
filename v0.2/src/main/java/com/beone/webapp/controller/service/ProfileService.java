@@ -174,7 +174,7 @@ public class ProfileService {
             } catch (EntityExistsException ex) {
                 logger.warn("Requested user entry already exists");
                 throw new ControllerServiceException(
-                        StatusCode.USER_ALREAD_EXISTS,
+                        StatusCode.USER_ALREADY_EXISTS,
                         "There is already a user with the given data");
             }
         }
