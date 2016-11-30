@@ -28,10 +28,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.beone.constants.Constants;
 import com.beone.webapp.controller.service.LoginService;
 import com.beone.webapp.controller.service.UserAlbumService;
-import com.beone.webapp.controller.service.UserService;
 import com.beone.webapp.model.StatusCode;
 import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserToken;
@@ -41,7 +39,6 @@ import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
 import com.beone.webapp.utils.GeneralUtils;
 import com.beone.webapp.utils.MessageTranslator;
-import com.beone.webapp.utils.UrlUtils;
 
 
 @Controller
@@ -75,9 +72,6 @@ public class LoginController extends AbstractController {
 	
 	@Autowired
 	private UserAlbumService albumService;
-	
-	@Autowired
-	private UserService userService;
 	
 	public UserAlbumService getAlbumService() {
 		return albumService;
@@ -162,7 +156,7 @@ public class LoginController extends AbstractController {
 			Model model,
 			TimeZone timezone) {
 		logger.info("loginSubmit is called with credentials: {}", user.getLogRepresentation());
-		String url = Constants.LOGIN;
+		
 		if(user.getEmail() == null || user.getEmail().length() == 0) {
 			logger.warn("Email is not provided");
 			
@@ -174,7 +168,7 @@ public class LoginController extends AbstractController {
 			List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 			validationErrors.add(err);
 			model.addAttribute("validationErrors", validationErrors);
-			return url;
+			return "login";
 		} else if(user.getPassword() == null || user.getPassword().length() == 0) {
 			logger.warn("Password is not provided: " + user.getEmail());
 
@@ -186,31 +180,25 @@ public class LoginController extends AbstractController {
 			List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 			validationErrors.add(err);
 			model.addAttribute("validationErrors", validationErrors);
-			return url;
+
+			return "login";
 		} else {
 			try {
 				UserToken securityToken = this.loginService.authenticate(user, request, response, model, timezone);
-				
 				logger.info("User has been authenticated successfully: " + user.getEmail());
-				if(GeneralUtils.isBlankOrNull(user.getLocale()))
-				{
-					userService.fetchUserLocale(user);
-				}
+				
 //				GeneralUtils.addSuccessfulLoginAttributesToModel(locale, model, timezone,
 //						securityToken.getToken());
-				url = Constants.HOME_REDIRECT;
-				url = UrlUtils.getUserLocale(user, securityToken.getToken(), url);
-				return url;
-				/*return Constants.HOME
-						+ "?token="+securityToken.getToken();*/
+				
+				return "redirect:/home"
+						+ "?token="+securityToken.getToken();
 			} catch (ControllerServiceException e) {
 				logger.warn("User authentication failed: " + user.getEmail());
 				model.addAttribute(
 						"loginResultMessage",
 						MessageTranslator.getStatusMessageTranslation(e.getStatusCode(), locale));
 				model.addAttribute("loginResultIsSuccess", false);
-				url = Constants.LOGIN;
-				return url;
+				return "login";
 			}
 		}
 	}

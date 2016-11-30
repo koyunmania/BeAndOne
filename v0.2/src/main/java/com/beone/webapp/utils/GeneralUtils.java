@@ -65,6 +65,21 @@ public class GeneralUtils {
 		}
 	}
 
+	public static final boolean isBlankOrNull(final String value)
+	{
+		return (null!=value && value.length()>0) ? false : true;
+	}
+	
+	public static final boolean isNotBlankOrNull(final String value)
+	{
+		return (null!=value && value.length()>0) ? true : false;		
+	}
+	
+	public static final boolean isNonZero(final int value)
+	{
+		return (value>0) ? true : false;		
+	}
+
 //	/**
 //	 * @param locale
 //	 * @param model

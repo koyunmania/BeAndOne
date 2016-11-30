@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page session="false"%>
 <%@include file="header.jsp"%>
 
@@ -6,7 +7,7 @@
 <link rel='stylesheet'
 	href="/resources/js/facebookSDK/angular-socialshare.css">
 
-<body onLoad="window.scroll(0, 170)">
+<body onLoad="init();window.scroll(0, 170)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
 			<div class="title-page col-md-12">
@@ -14,7 +15,7 @@
 					<span>B</span>
 				</div>
 				<div class="mood">
-					<h3>Keyfin Nasil?</h3>
+					<h3><spring:message code="label.home.cover.howisyourmood" /></h3>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Awesome" href=''>&#x1F603</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Good" href=''>&#x1F60A</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Neutral" href=''>&#x1F614</a>

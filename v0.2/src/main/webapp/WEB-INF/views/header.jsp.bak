@@ -27,45 +27,6 @@
 			splittedSelectedDate[2] + "-" +
 			splittedSelectedDate[1] + "-" +
 			splittedSelectedDate[0];
-		
-		function init()
-		{
-			var windowUrl = window.location.href;
-			var localIndex = 0;
-			if(null!=windowUrl)
-			{
-				var localeDetail = windowUrl.indexOf("&")!=-1 ? windowUrl.substring(windowUrl.indexOf("?"), windowUrl.indexOf("&")) : windowUrl.substring(windowUrl.indexOf("?"), windowUrl.length);
-				var localeDropdown = document.getElementById("locale");
-				var dropDownLen = document.getElementById("locale").options.length;
-				if(null!=localeDropdown && dropDownLen>0)
-				{
-					for(var i=0;i<dropDownLen;i++)
-					{
-						if(localeDetail.indexOf(localeDropdown.options[i].value)!=-1)
-						{
-							localeIndex = i;
-							break;
-						}
-					}
-				}
-			}
-			document.getElementById("locale").options.selectedIndex = localeIndex;
-		}
-		
-		function translatePageLang(pageLocale)
-		{
-			if(null!=pageLocale && null!=document.getElementById(pageLocale))
-			{
-				if(document.getElementById(pageLocale).selectedIndex==0)
-				{
-					window.open("http://localhost:8080/home?lang=en", "_self")
-				}
-				else
-				{
-					window.open("http://localhost:8080/home?lang=tr", "_self")
-				}
-			}			
-		}
 	</script>
     
     <!-- Latest compiled and minified JavaScript -->
@@ -74,7 +35,6 @@
 	<script src="/resources/js/angularjs-1.2.22/angular.js"></script>
 	<script src="/resources/js/angularjs-1.2.22/angular-route.js"></script>
 	<script src="/resources/js/angularjs-1.2.22/angular-animate.js"></script>
-	<script src="/resources/js/angularjs-1.2.22/angular-translate.js"></script>		
 	
 	<script type="text/javascript">
 		angular.module('beone', [])

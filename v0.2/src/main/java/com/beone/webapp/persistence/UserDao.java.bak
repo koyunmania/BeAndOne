@@ -252,35 +252,4 @@ public class UserDao extends AbstractDao {
 		}
  		// End of user code
 	}
-	
-	
-	public String findUserLocaleByUserEmail(final String email, final String password) 
-	{
-		String locale = (String)this.localSessionFactory.getCurrentSession()
-				.createQuery("select user.locale from User user where user.email=:email and user.password=:password")
-				.setParameter("email", email)
-	            .setParameter("password", password)
-				.uniqueResult();
-		return GeneralUtils.isNotBlankOrNull(locale) ? locale : "";
-	}
-	
-	public String findUserLocaleByUsername(final String userName) 
-	{
-		String locale = (String)this.localSessionFactory.getCurrentSession()
-				.createQuery("select user.locale from User user where user.username=:userName")
-				.setParameter("username", userName)
-				.uniqueResult(); 
-		return GeneralUtils.isNotBlankOrNull(locale) ? locale : "";
-	}
-	
-	public void updateUserLocale(final User user)
-	{
-		if(null!=findByKey(user.getUserId()) || null!=findByUsername(user.getUsername()))
-		{
-			int result = this.localSessionFactory.getCurrentSession()
-			.createQuery("update User user set user.locale=:userLocale where user.username=:userName")
-			.setParameter("userLocale", user.getLocale())
-			.setParameter("userName", user.getUsername()).executeUpdate();
-		}
-	}
 }
