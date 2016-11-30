@@ -36,4 +36,12 @@ public class BeOneCalendarSubCategoryUtil {
 		}
 		return converted;
 	}
+
+	public static BeOneCalendarSubCategory convertFromTO(BeOneCalendarSubCategoryTO beOneCalendarSub) {
+		BeOneCalendarSubCategory converted = new BeOneCalendarSubCategory();
+		converted.setSubcategoryId(beOneCalendarSub.getSubcategoryId());
+		converted.setCalendar(BeOneCalendarUtil.convertFromTO(beOneCalendarSub.getCalendar()));
+		
+		return converted;
+	}
 }

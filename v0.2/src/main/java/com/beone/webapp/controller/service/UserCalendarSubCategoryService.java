@@ -40,4 +40,10 @@ public class UserCalendarSubCategoryService {
 	public void assignAllSubcategoriesToUser(User user) {
 		userCalendarSubCategoryDao.assignAllSubcategoriesToUser(user);
 	}
+	
+	@Transactional
+	public UserCalendarSubCategory getUserSubCategoryIfExists(
+			UserCalendarSubCategory sub) {
+		return userCalendarSubCategoryDao.findByUserAndSubcategory(sub.getUser(), sub.getBeOneCalendarSubCategory());
+	}
 }

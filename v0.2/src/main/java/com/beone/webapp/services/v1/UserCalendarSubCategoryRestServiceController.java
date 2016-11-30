@@ -13,17 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.beone.webapp.controller.AbstractController;
-import com.beone.webapp.controller.service.BeOneCalendarSubCategoryService;
 import com.beone.webapp.controller.service.UserCalendarSubCategoryService;
-import com.beone.webapp.model.BeOneCalendar;
 import com.beone.webapp.model.BeOneCalendarSubCategory;
 import com.beone.webapp.model.BeOneLanguage;
 import com.beone.webapp.model.User;
 import com.beone.webapp.model.UserCalendarSubCategory;
+import com.beone.webapp.services.v1.model.BeOneCalendarSubCategoryTO;
 import com.beone.webapp.services.v1.model.UserCalendarSubCategoryTO;
 import com.beone.webapp.utils.BeOneCalendarSubCategoryUtil;
 import com.beone.webapp.utils.MessageTranslator;
@@ -93,7 +91,7 @@ public class UserCalendarSubCategoryRestServiceController extends AbstractContro
 		Date now = new Date(Calendar.getInstance().getTimeInMillis());
 		Timestamp t = new Timestamp(now.getTime());
 
-		User currentUser = getCurrentAuthUser();
+		currentUser = getCurrentAuthUser();
 		try {
 			for(BeOneCalendarSubCategory beOneCalendarSub: beOneCalendarSubs){
 				UserCalendarSubCategory sub = new UserCalendarSubCategory();
@@ -114,21 +112,37 @@ public class UserCalendarSubCategoryRestServiceController extends AbstractContro
 		}
 		return result;
 	}
+	
 	@RequestMapping(
 			value = "/api/v1/removeUserCalendarSubCategories/",
 			produces = "application/json",
 			method = RequestMethod.POST
 			)
 	public RestResult removeUserCalendarSubCategories(
-			@RequestBody Set<BeOneCalendarSubCategory> beOneCalendarSubs){
+			@RequestBody Set<BeOneCalendarSubCategoryTO> beOneCalendarSubs){
 		logger.info("UserCalendarSubCategoryRestServiceController: removeUserCalendarSubCategories called...");
+		currentUser = getCurrentAuthUser();
+		
 		RestResult result = new RestResult();
 		try {
-			for(BeOneCalendarSubCategory beOneCalendarSub: beOneCalendarSubs){
+			for(BeOneCalendarSubCategoryTO beOneCalendarSub: beOneCalendarSubs){
+				BeOneCalendarSubCategory converted = 
+						BeOneCalendarSubCategoryUtil.convertFromTO(beOneCalendarSub);
 				UserCalendarSubCategory sub = new UserCalendarSubCategory();
-				sub.setBeOneCalendarSubCategory(beOneCalendarSub);
+				sub.setBeOneCalendarSubCategory(converted);
 				sub.setUser(currentUser);
-				userCalendarSubCategoryService.deleteUserCalendarSubCategory(sub);
+				
+				UserCalendarSubCategory existing = 
+						userCalendarSubCategoryService.getUserSubCategoryIfExists(sub);
+				
+				if(existing != null) {
+					userCalendarSubCategoryService.deleteUserCalendarSubCategory(existing);
+				} else {
+					logger.warn("UserCalendarSubCategoryRestServiceController: removeUserCalendarSubCategories tried to delete a not existing item!");
+					result.setData(null);
+					result.setMessage("UserCalendarSubCategoryRestServiceController: Subcategory membership does not exist");
+					result.setStatus(false);
+				}
 			}
 			result.setData(beOneCalendarSubs);
 			result.setStatus(true);

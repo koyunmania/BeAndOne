@@ -127,4 +127,16 @@ public class BeOneCalendarUtil {
 		return converted;
 	}
 
+	public static BeOneCalendar convertFromTO(BeOneCalendarTO calendar) {
+		BeOneCalendar converted = new BeOneCalendar();
+		
+		converted.setCalendarId(calendar.getCalendarId());
+		converted.setButtonClass(calendar.getButtonClass());
+		converted.setCalendarIcon(calendar.getCalendarIcon());
+		converted.setColorCode(calendar.getColorCode());
+		converted.setSortOrder(calendar.getSortOrder());
+		
+		return converted;
+	}
+
 }
