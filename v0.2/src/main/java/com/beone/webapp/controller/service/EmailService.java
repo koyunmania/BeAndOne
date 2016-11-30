@@ -59,21 +59,22 @@ public class EmailService {
         return null;
     }
     
-    @Transactional
-    public boolean verify(int userid, String key) {
-        User user = userDao.findByKey(userid);
-        RegisterToken registerToken=new RegisterToken();
-        registerToken.setToken(key);
-        if (null!=registerTokenDao.getUserByToken(registerToken)) {
-            user.setStatus("active");
-            userDao.insertNew(user);
-            RegisterToken registerToken1=new RegisterToken();
-            registerToken1.setToken(SecurityUtils.generateToken());
-            registerToken1.setUser(user);
-            registerTokenDao.update(registerToken1);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    @Transactional
+//    public boolean verify(int userid, String key) {
+//        User user = userDao.findByKey(userid);
+//
+//        if (null!=registerTokenDao.getUserByToken(key)) {
+//            user.setStatus("active");
+//            
+//            userDao.update(user);
+//            
+//            RegisterToken registerToken1=new RegisterToken();
+//            registerToken1.setToken(SecurityUtils.generateToken());
+//            registerToken1.setUser(user);
+//            registerTokenDao.update(registerToken1);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }
