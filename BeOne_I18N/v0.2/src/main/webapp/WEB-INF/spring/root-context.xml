@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	
+	<bean name="applicationSettings" class="com.${application.package.name}.webapp.app.ApplicationSettings">
+		<property name="settingsMap">
+			<map>
+				<entry key="photoAlbumsUploadLocation" value="/tmp/beoneweb/resources/"/>
+				<entry key="plusCPhotosFolderName" value="beoneImages"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Some configuration parameters are externalized -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+         <property name="locations">
+            <value>classpath:/application.properties</value>
+         </property>
+    </bean>
+
+	<bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource">
+		<property name="databaseName" value="beone" />
+		<property name="serverName" value="localhost" />
+		<property name="portNumber" value="5432" />
+		<property name="user" value="postgres" />
+		<!--property name="user" value="Selcuk" /-->
+		<property name="password" value="admin" />
+	</bean>
+
+	<bean id="connectionFactoryLocator"
+		class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+		<property name="connectionFactories">
+			<list>
+				<bean
+					class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+					<constructor-arg value="1758970354388621" />
+					<constructor-arg value="0157dcf28f7ec5e2c51125e8bf521492" />
+					<property name="scope" value="public_profile,email,user_birthday,publish_actions"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Database Property -->
+	<bean id="oracleHibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<!-- <prop key="hibernate.query.substitutions">true 'T', false 'F'</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.c3p0.minPoolSize">5</prop>
+				<prop key="hibernate.c3p0.maxPoolSize">20</prop>
+				<prop key="hibernate.c3p0.timeout">600</prop>
+				<prop key="hibernate.c3p0.max_statement">50</prop>
+				<prop key="hibernate.c3p0.testConnectionOnCheckout">false</prop>
+				<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+			</props>
+		</property>
+		
+	</bean>
+
+	<bean id="localSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="hibernateProperties" ref="oracleHibernateProperties" />
+		<!-- OR mapping files. -->
+		<property name="mappingResources">
+			<list>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/City.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/Country.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/ProfileEntry.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserCalendars.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/NewsFeed.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/User.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserFriends.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserLikedNews.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserProfile.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserToken.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserExperience.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserWish.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserWishDailyCheck.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendar.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarSubCategory.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarEvent.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/PossibleAnswer.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/Question.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserAnswer.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserCalendarSubCategory.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserAlbum.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/UserPhoto.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="localSessionFactory" />
+    </bean>
+    
+    <bean id="countryDao" class="com.${application.package.name}.webapp.persistence.CountryDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="cityDao" class="com.${application.package.name}.webapp.persistence.CityDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userDao" class="com.${application.package.name}.webapp.persistence.UserDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userFriendDao" class="com.${application.package.name}.webapp.persistence.UserFriendDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="profileEntryDao" class="com.${application.package.name}.webapp.persistence.ProfileEntryDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="newsFeedDao" class="com.${application.package.name}.webapp.persistence.NewsFeedDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userTokenDao" class="com.${application.package.name}.webapp.persistence.UserTokenDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userExperienceDao" class="com.${application.package.name}.webapp.persistence.UserExperienceDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userWishDao" class="com.${application.package.name}.webapp.persistence.UserWishDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="checkDao" class="com.${application.package.name}.webapp.persistence.WishDailyCheckDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="calendarDao" class="com.${application.package.name}.webapp.persistence.CalendarDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="calendarEventDao" class="com.${application.package.name}.webapp.persistence.CalendarEventDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="calendarSubCategoryDao" class="com.${application.package.name}.webapp.persistence.CalendarSubCategoryDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="questionDao" class="com.${application.package.name}.webapp.persistence.QuestionDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="possibleAnswerDao" class="com.${application.package.name}.webapp.persistence.PossibleAnswerDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userAnswerDao" class="com.${application.package.name}.webapp.persistence.UserAnswerDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="userCalendarSubCategoryDao" class="com.${application.package.name}.webapp.persistence.UserCalendarSubCategoryDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	<bean id="photoAlbumDao" class="com.${application.package.name}.webapp.persistence.UserAlbumDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
+	
+	
+	
+	<bean id="loginService" class="com.${application.package.name}.webapp.controller.service.LoginService">
+		<property name="userDao" ref="userDao" />
+		<property name="tokenDao" ref="userTokenDao" />
+	</bean>
+	<bean id="profileService" class="com.${application.package.name}.webapp.controller.service.ProfileService">
+		<property name="profileEntryDao" ref="profileEntryDao" />
+		<property name="userDao" ref="userDao" />
+		<property name="tokenDao" ref="userTokenDao" />
+		<property name="cityDao" ref="cityDao" />
+		<property name="countryDao" ref="countryDao" />
+		<!-- <property name="userCalendarSubCategoryDao" ref="userCalendarSubCategoryDao" /> -->
+	</bean>
+	<bean id="experienceService" class="com.${application.package.name}.webapp.controller.service.ExperienceService">
+		<property name="userExperienceDao" ref="userExperienceDao" />
+	</bean>
+	<bean id="wishService" class="com.${application.package.name}.webapp.controller.service.WishService">
+		<property name="userWishDao" ref="userWishDao" />
+	</bean>
+	<bean id="checkService" class="com.${application.package.name}.webapp.controller.service.WishDailyCheckService">
+		<property name="checkDao" ref="checkDao" />
+	</bean>
+	<bean id="countryService" class="com.${application.package.name}.webapp.controller.service.CountryService">
+		<property name="countryDao" ref="countryDao" />
+		<property name="cityDao" ref="cityDao" />
+	</bean>
+	<bean id="cityService" class="com.${application.package.name}.webapp.controller.service.CityService">
+		<property name="cityDao" ref="cityDao" />
+		<property name="countryDao" ref="countryDao" />
+	</bean>
+	<bean id="calendarService" class="com.${application.package.name}.webapp.controller.service.BeOneCalendarService">
+		<property name="calendarDao" ref="calendarDao" />
+		<property name="calendarEventDao" ref="calendarEventDao" />
+	</bean>
+	<bean id="calendarEventService" class="com.${application.package.name}.webapp.controller.service.BeOneCalendarEventService">
+		<property name="calendarEventDao" ref="calendarEventDao" />
+	</bean>
+	<bean id="calendarSubCategoryService" class="com.${application.package.name}.webapp.controller.service.BeOneCalendarSubCategoryService">
+		<property name="calendarSubCategoryDao" ref="calendarSubCategoryDao" />
+	</bean>
+	<bean id="userservice" class="com.${application.package.name}.webapp.controller.service.UserService">
+		<property name="userDao" ref="userDao" />
+		<property name="cityDao" ref="cityDao" />
+		<property name="countryDao" ref="countryDao" />
+	</bean>
+	<bean id="userCalendarSubCategoryService" class="com.${application.package.name}.webapp.controller.service.UserCalendarSubCategoryService">
+		<property name="userCalendarSubCategoryDao" ref="userCalendarSubCategoryDao" />
+	</bean>	
+	<bean id = "customAuthManagerUserService" class = "com.${application.package.name}.webapp.app.secure.CustomAuthManagerUserService">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	<bean id = "questionService" class = "com.${application.package.name}.webapp.controller.service.QuestionService">
+		<property name="questionDao" ref="questionDao"/>
+		<property name="userAnswerDao" ref="userAnswerDao"/>
+		<property name="possibleAnswerDao" ref="possibleAnswerDao"/>
+	</bean>
+	<bean id = "userAlbumService" class = "com.${application.package.name}.webapp.controller.service.UserAlbumService">
+		<property name="photoAlbumDao" ref="photoAlbumDao"/>
+	</bean>
+	
+	
+	<bean id="securityAspect" class="com.${application.package.name}.webapp.app.secure.Secure" />
+    <bean id="tokenUtils" class="com.${application.package.name}.webapp.app.secure.TokenUtils">
+    	<property name="userTokenDao" ref="userTokenDao"/>
+    </bean>
+    
+    
+    <!-- Root Context: defines shared resources visible to all other web components -->
+	<bean class="com.${application.package.name}.webapp.app.SocialConfiguration">
+		<property name="dataSource" ref="dataSource" />
+		<property name="connectionFactoryLocator" ref="connectionFactoryLocator" />
+		<property name="loginService" ref="loginService" />
+	</bean>
+	
+	<!--
+	if missing this error might occur:
+	org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'springSecurityFilterChain' is defined
+	Its location is also important
+	-->
+	
+	
+	<sec:http security="none" pattern="/resources/**"/>
+
+	<sec:http use-expressions="true" entry-point-ref="customAuthenticationEntryPoint" pattern="/api/**">
+		<sec:intercept-url pattern="/api/**" access="hasRole('AUTHENTICATED')"/>
+		<sec:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER"/>
+	</sec:http>
+	
+	<sec:http use-expressions="true" entry-point-ref="customAuthenticationEntryPoint" pattern="/public/api/**">
+		<sec:intercept-url pattern="/public/api/**" />
+		<sec:custom-filter ref="publicServicesFilter" position="PRE_AUTH_FILTER"/>
+	</sec:http>	
+
+	<sec:http use-expressions="true" pattern="/**">
+		<sec:intercept-url pattern="/profile" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/home" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/cities" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/city" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/country" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/countries" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/countries" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/" access="hasRole('AUTHENTICATED')"/>
+		<sec:intercept-url pattern="/login**" access="hasRole('ROLE_ANONYMOUS')" />
+
+		<sec:form-login 
+			login-page="/login"
+			default-target-url="/home"/>
+			
+		<sec:anonymous username="anonymousUser" enabled="true"/>
+	</sec:http>
+	
+	<bean id="anonymousAuthenticationProvider" class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
+		<property name="key" value="foobar"/>
+	</bean>
+	
+	<sec:authentication-manager>
+		<sec:authentication-provider user-service-ref="customAuthManagerUserService"/>
+	</sec:authentication-manager>
+	
+<!-- 	<bean id="anonymousAuthFilter" class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter"> -->
+<!-- 		<constructor-arg value="anonymousUser"/> -->
+<!-- 	</bean> -->
+	
+	<!-- These beans are required for token authentication part -->
+	<bean id="customAuthenticationEntryPoint"
+              class="com.${application.package.name}.webapp.app.secure.CustomAuthenticationEntryPoint" />
+
+    <bean class="com.${application.package.name}.webapp.app.secure.AuthenticationTokenProcessingFilter"
+              id="authenticationTokenProcessingFilter">
+		<property name="tokenUtils" ref="tokenUtils"/>
+		<property name="userDao" ref="userDao"/>
+		<property name="tokenDao" ref="userTokenDao"/>
+    </bean>
+    
+    <bean class="com.${application.package.name}.webapp.app.secure.PublicServicesFilter" id="publicServicesFilter"/>
+    
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    </bean>
+   
+<!--     <bean id="countryDaoTester" class="com.spocial.webapp.persistence.test.CountryDaoTest"> -->
+<!--     	<property name="countryDao" ref="countryDao"/> -->
+<!--     </bean> -->
+</beans>

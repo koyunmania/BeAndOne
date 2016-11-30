@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="BeOneCalendarSubCategory" table="BeOneCalendarSubCategories">
+		<id name="subcategoryId" column="SubcategoryId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">beonecalendarsubcategories_subcategoryId_seq</param>
+			</generator>
+		</id>
+
+		<property name="calendarSubCategory" type="string" column="CalendarSubCategory"/>
+		<property name="description" type="string" column="description"/>
+		
+		<many-to-one name="calendar" class="com.beone.webapp.model.BeOneCalendar">
+			<column name="calendarId"></column>
+		</many-to-one>
+		
+    </class>
+</hibernate-mapping>
