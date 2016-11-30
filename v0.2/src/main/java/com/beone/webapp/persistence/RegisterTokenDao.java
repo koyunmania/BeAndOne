@@ -13,13 +13,13 @@ public class RegisterTokenDao extends AbstractDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public User getUserByToken(RegisterToken registerToken) {
+	public User getUserByToken(String registrationToken) {
 		List<User> result = (List<User>)this.localSessionFactory.getCurrentSession()
 				.createQuery("select usr from RegisterToken tk "
 						+ "inner join tk.user usr "
 						+ "where "
 						+ "tk.token=:token")
-                .setParameter("token", registerToken.getToken())
+                .setParameter("token", registrationToken)
                 .list();
 		
 		if(result.size() > 0) {

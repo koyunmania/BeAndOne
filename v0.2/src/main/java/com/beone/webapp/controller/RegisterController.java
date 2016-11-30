@@ -11,6 +11,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -87,6 +88,36 @@ public class RegisterController extends AbstractController {
 		}
 		
 		return "register";
+	}
+	
+	@RequestMapping(value = "/verify/{token}", method = RequestMethod.GET)
+	public String confirmUserWithToken(@PathVariable(value="token") String token, Locale locale, Model model) {
+		
+		logger.info("Account verify has been called with token data: ", token);
+		
+		try {
+			profileService.confirmUserWithToken(token, messageSource, locale);
+			logger.info("User has been verified");
+			model.addAttribute(
+					"verificationResultMessage", 
+					MessageTranslator.getStatusMessageTranslation(
+							messageSource, 
+							StatusCode.USER_CONFIRMATION_SUCCESSFUL, 
+							locale));
+			model.addAttribute("verificationResultIsSuccess", true);
+			
+		} catch (ControllerServiceException e) {
+			logger.warn("Error occured during confirmation of account", e);
+			model.addAttribute(
+					"verificationResultMessage",
+					MessageTranslator.getStatusMessageTranslation(
+							messageSource, 
+							e.getStatusCode(), 
+							locale));
+			model.addAttribute("verificationResultIsSuccess", false);
+		}
+		
+		return "landing";
 	}
 	
 	private List<ValidationError> validateFields(Model model, User user, Locale locale) {

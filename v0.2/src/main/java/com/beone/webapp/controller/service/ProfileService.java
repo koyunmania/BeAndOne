@@ -20,6 +20,7 @@ import com.beone.webapp.model.exceptions.ControllerServiceException;
 import com.beone.webapp.persistence.CityDao;
 import com.beone.webapp.persistence.CountryDao;
 import com.beone.webapp.persistence.ProfileEntryDao;
+import com.beone.webapp.persistence.RegisterTokenDao;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
 import com.beone.webapp.utils.GeneralUtils;
@@ -41,10 +42,13 @@ public class ProfileService {
     private CountryDao countryDao;
 
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
 
     @Autowired
     private CityDao cityDao;
+    
+    @Autowired
+    private RegisterTokenDao registerTokenDao;
 
     private Email email;
 
@@ -108,7 +112,15 @@ public class ProfileService {
 //		this.userCalendarSubCategoryDao = userCalendarSubCategoryDao;
 //	}
 
-    @Transactional
+    public RegisterTokenDao getRegisterTokenDao() {
+		return registerTokenDao;
+	}
+
+	public void setRegisterTokenDao(RegisterTokenDao registerTokenDao) {
+		this.registerTokenDao = registerTokenDao;
+	}
+
+	@Transactional
     public String registerUser(User user, ReloadableResourceBundleMessageSource messageSource, Locale locale) 
     		throws ControllerServiceException {
     	
@@ -207,4 +219,29 @@ public class ProfileService {
             return true;
         }
     }
+
+    /**
+     * Check whether the token is there and stil valid. If yes, then update
+     * the registration token and set the user status to active.
+     * @param token
+     * @param messageSource
+     * @param locale
+     * @throws ControllerServiceException
+     */
+    @Transactional
+	public void confirmUserWithToken(
+			String token,
+			ReloadableResourceBundleMessageSource messageSource, 
+			Locale locale) throws ControllerServiceException {
+    	User registeredUser = registerTokenDao.getUserByToken(token);
+    	if(registeredUser == null) {
+    		logger.info("The user with the confirmation token does not exist");
+    		throw new ControllerServiceException(
+    				StatusCode.USER_CONFIRMATION_FAILED_TOKEN_NOT_VALID, 
+    				"The provided token is not valid.");
+    	} else {
+    		registeredUser.setStatus(User.STATUS_ACTIVE);
+    		userDao.update(registeredUser);
+    	}
+	}
 }
