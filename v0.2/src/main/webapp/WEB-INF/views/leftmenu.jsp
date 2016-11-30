@@ -1,8 +1,12 @@
 <div class="user" ng-controller="ProfileCtrl" ng-init="initProfile()">
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
+			<div class="info-bar fa fa-cog">
+				<span class="info-date">{{selectedDate}} | 13:48</span>
+				<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
+			</div>
 			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'">
+				<div class="img-thumbnail img-circle fa fa-user profile-picture"></div>
 			</a>
 			<ul class="dropdown-menu">
 				<li><a href ng-click="openProfileModal();">Profile</a></li>

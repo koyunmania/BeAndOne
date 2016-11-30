@@ -15,17 +15,16 @@
 				</div>
 				<div class="mood">
 					<h3>Keyfin Nasil?</h3>
-					<a class="emoji" href=''>&#x1F603</a>
-					<a class="emoji" href=''>&#x1F60A</a>
-					<a class="emoji" href=''>&#x1F614</a>
-					<a class="emoji" href=''>&#x1F615</a>
-					<a class="emoji" href=''>&#x1F627</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Awesome" href=''>&#x1F603</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Good" href=''>&#x1F60A</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Neutral" href=''>&#x1F614</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F615</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Frustrated" href=''>&#x1F627</a>
 				</div>
 				<div class="instagram fa fa-instagram">
 					@benowmehere
 				</div>
 			</div>
-
 			<div class="col-md-2">
 				<%@include file="leftmenu.jsp"%>
 			</div>
@@ -174,7 +173,7 @@
 						<div id="myCarousel" class="carousel slide" data-interval="false">
 							<div ng-controller="QuestionAnswerCtrl" ng-init="initQuestionAnswer('${selectedDate}')" class="carousel-inner" role="listbox">
 								<div class="item panel panel-default active" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
-									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugün neler ögrendin?
+									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugun neler ogrendin?
 										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
 											<span>&gt;&gt;</span>
 										</a>

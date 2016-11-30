@@ -9,14 +9,25 @@ body {
 }
 
 .info-bar {
-  width: 700px;
+  width: 815px;
   height: 60px;
-  background-color: #5a5a5a
+  transform: translate(-20px, -5px);
+  background-color: #5a5a5a;
+  border-bottom-right-radius: 20px;
+  line-height: 60px;
+  padding-left: 110%;
+  font-size: 38px;
+  color: white;
+}
+
+.info-date {
+  font-size: 20px;
+  padding-left: 20px;
 }
 
 .profile-area {
 	margin-top: -110px;
-	padding: 54px 40px 0px 40px !important;
+	padding: 0px 40px 0px 40px !important;
 }
 
 .profile-area .profile-img {
@@ -50,6 +61,7 @@ body {
 }
 
 #happenings-header {
+    padding-top: 60px;
     color:#5f625e;
 }
 
@@ -143,14 +155,23 @@ body {
   color: white;
   float: right;
   font-size: 15px;
-  margin: 75px 20px 0 0;
+  margin: 60px 20px 0 0;
 }
 
-.title-page .mood a {
+.title-page .mood .emoji {
   color: white;
   text-decoration: none;
+  font-size: 25px;
+  margin: 0 5px 0 5px;
 }
-
+ .profile-picture {
+    text-align: center;
+    width: 100%;
+    border-radius: 50%;
+    position: relative;
+    height: 0;
+    padding: 50% 0;   
+ }
 .header-bar {
 	height: 50px;
 }
