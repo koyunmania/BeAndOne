@@ -212,8 +212,7 @@ public class SocialConnectionRepository implements ConnectionRepository{
 			profileService.registerUser(user, messageSource, null);
 			userCalendarSubCategoryService.assignAllSubcategoriesToUser(user);
 		} catch (ControllerServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("The user could not be registered via social account.", e);
 		}
 		logger.debug("Social user has been inserted into DB");
 	}

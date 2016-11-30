@@ -54,6 +54,8 @@ public final class SimpleConnectionSignUp implements ConnectionSignUp {
 		remoteUser.setLastname(connection.fetchUserProfile().getLastName());
 		remoteUser.setProvider(providerId);
 		remoteUser.setUsername(providerUserId);
+		remoteUser.setLocale("en");
+		remoteUser.setLanguage(1);
 		this.usersDao.insertNew(remoteUser);
 		return ""+remoteUser.getUserId();
 	}
