@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.encrypt.Encryptors;
@@ -62,6 +63,9 @@ public class SocialConfiguration {
 	@Autowired
 	private UserCalendarSubCategoryService userCalendarSubCategoryService;
 	
+	@Autowired
+	private ReloadableResourceBundleMessageSource messageSource;
+	
 	public ProfileService getProfileService() {
 		return profileService;
 	}
@@ -112,6 +116,14 @@ public class SocialConfiguration {
 		this.userCalendarSubCategoryService = userCalendarSubCategoryService;
 	}
 
+	public ReloadableResourceBundleMessageSource getMessageSource() {
+		return messageSource;
+	}
+
+	public void setMessageSource(ReloadableResourceBundleMessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+
 	/**
 	 * handles connection persistence methods across all users; 
 	 * this will be a normal singleton bean in your application context
@@ -132,6 +144,7 @@ public class SocialConfiguration {
 	    repository.setConnectionSignUp(signUp);
 	    repository.setProfileService(profileService);
 	    repository.setUserCalendarSubCategoryService(userCalendarSubCategoryService);
+	    repository.setMessageSource(messageSource);
 	    
 	    return repository;
 	}

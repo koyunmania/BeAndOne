@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -30,18 +31,13 @@ public class SocialUsersConnectionRepository implements UsersConnectionRepositor
 	private static final Logger logger = LoggerFactory.getLogger(SocialUsersConnectionRepository.class);
 	
 	private ConnectionSignUp connectionSignUp;
-	
 	private UserDao usersDao;
-	
 	private UserTokenDao userTokenDao;
-	
 	private ConnectionFactoryLocator connectionFactoryLocator;
-	
 	private TextEncryptor textEncryptor;
-	
 	private ProfileService profileService;
-	
 	private UserCalendarSubCategoryService userCalendarSubCategoryService;
+	private ReloadableResourceBundleMessageSource messageSource;
 	
 	public UserCalendarSubCategoryService getUserCalendarSubCategoryService() {
 		return userCalendarSubCategoryService;
@@ -58,6 +54,14 @@ public class SocialUsersConnectionRepository implements UsersConnectionRepositor
 
 	public void setProfileService(ProfileService profileService) {
 		this.profileService = profileService;
+	}
+	
+	public ReloadableResourceBundleMessageSource getMessageSource() {
+		return messageSource;
+	}
+
+	public void setMessageSource(ReloadableResourceBundleMessageSource messageSource) {
+		this.messageSource = messageSource;
 	}
 	
 	public SocialUsersConnectionRepository(
@@ -129,6 +133,7 @@ public class SocialUsersConnectionRepository implements UsersConnectionRepositor
 		
 		conRep.setProfileService(profileService);
 		conRep.setUserCalendarSubCategoryService(userCalendarSubCategoryService);
+		conRep.setMessageSource(messageSource);
 		
 		return conRep;
 	}
@@ -143,5 +148,4 @@ public class SocialUsersConnectionRepository implements UsersConnectionRepositor
 		logger.info("setConnectionSignUp called");
 		this.connectionSignUp = connectionSignUp;
 	}
-
 }

@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -41,10 +43,13 @@ public class SocialConnectionRepository implements ConnectionRepository{
 	
 	private UserDao usersDao;
 	private UserTokenDao userTokenDao;
-	
 	private ProfileService profileService;
-	
 	private UserCalendarSubCategoryService userCalendarSubCategoryService;
+	private ReloadableResourceBundleMessageSource messageSource;
+	private ConnectionFactoryLocator connectionFactoryLocator;
+	private TextEncryptor textEncryptor;
+	private String remoteUserId;
+	private String localUserId;
 	
 	public ProfileService getProfileService() {
 		return profileService;
@@ -63,11 +68,14 @@ public class SocialConnectionRepository implements ConnectionRepository{
 		this.userCalendarSubCategoryService = userCalendarSubCategoryService;
 	}
 
-	private ConnectionFactoryLocator connectionFactoryLocator;
-	private TextEncryptor textEncryptor;
-	private String remoteUserId;
-	private String localUserId;
-	
+	public ReloadableResourceBundleMessageSource getMessageSource() {
+		return messageSource;
+	}
+
+	public void setMessageSource(ReloadableResourceBundleMessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+
 	public SocialConnectionRepository(
 			String localUserId,
 			UserDao usersDao, 
@@ -201,7 +209,7 @@ public class SocialConnectionRepository implements ConnectionRepository{
 		user.setExternalConnections(externalConnections);
 		logger.debug("The external connection is assigned to the local user");
 		try {
-			profileService.registerUser(user);
+			profileService.registerUser(user, messageSource, null);
 			userCalendarSubCategoryService.assignAllSubcategoriesToUser(user);
 		} catch (ControllerServiceException e) {
 			// TODO Auto-generated catch block
