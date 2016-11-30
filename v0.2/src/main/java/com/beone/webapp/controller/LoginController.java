@@ -206,14 +206,17 @@ public class LoginController extends AbstractController {
 				UserToken securityToken = this.loginService.authenticate(user, request, response, model, timezone);
 				
 				logger.info("User has been authenticated successfully: " + user.getEmail());
-				if(GeneralUtils.isBlankOrNull(user.getLocale()))
-				{
-					userService.fetchUserLocale(user);
-				}
+//				if(GeneralUtils.isBlankOrNull(user.getLocale()))
+//				{
+//					userService.fetchUserLocale(user);
+//				}
 //				GeneralUtils.addSuccessfulLoginAttributesToModel(locale, model, timezone,
 //						securityToken.getToken());
-				url = Constants.HOME_REDIRECT;
-				url = UrlUtils.getUserLocale(user, securityToken.getToken(), url);
+				url = UrlUtils.getUserLocale(
+						user, 
+						securityToken.getToken(),
+						Constants.HOME_REDIRECT);
+				
 				return url;
 				/*return Constants.HOME
 						+ "?token="+securityToken.getToken();*/
