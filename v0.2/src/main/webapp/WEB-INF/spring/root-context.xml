@@ -249,6 +249,13 @@
 		<property name="loginService" ref="loginService" />
 	</bean>
 	
+	<!-- <bean id="smtpSession" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/mail/Session"/>
+	</bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="session" ref="smtpSession" />
+	</bean> -->
+	
 	<!--
 	if missing this error might occur:
 	org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'springSecurityFilterChain' is defined
