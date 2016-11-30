@@ -93,7 +93,7 @@ public class UserDao extends AbstractDao {
 		
 		if(items == null || items.size() == 0) {
 			//session.saveOrUpdate(user);
-			user.setStatus("pending"); //setting the default value to active user as false for email verification
+			user.setStatus(User.STATUS_PENDING); //setting the default value to active user as false for email verification
 			session.save(user);
 			querySuccess=true;
 		}

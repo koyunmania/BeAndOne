@@ -1,12 +1,14 @@
 package com.beone.webapp.controller.service;
 
 import java.sql.Timestamp;
+import java.util.Locale;
 
 import javax.persistence.EntityExistsException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beone.webapp.model.City;
@@ -21,6 +23,7 @@ import com.beone.webapp.persistence.ProfileEntryDao;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
 import com.beone.webapp.utils.GeneralUtils;
+import com.beone.webapp.utils.MessageTranslator;
 
 public class ProfileService {
     private static final Logger logger = LoggerFactory.getLogger(ProfileService.class);
@@ -106,7 +109,9 @@ public class ProfileService {
 //	}
 
     @Transactional
-    public String registerUser(User user) throws ControllerServiceException {
+    public String registerUser(User user, ReloadableResourceBundleMessageSource messageSource, Locale locale) 
+    		throws ControllerServiceException {
+    	
         logger.info("registerUser has been called with user data: {}", user.getLogRepresentation());
 
         if (validateRegistrationFields(user)) {
@@ -160,11 +165,18 @@ public class ProfileService {
                 if (userDao.checkExistingInsertNewFromProfile(user)) {
                     logger.info("Sending verification mail to user");
                     Email email = new Email();
-                    email.setFrom("no-reply@beandone.com");
+                    email.setFrom(MessageTranslator.getMessage(
+                    		messageSource, 
+                    		MessageTranslator.REGISTRATION_EMAIL_VERIFICATION_SENDER, 
+                    		locale));
                     email.setTo(user.getEmail());
-                    email.setSubject("New user verification mail");
+                    email.setSubject(
+                    	MessageTranslator.getMessage(
+                    		messageSource, 
+                    		MessageTranslator.REGISTRATION_EMAIL_VERIFICATION_SUBJECT, 
+                    		locale));
                     email.setLocale(user.getLocale());
-                    email.setUserName(user.getFirstname());
+                    email.setUserName(user.getEmail());
                     emailService.sendVerificationEmail(user, email);
                 }
                 logger.info("User has been created, assigning him all of the subcategories.");

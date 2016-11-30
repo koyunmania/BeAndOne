@@ -165,7 +165,9 @@ public class LoginController extends AbstractController {
 			Locale locale, 
 			Model model,
 			TimeZone timezone) {
+		
 		logger.info("loginSubmit is called with credentials: {}", user.getLogRepresentation());
+		
 		String url = Constants.LOGIN;
 		if(user.getEmail() == null || user.getEmail().length() == 0) {
 			logger.warn("Email is not provided");
@@ -174,7 +176,11 @@ public class LoginController extends AbstractController {
 			
 			ValidationError err = new ValidationError();
 			err.setFieldName("email");
-			err.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
+			err.setValidationMessage(
+					MessageTranslator.getStatusMessageTranslation(
+							messageSource, 
+							StatusCode.MISSING_MANDATORY_FIELD, 
+							locale));
 			List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 			validationErrors.add(err);
 			model.addAttribute("validationErrors", validationErrors);
@@ -186,7 +192,11 @@ public class LoginController extends AbstractController {
 			
 			ValidationError err = new ValidationError();
 			err.setFieldName("password");
-			err.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
+			err.setValidationMessage(
+					MessageTranslator.getStatusMessageTranslation(
+							messageSource, 
+							StatusCode.MISSING_MANDATORY_FIELD, 
+							locale));
 			List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 			validationErrors.add(err);
 			model.addAttribute("validationErrors", validationErrors);
@@ -208,7 +218,7 @@ public class LoginController extends AbstractController {
 				/*return Constants.HOME
 						+ "?token="+securityToken.getToken();*/
 			} catch (ControllerServiceException e) {
-				logger.warn("User authentication failed: " + user.getEmail());
+				logger.warn("User authentication failed: " + user.getEmail() + " with reason: " + e.getMessage());
 				model.addAttribute(
 						"loginResultMessage",
 						MessageTranslator.getStatusMessageTranslation(messageSource, e.getStatusCode(), locale));

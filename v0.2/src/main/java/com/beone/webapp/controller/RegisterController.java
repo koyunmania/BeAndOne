@@ -64,7 +64,7 @@ public class RegisterController extends AbstractController {
 		if(validationErrors.size() == 0) {
 			try {
 				user.setProvider(User.USER_PROVIDER_BEONE);
-				profileService.registerUser(user);
+				profileService.registerUser(user, messageSource, locale);
 				logger.info("User has been created");
 				model.addAttribute(
 						"creationResultMessage", 

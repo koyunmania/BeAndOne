@@ -69,43 +69,51 @@ public class LoginService {
 				user.getEmail(), 
 				user.getPassword(), 
 				User.USER_PROVIDER_BEONE);
+		
 		if(foundUser != null) {
 			logger.info("Login with credentials is successful, loading user.");
-			boolean status=checkUserStatus(user);
-			if(!status){
-				logger.info("Checking status of user. Send verification mail");
+			if(User.STATUS_PENDING.equals(user.getStatus())) {
+				throw new ControllerServiceException(StatusCode.ACCOUNT_NOT_CONFIRMED, 
+						"Your account is not confirmed yet");
+			} else if(User.STATUS_INACTIVE.equals(user.getStatus())) {
+				throw new ControllerServiceException(StatusCode.ACCOUNT_NOT_ACTIVE, 
+						"Your account suspended because you were inactive for a long time");
+			} else if(User.STATUS_SUSPICIOUS.equals(user.getStatus())) {
+				throw new ControllerServiceException(StatusCode.ACCOUNT_SUSPICIOUS, 
+						"Your account suspended because of security reasons");
+			} else {
+				logger.debug("Creating token for user");
+				UserToken token = new UserToken();
+				Timestamp currentTime = GeneralUtils.getCurrentTimestamp(timezone);
+				String securityToken = SecurityUtils.generateToken();
+				token.setUser(foundUser);
+				token.setCreatedAt(currentTime);
+				token.setUpdatedAt(currentTime);
+				token.setToken(securityToken);
+				
+				tokenDao.insertNew(token);
+				response.setHeader("LoginAuthToken", securityToken);
+				
+				logger.debug("Creating authentication session for user");
+				
+				// we need to set the context authentication otherwise user context is not created
+				List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+				authorities.add(new SimpleGrantedAuthority("AUTHENTICATED"));
+				
+				UsernamePasswordAuthenticationToken authToken = 
+					new UsernamePasswordAuthenticationToken(
+						foundUser, 
+						foundUser.getPassword(), 
+						authorities);
+				
+				authToken.setDetails(new WebAuthenticationDetails(request));
+				
+				SecurityContext context = SecurityContextHolder.getContext();
+				context.setAuthentication(authToken);
+				
+				logger.info("Login was successful.");
+				return token;
 			}
-			logger.debug("Creating token for user");
-			UserToken token = new UserToken();
-			token.setUser(foundUser);
-			String securityToken = SecurityUtils.generateToken();
-			token.setToken(securityToken);
-			Timestamp currentTime = GeneralUtils.getCurrentTimestamp(timezone);
-			token.setCreatedAt(currentTime);
-			token.setUpdatedAt(currentTime);
-			
-			tokenDao.insertNew(token);
-			response.setHeader("LoginAuthToken", securityToken);
-			
-			logger.debug("Creating authentication session for user");
-			
-			// we need to set the context authentication otherwise user context is not created
-			List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-			authorities.add(new SimpleGrantedAuthority("AUTHENTICATED"));
-			
-			UsernamePasswordAuthenticationToken authToken = 
-				new UsernamePasswordAuthenticationToken(
-					foundUser, 
-					foundUser.getPassword(), 
-					authorities);
-			
-			authToken.setDetails(new WebAuthenticationDetails(request));
-			
-			SecurityContext context = SecurityContextHolder.getContext();
-			context.setAuthentication(authToken);
-			
-			logger.info("Login was successful.");
-			return token;
 		} else {
 			logger.info("Login was unsuccessful");
 			
@@ -280,9 +288,9 @@ public class LoginService {
 			logger.error("The just inserted remote user could not be found again.");
 		}
 	}
-
-	public boolean checkUserStatus(User user){
-		//TODO
-		return false;
-	}
+//
+//	public User.Status checkUserStatus(User user){
+//		//TODO
+//		return false;
+//	}
 }

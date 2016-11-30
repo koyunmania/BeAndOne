@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -40,6 +40,11 @@ public class User implements Serializable {
 	public static final String ATTR_PROVIDER_USERID = "providerUserId";
 
 	public static final String ATTR_TOKEN = "token";
+
+	public static final String STATUS_PENDING = "pending";
+	public static final String STATUS_ACTIVE = "active";
+	public static final String STATUS_INACTIVE = "inactive";
+	public static final String STATUS_SUSPICIOUS = "suspicious";
 	
 	private int userId;
 	private String username;
