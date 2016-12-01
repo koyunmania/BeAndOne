@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.beone.webapp.controller.service.CityService;
 import com.beone.webapp.controller.service.CountryService;
 import com.beone.webapp.controller.service.ProfileService;
+import com.beone.webapp.controller.service.UserCalendarSubCategoryService;
 import com.beone.webapp.model.StatusCode;
 import com.beone.webapp.model.User;
 import com.beone.webapp.model.exceptions.ControllerServiceException;
@@ -41,6 +42,9 @@ public class RegisterController extends AbstractController {
 	
 	@Autowired
 	private ReloadableResourceBundleMessageSource messageSource;
+	
+	@Autowired
+	private UserCalendarSubCategoryService userCalendarSubCategoryService;
 
 
 	public ProfileService getProfileService() {
@@ -49,6 +53,15 @@ public class RegisterController extends AbstractController {
 
 	public void setProfileService(ProfileService profileService) {
 		this.profileService = profileService;
+	}
+
+	public UserCalendarSubCategoryService getUserCalendarSubCategoryService() {
+		return userCalendarSubCategoryService;
+	}
+
+	public void setUserCalendarSubCategoryService(
+			UserCalendarSubCategoryService userCalendarSubCategoryService) {
+		this.userCalendarSubCategoryService = userCalendarSubCategoryService;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -66,6 +79,7 @@ public class RegisterController extends AbstractController {
 			try {
 				user.setProvider(User.USER_PROVIDER_BEONE);
 				profileService.registerUser(user, messageSource, locale);
+				userCalendarSubCategoryService.assignAllSubcategoriesToUser(user);
 				logger.info("User has been created");
 				model.addAttribute(
 						"creationResultMessage", 

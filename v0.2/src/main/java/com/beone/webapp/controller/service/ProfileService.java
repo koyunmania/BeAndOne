@@ -21,6 +21,7 @@ import com.beone.webapp.persistence.CityDao;
 import com.beone.webapp.persistence.CountryDao;
 import com.beone.webapp.persistence.ProfileEntryDao;
 import com.beone.webapp.persistence.RegisterTokenDao;
+import com.beone.webapp.persistence.UserCalendarSubCategoryDao;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
 import com.beone.webapp.utils.GeneralUtils;

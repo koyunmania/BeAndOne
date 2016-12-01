@@ -84,7 +84,7 @@ public class UserCalendarSubCategoryRestServiceController extends AbstractContro
 			method = RequestMethod.POST
 			)
 	public RestResult addUserCalendarSubCategories(
-			@RequestBody Set<BeOneCalendarSubCategory> beOneCalendarSubs){
+			@RequestBody Set<BeOneCalendarSubCategoryTO> beOneCalendarSubs){
 		logger.info("UserCalendarSubCategoryRestServiceController: addUserCalendarSubCategories called...");
 		RestResult result = new RestResult();
 		
@@ -93,9 +93,12 @@ public class UserCalendarSubCategoryRestServiceController extends AbstractContro
 
 		currentUser = getCurrentAuthUser();
 		try {
-			for(BeOneCalendarSubCategory beOneCalendarSub: beOneCalendarSubs){
+			for(BeOneCalendarSubCategoryTO beOneCalendarSub: beOneCalendarSubs){
+				BeOneCalendarSubCategory converted = 
+						BeOneCalendarSubCategoryUtil.convertFromTO(beOneCalendarSub);
+				
 				UserCalendarSubCategory sub = new UserCalendarSubCategory();
-				sub.setBeOneCalendarSubCategory(beOneCalendarSub);
+				sub.setBeOneCalendarSubCategory(converted);
 				sub.setUser(currentUser);
 				sub.setCreatedAt(t);
 				sub.setUpdatedAt(t);
