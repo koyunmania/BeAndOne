@@ -2,7 +2,7 @@
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
 			<div class="info-bar fa fa-cog">
-				<span class="info-date">{{selectedDate}} | 13:48</span>
+				<span class="info-date">{{selectedDate}} | {{current_time}}</span>
 				<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
 			</div>
 			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

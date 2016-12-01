@@ -21,7 +21,23 @@ beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileSe
 	$scope.selectCountry = function(country) {
 		$scope.selectedCountry = country;
 	};
-	
+
+	(function() {
+		var pad = function(x) {
+			return x < 10 ? '0'+x : x;
+		};
+		
+		var ticktock = function() {
+			var d = new Date();
+			var h = pad( d.getHours() );
+			var m = pad( d.getMinutes() );
+			// var s = pad( d.getSeconds() );
+			$scope.current_time = [h,m].join(':');
+		};
+		ticktock();
+		setInterval(ticktock, 1000);
+	}());
+		
 	$scope.greeting = function(){
 		var d = new Date();
 		var h = d.getHours();
