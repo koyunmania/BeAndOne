@@ -5,6 +5,7 @@ public class BeOneCalendarSubCategoryTO {
 	private String calendarSubCategory;
 	private String description;
 	private BeOneCalendarTO calendar;
+	private String calendarIcon;
 	
 	public int getSubcategoryId() {
 		return subcategoryId;
@@ -29,6 +30,12 @@ public class BeOneCalendarSubCategoryTO {
 	}
 	public void setCalendar(BeOneCalendarTO calendar) {
 		this.calendar = calendar;
+	}
+	public String getCalendarIcon() {
+		return calendarIcon;
+	}
+	public void setCalendarIcon(String calendarIcon) {
+		this.calendarIcon = calendarIcon;
 	}
 	
 	

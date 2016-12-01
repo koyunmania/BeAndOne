@@ -137,7 +137,6 @@ DROP TABLE IF EXISTS beonecalendars;
 CREATE TABLE beonecalendars (
 	calendarId SERIAL NOT NULL,
 	colorcode character varying(500),
-	calendaricon character varying(500),
 	buttonClass character varying(50),
 	sortOrder integer not null,
 	CONSTRAINT beonecalendars_pkey PRIMARY KEY (calendarId)
@@ -159,6 +158,7 @@ CREATE TABLE beonecalendarsubcategories
 	subcategoryId serial NOT NULL,
 	calendarid integer,
 	description character varying(500),
+	calendaricon character varying(500),
 	CONSTRAINT beonecalendarsubcategories_pkey PRIMARY KEY (subcategoryId)
 );
 

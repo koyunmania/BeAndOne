@@ -5,7 +5,6 @@ public class BeOneCalendarTO {
 	private String description;
 	private int calendarId;
 	private String colorCode;
-	private String calendarIcon;
 	private String buttonClass;
 	private int sortOrder;
 	
@@ -32,12 +31,6 @@ public class BeOneCalendarTO {
 	}
 	public void setColorCode(String colorCode) {
 		this.colorCode = colorCode;
-	}
-	public String getCalendarIcon() {
-		return calendarIcon;
-	}
-	public void setCalendarIcon(String calendarIcon) {
-		this.calendarIcon = calendarIcon;
 	}
 	public String getButtonClass() {
 		return buttonClass;

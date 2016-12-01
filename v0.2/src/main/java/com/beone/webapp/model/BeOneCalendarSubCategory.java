@@ -4,10 +4,9 @@ import java.util.Set;
 
 public class BeOneCalendarSubCategory {
 	private int subcategoryId;
-//	private String calendarSubCategory;
-//	private String description;
 	private BeOneCalendar calendar;
 	private Set<BeOneCalendarSubCategoryTranslation> translations;
+	private String calendarIcon;
 	
 	
 	public int getSubcategoryId() {
@@ -39,6 +38,12 @@ public class BeOneCalendarSubCategory {
 	}
 	public void setTranslations(Set<BeOneCalendarSubCategoryTranslation> translations) {
 		this.translations = translations;
+	}
+	public String getCalendarIcon() {
+		return calendarIcon;
+	}
+	public void setCalendarIcon(String calendarIcon) {
+		this.calendarIcon = calendarIcon;
 	}
 	
 	

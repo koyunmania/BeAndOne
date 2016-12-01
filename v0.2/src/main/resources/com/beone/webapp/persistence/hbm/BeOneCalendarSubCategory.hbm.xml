@@ -11,6 +11,8 @@
 				<param name="sequence">beonecalendarsubcategories_subcategoryId_seq</param>
 			</generator>
 		</id>
+		
+		<property name="calendarIcon" type="string" column="CalendarIcon"/>
 
 		<!-- <property name="calendarSubCategory" type="string" column="CalendarSubCategory"/>
 		<property name="description" type="string" column="description"/> -->

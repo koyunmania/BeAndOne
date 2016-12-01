@@ -327,7 +327,6 @@ public class DataUploadController {
 		        		BeOneCalendar cal = new BeOneCalendar();
 //		        		cal.setCalendarName(calendarName);
 		        		cal.setColorCode(BeOneCalendarUtil.getOrGenerateColorCode(categoryTrCell.getStringCellValue()));
-		        		cal.setCalendarIcon(BeOneCalendarUtil.getOrGenerateCalendarIcon(categoryTrCell.getStringCellValue()));
 		        		// try adding the calendar if it does not exist.
 		        		// it doesn't cause any issue when called
 		        		// this assures non-existing calendars created in advance
@@ -374,14 +373,14 @@ public class DataUploadController {
 		        		subCatTransTr.setLanguageId(BeOneLanguage.TURKISH.ordinal());
 		        		subCatTransTr.setDescriptionTrans("Inital content. Not taken from Excel file.");
 		        		subCatTransTr.setCalendarSubCategoryTrans(subCategoryNameTr);
-		        		subCatTransTr.setSubcategoryId(subCategory.getSubcategoryId());
+		        		subCatTransTr.setSubcategoryId(insertedOrExistingSubCategory.getSubcategoryId());
 		        		subcategoryService.addTranslationIfNotExists(subCatTransTr);
 		        		
 		        		BeOneCalendarSubCategoryTranslation subCatTransEn = new BeOneCalendarSubCategoryTranslation();
 		        		subCatTransEn.setLanguageId(BeOneLanguage.ENGLISH.ordinal());
 		        		subCatTransEn.setDescriptionTrans("Inital content. Not taken from Excel file.");
 		        		subCatTransEn.setCalendarSubCategoryTrans(subCategoryNameEn);
-		        		subCatTransEn.setSubcategoryId(subCategory.getSubcategoryId());
+		        		subCatTransEn.setSubcategoryId(insertedOrExistingSubCategory.getSubcategoryId());
 		        		subcategoryService.addTranslationIfNotExists(subCatTransEn);
 		        		
 		        		logger.debug("Iterating through the cells to add the events");

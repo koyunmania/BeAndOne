@@ -41,7 +41,6 @@ public class BeOneCalendarUtil {
 		converted.setCalendarName(trans == null ? BeOneCalendar.CALENDAR_NAME_TRANSLATION_MISSING : trans.getTransName());
 		converted.setDescription(trans == null ? BeOneCalendar.CALENDAR_DESC_TRANSLATION_MISSING : trans.getTransName());
 		converted.setColorCode(cal.getColorCode());
-		converted.setCalendarIcon(cal.getCalendarIcon());
 		converted.setSortOrder(cal.getSortOrder());
 		converted.setButtonClass(cal.getButtonClass());
 		
@@ -132,7 +131,6 @@ public class BeOneCalendarUtil {
 		
 		converted.setCalendarId(calendar.getCalendarId());
 		converted.setButtonClass(calendar.getButtonClass());
-		converted.setCalendarIcon(calendar.getCalendarIcon());
 		converted.setColorCode(calendar.getColorCode());
 		converted.setSortOrder(calendar.getSortOrder());
 		

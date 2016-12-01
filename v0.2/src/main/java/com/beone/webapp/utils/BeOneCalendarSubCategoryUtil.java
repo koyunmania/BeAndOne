@@ -25,6 +25,7 @@ public class BeOneCalendarSubCategoryUtil {
 		converted.setCalendarSubCategory(trans == null ? "Missing Translation" : trans.getCalendarSubCategoryTrans());
 		converted.setDescription(trans == null ? "Missing Translation" : trans.getDescriptionTrans());
 		converted.setSubcategoryId(calendarSubCategory.getSubcategoryId());
+		converted.setCalendarIcon(calendarSubCategory.getCalendarIcon());
 		return converted;
 	}
 	
@@ -41,6 +42,7 @@ public class BeOneCalendarSubCategoryUtil {
 		BeOneCalendarSubCategory converted = new BeOneCalendarSubCategory();
 		converted.setSubcategoryId(beOneCalendarSub.getSubcategoryId());
 		converted.setCalendar(BeOneCalendarUtil.convertFromTO(beOneCalendarSub.getCalendar()));
+		converted.setCalendarIcon(beOneCalendarSub.getCalendarIcon());
 		
 		return converted;
 	}

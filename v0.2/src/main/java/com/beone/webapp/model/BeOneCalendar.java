@@ -10,7 +10,7 @@ public class BeOneCalendar {
 //	private String description;
 	private int calendarId;
 	private String colorCode;
-	private String calendarIcon;
+	
 	private String buttonClass;
 	private int sortOrder;
 	private Set<BeOneCalendarTranslation> translations;
@@ -38,12 +38,6 @@ public class BeOneCalendar {
 	}
 	public void setColorCode(String colorCode) {
 		this.colorCode = colorCode;
-	}
-	public String getCalendarIcon() {
-		return calendarIcon;
-	}
-	public void setCalendarIcon(String calendarIcon) {
-		this.calendarIcon = calendarIcon;
 	}
 	public String getButtonClass() {
 		return buttonClass;
