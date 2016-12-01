@@ -19,8 +19,8 @@
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Awesome" href=''>&#x1F603</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Good" href=''>&#x1F60A</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Neutral" href=''>&#x1F614</a>
-					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F615</a>
-					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Frustrated" href=''>&#x1F627</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F621</a>
+					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Crying" href=''>&#x1F62D</a>
 				</div>
 				<div class="instagram fa fa-instagram">
 					@benowmehere
@@ -31,28 +31,68 @@
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<div class="col-md-7" ng-controller="HappeningCtrl" ng-init="initHappenings()">
+					<div class="col-md-7" ng-controller="HappeningCtrl">
 						<h2 id="happenings-header">Bugunkuler</h2>
-						<div ng-repeat="calendar in $parent.userCalendars">
-							<div class="row panel panel-body" ng-repeat="happening in calendar.happenings" style="{{calendar.colorCode}}; font-size:40px; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
-								<div style="{{calendar.colorCode}}" class="col-md-2"><span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings'"></span></div>
-								<div class="col-md-7">
-									<span style="{{calendar.colorCode}} font-size:20px; vertical-align:middle">
-										<label>{{happening.eventName}}</label>
-									</span><br/>
-									<span style="{{calendar.colorCode}} font-size:12px; vertical-align:middle">
-										<label>{{happening.subCategory.calendarSubCategory}}</label>
-									</span>
+						<div ng-repeat="doubleHappening in doubleHappenings" class="row">
+							<div class="col-md-6">
+								<div style="font-size:40px; margin-right: 0px; background-color: transparent; margin-right: 10px;">
+										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-{{doubleHappening[0].subCategory.calendar.colorCode}}; padding-top: 15px; padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 15px;">
+											<div class="col-md-2">
+												<span class="{{doubleHappening[0].subCategory.calendar.calendarIcon}}" style="color: white; font-family:beone-font,'Glyphicons Halflings'"></span>
+											</div>
+											<div class="col-md-10">
+												<span style="color: white; font-size:20px; vertical-align:middle">
+													<label>{{doubleHappening[0].eventName}}</label>
+												</span><br/>
+												<span style="color: white; font-size:12px; vertical-align:middle">
+													<label>{{doubleHappening[0].subCategory.calendarSubCategory}}</label>
+												</span>
+											</div>
+										</div>
+										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color: white;">
+											<img src="../../resources/images/yahudi-soykirimi-400px.jpg" style="width: 85%; display: block; margin: 5% auto 5% auto;">
+										</div>
+										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
+											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
+												<button type="button" class="btn btn-success" ng-click="toggleModal(doubleHappening[0])">+C</button>
+												<a href="https://www.google.com/search?q={{doubleHappening[0].eventName}}"
+														target="_blank" class="btn btn-default btn-google"><img style="display: inline; margin-top: 2px;"
+														src="../../resources/images/google-icon.svg" height="14px" /></a> 
+											</div>
+										</div>
 								</div>
-								<div class="col-md-3" style="text-align:right;">
-									<button type="button" class="btn btn-success" ng-click="toggleModal(happening)">+C</button>
-									<a href="https://www.google.com/search?q={{happening.eventName}}"
-											target="_blank" class="btn btn-default btn-google"><img style="display: inline; margin-top: 2px;"
-											src="../../resources/images/google-icon.svg" height="14px" /></a> 
+							</div>
+							
+							<div ng-if="doubleHappening[1]" class="col-md-6">
+								<div style="font-size:40px; margin-right: 0px; background-color: transparent; margin-right: 10px;">
+										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-{{doubleHappening[1].subCategory.calendar.colorCode}}; padding-top: 15px; padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 15px;">
+											<div class="col-md-2">
+												<span class="{{doubleHappening[1].subCategory.calendar.calendarIcon}}" style="color: white; font-family:beone-font,'Glyphicons Halflings'"></span>
+											</div>
+											<div class="col-md-10">
+												<span style="color: white; font-size:20px; vertical-align:middle">
+													<label>{{doubleHappening[1].eventName}}</label>
+												</span><br/>
+												<span style="color: white; font-size:12px; vertical-align:middle">
+													<label>{{doubleHappening[1].subCategory.calendarSubCategory}}</label>
+												</span>
+											</div>
+										</div>
+										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color: white;">
+											<img src="../../resources/images/yahudi-soykirimi-400px.jpg" style="width: 85%; display: block; margin: 5% auto 5% auto;">
+										</div>
+										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
+											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
+												<button type="button" class="btn btn-success" ng-click="toggleModal(doubleHappening[1])">+C</button>
+												<a href="https://www.google.com/search?q={{doubleHappening[1].eventName}}"
+														target="_blank" class="btn btn-default btn-google"><img style="display: inline; margin-top: 2px;"
+														src="../../resources/images/google-icon.svg" height="14px" /></a> 
+											</div>
+										</div>
 								</div>
 							</div>
 						</div>
-
+						
 						<div id="happeningModal" class="modal fade" role="dialog">
 							<div class="modal-dialog" style="width: 430px;">
 								<!-- Modal content-->

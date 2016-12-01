@@ -1,7 +1,10 @@
 ﻿beoneApp.controller('HappeningCtrl', function($scope, $http, HappeningService) {
 	$scope.happening = {};
+	$scope.doubleHappenings = [];
 	
 	$scope.initHappenings = function() {
+		$scope.happening = {};
+		$scope.doubleHappenings = [];
 		$scope.getUserCalendarEvents();
 	};
 
@@ -58,6 +61,15 @@
 				}
 			}
 			$scope.$parent.userCalendars[i].happenings = happenings;
+		}
+
+		var count = 0;
+		for(var j = 0; j < Math.ceil($scope.userCalendarEvents.length/2); j++){
+			if($scope.userCalendarEvents[j*2+1]){
+				$scope.doubleHappenings.push([$scope.userCalendarEvents[j*2], $scope.userCalendarEvents[j*2+1]]);
+			} else {
+				$scope.doubleHappenings.push([$scope.userCalendarEvents[j*2]]);
+			}
 		}
 	};
 	

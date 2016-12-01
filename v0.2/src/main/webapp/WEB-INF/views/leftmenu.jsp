@@ -6,7 +6,8 @@
 				<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
 			</div>
 			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-				<div class="img-thumbnail img-circle fa fa-user profile-picture"></div>
+				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'">
+				<!--  <div class="img-thumbnail img-circle fa fa-user profile-picture"></div> -->
 			</a>
 			<ul class="dropdown-menu">
 				<li><a href ng-click="openProfileModal();">Profile</a></li>

@@ -1,3 +1,4 @@
+@import "../fonts/SegoeUISymbol/styles.css";
 @font-face { font-family: 'beone-font'; src: url('/resources/fonts/icomoon.ttf') format('truetype'); }
 
 .beone-icon-calendar:before {
@@ -159,10 +160,11 @@ body {
 }
 
 .title-page .mood .emoji {
-  color: white;
-  text-decoration: none;
-  font-size: 25px;
-  margin: 0 5px 0 5px;
+	font-family: 'SegoeUISymbol';
+	color: white;
+	text-decoration: none;
+	font-size: 25px;
+	margin: 0 5px 0 5px;
 }
  .profile-picture {
     text-align: center;
