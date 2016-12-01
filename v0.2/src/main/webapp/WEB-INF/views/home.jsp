@@ -38,7 +38,7 @@
 								<div style="font-size:40px; margin-right: 0px; background-color: transparent; margin-right: 10px;">
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-{{doubleHappening[0].subCategory.calendar.colorCode}}; padding-top: 15px; padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 15px;">
 											<div class="col-md-2">
-												<span class="{{doubleHappening[0].subCategory.calendar.calendarIcon}}" style="color: white; font-family:beone-font,'Glyphicons Halflings'"></span>
+												<span style="color: white; font-family: 'beone_icons';">A</span>
 											</div>
 											<div class="col-md-10">
 												<span style="color: white; font-size:20px; vertical-align:middle">
@@ -67,7 +67,7 @@
 								<div style="font-size:40px; margin-right: 0px; background-color: transparent; margin-right: 10px;">
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-{{doubleHappening[1].subCategory.calendar.colorCode}}; padding-top: 15px; padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 15px;">
 											<div class="col-md-2">
-												<span class="{{doubleHappening[1].subCategory.calendar.calendarIcon}}" style="color: white; font-family:beone-font,'Glyphicons Halflings'"></span>
+												<span style="color: white; font-family: 'beone_icons';">B</span>
 											</div>
 											<div class="col-md-10">
 												<span style="color: white; font-size:20px; vertical-align:middle">

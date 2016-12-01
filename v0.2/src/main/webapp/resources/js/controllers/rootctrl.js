@@ -71,7 +71,7 @@ beoneApp.controller('RootCtrl', function ($http, $scope, $routeParams, $timeout,
 					return 0 //default return value (no sorting)
 				});
 				$scope.userCalendars = result.slice();
-				// $scope.$broadcast('addHappeningsToUserCalendars', null);
+				$scope.$broadcast('addHappeningsToUserCalendars', null);
 				// $scope.$apply();
 			},
 			function(response){
