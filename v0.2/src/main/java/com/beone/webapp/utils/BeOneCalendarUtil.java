@@ -76,7 +76,10 @@ public class BeOneCalendarUtil {
 		converted.setEventName(trans == null ? "Translation missing" : trans.getEventName());
 		converted.setEventType(cal.getEventType());
 		converted.setSubCategory(BeOneCalendarSubCategoryUtil.convertToTO(cal.getSubCategory(), language));
-		converted.setEventHappeningPhotoUrl("../../resources/images/yahudi-soykirimi-400px.jpg");
+		converted.setEventHappeningPhotoUrl(
+				trans == null 
+					? "http://d3sljlta800p6s.cloudfront.net/PlusC/1.jpg"
+					: "http://d3sljlta800p6s.cloudfront.net/PlusC/"+trans.getPlusCToWeb()+".jpg");
 		
 		return converted;
 	}
