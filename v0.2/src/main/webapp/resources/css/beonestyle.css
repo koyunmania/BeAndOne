@@ -150,6 +150,10 @@ body {
 .title-page .mood {
   text-align: center;
   color: white;
+  position: absolute;
+  bottom: 50px;
+  left: 40%;
+  width: 20%;
 }
 
 .title-page .instagram {
@@ -158,6 +162,9 @@ body {
   float: right;
   font-size: 15px;
   margin: 60px 20px 0 0;
+  position: absolute;
+  bottom: 10px;
+  right: 2%;
 }
 
 .title-page .mood .emoji {

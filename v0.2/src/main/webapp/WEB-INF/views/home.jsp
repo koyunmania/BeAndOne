@@ -7,7 +7,7 @@
 <link rel='stylesheet'
 	href="/resources/js/facebookSDK/angular-socialshare.css">
 
-<body onLoad="window.scroll(0, 450)">
+<body onLoad="window.scroll(0, 350)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
 			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat center center; !important;">
@@ -22,9 +22,11 @@
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F621</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Crying" href=''>&#x1F62D</a>
 				</div>
-				<div class="instagram fa fa-instagram">
-					@benowmehere
-				</div>
+				<a href="https://www.instagram.com/benowmehere/" class="btn btn-default" style="background-color:transparent;">
+					<div class="instagram fa fa-instagram">
+						@benowmehere
+					</div>
+				</a>
 			</div>
 			<div class="col-md-2">
 				<%@include file="leftmenu.jsp"%>
