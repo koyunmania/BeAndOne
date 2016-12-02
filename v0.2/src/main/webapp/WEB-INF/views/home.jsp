@@ -105,13 +105,13 @@
 										style="min-height: 300px; background-repeat: no-repeat;">
 										<!-- <div style="height: 40px;"></div>
 										{{happening.eventDescription}}-->
-										<img class="img-responsive" src="/api/v1/plusc/photo/{{happening.eventHappeningPhotoFilename}}"/>
+										<img class="img-responsive" src="{{happening.eventHappeningPhotoUrl}}"/>
 									</div>
 									<div class="modal-footer">
 										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook"
 											data-url='beandone.com'
 											data-shares='shares'
-											data-picture=''
+											data-picture='{{happening.eventHappeningPhotoUrl}}'
 											data-name={{happening.eventName}}
 											data-description={{happening.eventDescription}}
 											data-caption='beandone.com'>{{shares}}
@@ -121,7 +121,7 @@
 											twitter data-lang="en"
 											data-count='horizontal' 
 											data-url='http://beandone.com'
-											data-via='' 
+											data-via='{{happening.eventHappeningPhotoUrl}}' 
 											data-size="medium"
 											data-text={{happening.eventName}}></a>
 										<!-- <div class="fa fa-twitter btn btn-primary btn-twitter" ng-click="twitterClick($event)">

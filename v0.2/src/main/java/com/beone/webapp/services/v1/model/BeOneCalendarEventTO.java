@@ -10,7 +10,7 @@ public class BeOneCalendarEventTO {
 	private String eventType;
 	private int eventId;
 	private BeOneCalendarSubCategoryTO subCategory;
-	private String eventHappeningPhotoFilename;
+	private String eventHappeningPhotoUrl;
 	
 	public String getEventName() {
 		return eventName;
@@ -54,11 +54,11 @@ public class BeOneCalendarEventTO {
 	public void setSubCategory(BeOneCalendarSubCategoryTO subCategory) {
 		this.subCategory = subCategory;
 	}
-	public String getEventHappeningPhotoFilename() {
-		return eventHappeningPhotoFilename;
+	public String getEventHappeningPhotoUrl() {
+		return eventHappeningPhotoUrl;
 	}
-	public void setEventHappeningPhotoFilename(
-			String eventHappeningPhotoFilename) {
-		this.eventHappeningPhotoFilename = eventHappeningPhotoFilename;
+	public void setEventHappeningPhotoUrl(
+			String eventHappeningPhotoUrl) {
+		this.eventHappeningPhotoUrl = eventHappeningPhotoUrl;
 	}
 }

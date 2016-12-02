@@ -76,7 +76,7 @@ public class PhotoRestServiceController extends AbstractController{
     }
 	
 	@ResponseBody
-	@RequestMapping(value = "/api/v1/plusc/photo/{plusCid}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	@RequestMapping(value = "/api/v1/plusc/photo/web/{plusCid}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	public byte[] getPlusCPhoto(@PathVariable(value="plusCid") String plusCid) {
 		logger.info("getPlusCPhoto-get is called");
 		
