@@ -1,10 +1,6 @@
 <div class="user" ng-controller="ProfileCtrl" ng-init="initProfile()">
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
-			<div class="info-bar fa fa-cog">
-				<span class="info-date">{{selectedDate}} | {{current_time}}</span>
-				<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
-			</div>
 			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'">
 				<!--  <div class="img-thumbnail img-circle fa fa-user profile-picture"></div> -->
@@ -117,14 +113,14 @@
 		<div ng-repeat="(parentIndex, calendar) in allCalendars">
 			<button type="button" class="btn btn-lg btn-block btn-calendar" 
 				ng-click="openSubCategoryModal(calendar, $index)" 
-				ng-class="{true: calendar.buttonClass, false: 'btn-default'}[isCalendarAUserCalendar(calendar.calendarId)]"><span style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span><!--<span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span>-->&nbsp;{{calendar.calendarName}}</button>
+				ng-class="calendar.buttonClass"><span style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span><!--<span class="{{calendar.calendarIcon}}" style="font-family:beone-font,'Glyphicons Halflings';float:left;"></span>-->&nbsp;{{calendar.calendarName}}</button>
 			<div id="subCategoryModal{{$index}}" class="modal fade" role="dialog">
 				<div class="modal-dialog" style="width: 400px;">
 					<!-- Modal content-->
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header" style="color:white; background-color:{{selectedCalendar.colorCode}}">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title happening">{{calendar.calendarName}} Subscription</h4>
+							<h4 class="modal-title happening">{{selectedCalendar.calendarName}} Subscription</h4>
 						</div>
 						<div class="modal-body">
 							<button class="btn btn-default" ng-click="selectAllSubCategories(selectedCalendar.subCategories)">Select All</button>
@@ -133,14 +129,14 @@
 								<div class="subcategoryList">
 									<div ng-repeat="subCategory in selectedCalendar.subCategories | filter:query | orderBy:subCategory.calendarSubCategory">
 										<input id="subCategoryCheckbox{{subCategory.subcategoryId}}" type="checkbox" ng-click="addToSelectedSubCategoryList(subCategory, $index)" ng-model="checkboxValues[$index]" ng-checked="isUserSubCategory(subCategory) || selectAll">
-										<label  class="checkbox-inline">
+										<label  class="checkbox-inline" style="color:{{selectedCalendar.colorCode}}; font-weight:bold;">
+										<span style="font-family: 'beone_icons';">{{subCategory.calendarIcon}}</span>
 											{{subCategory.calendarSubCategory}}
 										</label>
 									</div>
 								</div>
 								<div class="modal-footer">
 									<button id="profileButton" class="btn btn-default" ng-click="addUserCalendarSubCategories(parentIndex, calendar.calendarId)">Subscribe</button>
-									<button class="btn btn-default" data-dismiss="modal">Cancel</button>
 								</div>
 							</form>
 						</div>
