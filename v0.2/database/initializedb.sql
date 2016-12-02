@@ -339,6 +339,18 @@ CREATE TABLE useralbumphoto(
 );
 
 
+DROP TABLE IF EXISTS coverphotos;
+CREATE TABLE coverphotos(
+	photoId SERIAL NOT NULL,
+	photoFileName character varying(100),
+	photoDisplayDay character varying(10),
+	isActive boolean NOT NULL,
+	createdat timestamp without time zone,
+	updatedat timestamp without time zone,
+	CONSTRAINT coverphotos_pkey PRIMARY KEY(photoId)
+);
+
+
 GRANT ALL PRIVILEGES ON DATABASE beone TO beoneuser;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO beoneuser;
 GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO beoneuser;

@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.beone.constants.Constants;
+import com.beone.webapp.controller.service.CoverPhotoService;
 import com.beone.webapp.controller.service.ExperienceService;
 import com.beone.webapp.controller.service.UserAlbumService;
 import com.beone.webapp.controller.service.UserService;
+import com.beone.webapp.model.CoverPhoto;
 import com.beone.webapp.model.User;
 import com.beone.webapp.utils.UrlUtils;
 
@@ -40,6 +42,9 @@ public class HomeController extends AbstractController{
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CoverPhotoService coverPhotoService;
+	
 	public UserAlbumService getAlbumService() {
 		return albumService;
 	}
@@ -58,6 +63,14 @@ public class HomeController extends AbstractController{
 	
 	
 	
+	public CoverPhotoService getCoverPhotoService() {
+		return coverPhotoService;
+	}
+
+	public void setCoverPhotoService(CoverPhotoService coverPhotoService) {
+		this.coverPhotoService = coverPhotoService;
+	}
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -124,7 +137,15 @@ public class HomeController extends AbstractController{
 			"-"+
 			year;
 		
+		String reverseUserDate = 
+				year +
+				"-"+(month < 10 ? "0"+month : month) +
+				"-"+(day < 10 ? "0"+day : day);
+		
+		CoverPhoto coverPhoto = coverPhotoService.getCoverPhotoOfDay(reverseUserDate);
+		model.addAttribute("coverPhoto", coverPhoto);
 		model.addAttribute("usersCurrentDate", userDate);
+
 		if(null!=user)
 		{
 			url = UrlUtils.getUserLocale(user, null, url);

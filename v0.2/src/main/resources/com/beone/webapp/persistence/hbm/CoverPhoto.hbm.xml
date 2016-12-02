@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.beone.webapp.model">
+
+    <class name="CoverPhoto" table="CoverPhotos">
+		<id name="photoId" column="PhotoId">
+			<generator class="org.hibernate.id.SequenceGenerator">
+				<param name="sequence">coverphotos_photoid_seq</param>
+			</generator>
+		</id>
+
+		<property name="photoFileName" type="string" column="PhotoFileName"/>
+		<property name="photoDisplayDay" type="string" column="PhotoDisplayDay"/>
+		<property name="isActive" type="boolean" column="IsActive"/>
+		<property name="createdAt" type="timestamp" column="CreatedAt"/>
+		<property name="updatedAt" type="timestamp" column="UpdatedAt"/>
+		 
+    </class>
+</hibernate-mapping>

@@ -74,6 +74,7 @@
 			<list>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/City.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/Country.hbm.xml</value>
+				<value>/com/${application.package.name}/webapp/persistence/hbm/CoverPhoto.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/ProfileEntry.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/UserCalendars.hbm.xml</value>
 				<value>/com/${application.package.name}/webapp/persistence/hbm/NewsFeed.hbm.xml</value>
@@ -165,6 +166,9 @@
 	<bean id="registerTokenDao" class="com.${application.package.name}.webapp.persistence.RegisterTokenDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
+	<bean id="coverPhotoDao" class="com.${application.package.name}.webapp.persistence.CoverPhotoDao">
+		<property name="localSessionFactory" ref="localSessionFactory" />
+	</bean>
 
 	
 	
@@ -233,6 +237,9 @@
 	</bean>
 	<bean id = "userAlbumService" class = "com.${application.package.name}.webapp.controller.service.UserAlbumService">
 		<property name="photoAlbumDao" ref="photoAlbumDao"/>
+	</bean>
+	<bean id = "coverPhotoService" class = "com.${application.package.name}.webapp.controller.service.CoverPhotoService">
+		<property name="coverPhotoDao" ref="coverPhotoDao"/>
 	</bean>
 
 
