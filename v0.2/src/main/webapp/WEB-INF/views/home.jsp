@@ -50,7 +50,7 @@
 											</div>
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color: white;">
-											<img src="../../resources/images/yahudi-soykirimi-400px.jpg" style="width: 85%; display: block; margin: 5% auto 5% auto;">
+											<img src="{{happening.eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
 											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
@@ -79,7 +79,7 @@
 											</div>
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color: white;">
-											<img src="../../resources/images/yahudi-soykirimi-400px.jpg" style="width: 85%; display: block; margin: 5% auto 5% auto;">
+											<img src="{{happening.eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
 											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
