@@ -1,10 +1,8 @@
 ﻿beoneApp.controller('HappeningCtrl', function($scope, $http, HappeningService) {
 	$scope.happening = {};
-	$scope.doubleHappenings = [];
 	
 	$scope.initHappenings = function() {
 		$scope.happening = {};
-		$scope.doubleHappenings = [];
 		$scope.getUserCalendarEvents();
 	};
 
@@ -53,6 +51,7 @@
 	};
 	
 	$scope.addHappeningsToCalendars = function(){
+		$scope.doubleHappenings = [];
 		for(var i = 0; i < $scope.$parent.userCalendars.length; i++){
 			var happenings = [];
 			for(var j = 0; j < $scope.userCalendarEvents.length; j++){

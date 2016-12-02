@@ -33,7 +33,7 @@
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<div class="col-md-7" ng-controller="HappeningCtrl">
+					<div class="col-md-7" ng-controller="HappeningCtrl" ng-init="initHappenings()">
 						<h2 id="happenings-header">Bugunkuler</h2>
 						<div ng-repeat="doubleHappening in doubleHappenings" class="row">
 							<div class="col-md-6">
