@@ -1,5 +1,24 @@
+<!-- Footer -->
+    <footer>
+        <div class="container" style="text-align:center;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li style="margin-right:30px;">
+                            <a href="#">Turkish</a>
+                        </li>
+                        <li>
+                            <a href="#">English</a>
+                        </li>
+                    </ul>                    
+                </div>
+            </div>
+        </div>
+    </footer>
+
 <script src="/resources/js/fileupload/jquery.iframe-transport.js"></script>
 <script src="/resources/js/fileupload/jquery.fileupload.js"></script>
+<!--<script src="js/stickynavbar.js"></script>-->
 
 	<script>
 	

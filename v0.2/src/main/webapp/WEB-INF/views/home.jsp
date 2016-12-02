@@ -52,7 +52,7 @@
 											</div>
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color: white;">
-											<img src="{{happening.eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
+											<img src="{{doubleHappening[0].eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
 											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
@@ -81,7 +81,7 @@
 											</div>
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color: white;">
-											<img src="{{happening.eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
+											<img src="{{doubleHappening[1].eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
 											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
@@ -111,12 +111,11 @@
 									</div>
 									<div class="modal-footer">
 										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook"
-											data-url='beandone.com'
+											data-url='http://www.beandone.com'
 											data-shares='shares'
 											data-picture='{{happening.eventHappeningPhotoUrl}}'
 											data-name={{happening.eventName}}
-											data-description={{happening.eventDescription}}
-											data-caption='beandone.com'>{{shares}}
+											data-caption='Be&One'>{{shares}}
 										</a>
 										<a id="twitterButton" 
 											class="btn-twitter"
@@ -124,8 +123,7 @@
 											data-count='horizontal' 
 											data-url='http://beandone.com'
 											data-via='{{happening.eventHappeningPhotoUrl}}' 
-											data-size="medium"
-											data-text={{happening.eventName}}></a>
+											data-size="medium"></a>
 										<!-- <div class="fa fa-twitter btn btn-primary btn-twitter" ng-click="twitterClick($event)">
 												<a id="twitterButton" style="display: none;" twitter data-lang="en" data-count='horizontal' data-url='http://google.com' data-via='notsosleepy' data-size="medium" data-text='Testing Twitter Share' ></a>
 											</div> -->

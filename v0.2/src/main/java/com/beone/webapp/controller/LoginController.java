@@ -63,7 +63,7 @@ public class LoginController extends AbstractController {
 		this.localSessionFactory = localSessionFactory;
 	}
 
-	private Facebook facebook;
+//	private Facebook facebook;
 	
 	@Autowired
 	private UserDao userDao;
@@ -115,10 +115,10 @@ public class LoginController extends AbstractController {
 		this.loginService = loginService;
 	}
 
-	@Inject
-	public LoginController(Facebook facebook) {
-		this.facebook = facebook;
-	}
+//	@Inject
+//	public LoginController(Facebook facebook) {
+//		this.facebook = facebook;
+//	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -139,7 +139,7 @@ public class LoginController extends AbstractController {
 						"You have not registered with your social network account yet.");
 			}
 		}
-		return "login";
+		return "landing";
 	}
 	
 	/**
@@ -226,8 +226,7 @@ public class LoginController extends AbstractController {
 						"loginResultMessage",
 						MessageTranslator.getStatusMessageTranslation(messageSource, e.getStatusCode(), locale));
 				model.addAttribute("loginResultIsSuccess", false);
-				url = Constants.LOGIN;
-				return url;
+				return "landing";
 			}
 		}
 	}
@@ -238,14 +237,7 @@ public class LoginController extends AbstractController {
 	public String loginFacebook(Locale locale, Model model) {
 		logger.info("/login/facebook called");
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "login";
+		return "landing";
 	}
 	
 	@RequestMapping(value = "/login/twitter", method = RequestMethod.POST)
@@ -259,7 +251,7 @@ public class LoginController extends AbstractController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "login";
+		return "landing";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -276,7 +268,7 @@ public class LoginController extends AbstractController {
 		
 		SecurityContextHolder.getContext().setAuthentication(anonym);
 		
-		return "redirect:/login";
+		return "redirect:/";
 	}
 	
 }

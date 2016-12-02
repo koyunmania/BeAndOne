@@ -101,7 +101,8 @@ public class RegisterController extends AbstractController {
 			model.addAttribute("validationErrors", validationErrors);
 		}
 		
-		return "register";
+//		return "register";
+		return "landing";
 	}
 	
 	@RequestMapping(value = "/verify/{token}", method = RequestMethod.GET)
