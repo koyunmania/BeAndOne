@@ -7,10 +7,10 @@
 <link rel='stylesheet'
 	href="/resources/js/facebookSDK/angular-socialshare.css">
 
-<body onLoad="init();window.scroll(0, 170)">
+<body onLoad="window.scroll(0, 450)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
-			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat center center; !important">
+			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat center center; !important;">
 				<div class="b-logo">
 					<span>B</span>
 				</div>

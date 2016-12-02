@@ -130,8 +130,8 @@ body {
 
 .title-page {
 	background: url('/resources/images/webapp_cover.png') no-repeat center center;	
-	background-size:cover;
-	height: 250px;
+	background-size:100% 100% !important;
+	height: 500px;
 }
 
 .title-page .b-logo {

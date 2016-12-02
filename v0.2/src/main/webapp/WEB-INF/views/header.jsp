@@ -28,7 +28,7 @@
 			splittedSelectedDate[1] + "-" +
 			splittedSelectedDate[0];
 		
-		function init()
+		/* function init()
 		{
 			var windowUrl = window.location.href;
 			var localIndex = 0;
@@ -50,7 +50,7 @@
 				}
 			}
 			document.getElementById("locale").options.selectedIndex = localeIndex;
-		}
+		} */
 		
 		function translatePageLang(pageLocale)
 		{
