@@ -168,7 +168,7 @@ public class LoginController extends AbstractController {
 		
 		logger.info("loginSubmit is called with credentials: {}", user.getLogRepresentation());
 		
-		String url = Constants.LOGIN;
+		String url = Constants.LANDING;
 		if(user.getEmail() == null || user.getEmail().length() == 0) {
 			logger.warn("Email is not provided");
 			

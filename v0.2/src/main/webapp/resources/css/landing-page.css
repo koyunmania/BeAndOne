@@ -25,6 +25,15 @@ h6 {
     font-size: 14px; 
 }
 
+footer {
+    position: fixed;
+    height:60px;
+    bottom: 0;
+    width: 100%;
+	padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
 .lead {
     font-size: 18px;
     font-weight: 400;
@@ -35,8 +44,6 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/beandone_landing_background.jpg) no-repeat center center fixed;
-    background-size: cover;
 }
 .intro-message {
     position: relative;
@@ -65,6 +72,24 @@ h6 {
 
 #landing-login-button-listitem {
 	margin-right:10px;
+}
+
+img.img-responsive { 
+	display: table-cell; 
+	max-width: 100%; 
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+body {
+    background: url(/resources/images/beandone_landing_background.jpg) no-repeat center center fixed;
+}
+
+@media(max-width:400px) {
+	body {
+		background: url(/resources/images/beandone_landing_background.jpg) no-repeat center center fixed;
+		background-position: -800px 0px;
+	}
 }
 
 @media(max-width:767px) {
@@ -104,6 +129,7 @@ h6 {
 	
 	#landing-login-button-listitem {
 		background-color:#49C1D2;
+		margin-right:0px;
 	}
 	
 	#landing-register-button-listitem {
@@ -115,6 +141,17 @@ h6 {
 	.container-fluid {
 		padding:0px;
 	}
+	
+	.navbar-header  button {
+		margin-right:30px;
+		margin-top:18px;
+	}
+	
+	footer {
+		height:30px;
+		padding-top: 10px;
+	}
+	
 }
 
 .network-name {
@@ -169,11 +206,6 @@ h6 {
     ul.banner-social-buttons > li:last-child {
         margin-bottom: 0;
     }
-}
-
-footer {
-    padding: 50px 0;
-    background-color: #f8f8f8;
 }
 
 p.copyright {

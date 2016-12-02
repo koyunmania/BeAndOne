@@ -95,134 +95,152 @@ body {
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title text-center" id="loginModalLabel">Connect</h4>
+					<h4 class="modal-title text-center" id="loginModalLabel">Giris Yap</h4>
 				</div>
 				<div class="modal-body">
 					<div class="text-center">
-						<div role="tabpanel" class="login-tab">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a id="signin-taba"
-									href="#home" aria-controls="home" role="tab" data-toggle="tab">Sign
-										In</a></li>
-								<li role="presentation"><a id="signup-taba" href="#profile"
-									aria-controls="profile" role="tab" data-toggle="tab">Sign
-										Up</a></li>
-							</ul>
-
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane active text-center"
-									id="home">
-									&nbsp;&nbsp; <span id="login_fail" class="response_error"
-										style="display: none;">Login failed, please try again.</span>
-									<div class="clearfix"></div>
-									<form id="login-form" method="POST" action="/login">
-										<div class="form-group">
-											<div>
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-user"></i>
-													</div>
-													<input type="text" class="form-control" id="email" name="email"
-														placeholder="Username">
-												</div>
-												<span class="help-block has-error" id="email-error"></span>
-											</div>
-											<div class="form-group">
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-lock"></i>
-													</div>
-													<input type="password" class="form-control" id="password" name="password"
-														placeholder="Password">
-												</div>
-												<span class="help-block has-error" id="password-error"></span>
-											</div>
-										</div>
-
-										<button type="submit" id="login_btn"
-											class="btn btn-block bt-login"
-											data-loading-text="Signing In....">Login</button>
-										<div class="modal-social-icons">
-											<a href='#' class="btn btn-default facebook"> <i
-												class="fa fa-facebook modal-icons"></i> Sign In with
-												Facebook
-											</a> <a href='#' class="btn btn-default google"> <i
-												class="fa fa-google-plus modal-icons"></i> Sign In with
-												Google
-											</a>
-
-										</div>
-										<div class="clearfix"></div>
-										<div class="login-modal-footer">
-											<div class="row">
-												<div class="col-xs-8 col-sm-8 col-md-8">
-													<i class="fa fa-lock"></i> <a href="javascript:;"
-														class="forgetpass-tab"> Forgot password? </a>
-
-												</div>
-
-												<div class="col-xs-4 col-sm-4 col-md-4">
-													<i class="fa fa-check"></i> <a href="javascript:;"
-														class="signup-tab"> Sign Up </a>
-												</div>
-											</div>
-										</div>
-									</form>
+						<form id="login-form" method="POST" action="/login" class="form-horizontal">
+							<div class="form-group">
+								<label for="email" class="col-sm-3 control-label">Email</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="email" name="email" placeholder="Email">
 								</div>
-								<div role="tabpanel" class="tab-pane" id="profile">
-									&nbsp;&nbsp; <span id="registration_fail"
-										class="response_error" style="display: none;">Registration
-										failed, please try again.</span>
-									<div class="clearfix"></div>
-									<form id="registration-form" method="POST" action="/register">
-										<div class="form-group">
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-user"></i>
-												</div>
-												<input type="text" class="form-control" id="username"
-													placeholder="Username">
-											</div>
-											<span class="help-block has-error" data-error='0'
-												id="username-error"></span>
-										</div>
-										<div class="form-group">
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-at"></i>
-												</div>
-												<input type="text" class="form-control" id="remail"
-													placeholder="Email">
-											</div>
-											<span class="help-block has-error" data-error='0'
-												id="remail-error"></span>
-										</div>
-										<button type="submit" id="register_btn"
-											class="btn btn-block bt-login"
-											data-loading-text="Registering....">Kaydol</button>
-										<div class="clearfix"></div>
-										<div class="login-modal-footer">
-											<div class="row">
-												<div class="col-xs-4 col-sm-4 col-md-4">
-													<i class="fa fa-check"></i> <a href="javascript:;"
-														class="signin-tab"> Sign In </a>
-												</div>
-											</div>
-										</div>
-									</form>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-3 control-label">Password</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 								</div>
 							</div>
 
+							<div class="form-group">
+								<div class="col-sm-6 col-md-offset-3">
+									<button type="submit" id="login_btn" class="btn btn-block bt-login"
+								data-loading-text="Signing In....">Giris Yap</button>
+								</div>
+							</div>
+							
+								
+						</form>
+						
+						<div class="clearfix"></div>
+						
+						<div class="form-group">
+							ya da
 						</div>
+						<div class="clearfix"></div>
+						<form role="form" method="POST" action="/signin/facebook">
+							<div class="col-sm-6 col-md-offset-3">
+								<button class="btn btn-default btn-block facebook"><i class="fa fa-facebook modal-icons"></i> Facebook ile giris olun</button>
+							</div>
+						</form>
+						<div class="clearfix"></div>
+						<form role="form" method="POST" action="/signin/twitter">
+							<div class="col-sm-6 col-md-offset-3">
+								<button class="btn btn-default btn-block twitter"><i class="fa fa-twitter modal-icons"></i> Twitter ile giris olun</button>
+							</div>
+						</form>
+						<div class="clearfix"></div>
+							
+						<!--
+						<div class="clearfix"></div>
+						<div class="login-modal-footer">
+							<div class="row">
+								<div class="col-xs-8 col-sm-8 col-md-8">
+									<i class="fa fa-lock"></i> <a href="javascript:;"
+										class="forgetpass-tab"> Forgot password? </a>
+								</div>
+								<div class="col-xs-4 col-sm-4 col-md-4">
+									<i class="fa fa-check"></i> <a href="javascript:;"
+										class="signup-tab"> Sign Up </a>
+								</div>
+							</div>
+						</div>
+						-->
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- - Login Model Ends Here -->
+	
+	
+	<!-- -Registration Modal -->
+	<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content login-modal">
+				<div class="modal-header login-modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-center" id="lregistrationModalLabel">Kayit Ol</h4>
+				</div>
+				<div class="modal-body">
+					<div class="text-center">
+						<div class="clearfix"></div>
+						<form id="registration-form" method="POST" action="/register" class="form-horizontal">
+							<div class="form-group">
+								<label for="firstname" class="col-sm-3 control-label">Firstname</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Firstname">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="lastname" class="col-sm-3 control-label">Lastname</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email" class="col-sm-3 control-label">Email</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="email" name="email" placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-3 control-label">Password</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="password" name="password" placeholder="Password">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="passwordRepeat" class="col-sm-3 control-label">Repeat your password</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="passwordRepeat" placeholder="Repeat your password">
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-offset-3">
+								<button type="submit" id="register_btn"
+									class="btn btn-block bt-login"
+									data-loading-text="Registering....">Kaydol</button>
+							</div>
+						</form>
+						
+						<div class="clearfix"></div>
+						
+						<div class="form-group">
+							ya da
+						</div>
+						<div class="clearfix"></div>
+						<form role="form" method="POST" action="/connect/facebook">
+							<div class="col-sm-6 col-md-offset-3">
+								<button class="btn btn-default btn-block facebook"><i class="fa fa-facebook modal-icons"></i> Facebook ile kayit olun</button>
+							</div>
+						</form>
+						<div class="clearfix"></div>
+						<form role="form" method="POST" action="/connect/twitter">
+							<div class="col-sm-6 col-md-offset-3">
+								<button class="btn btn-default btn-block twitter"><i class="fa fa-twitter modal-icons"></i> Twitter ile kayit olun</button>
+							</div>
+						</form>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- - Registration Modal Ends Here -->
 
 	<%@include file="footer.jsp"%>
 </body>

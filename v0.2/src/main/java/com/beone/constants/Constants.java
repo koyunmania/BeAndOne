@@ -10,4 +10,5 @@ public interface Constants
 	public static final String HOME = "home";
 	public static final String LOGIN = "login";
 	public static final String LOGIN_REDIRECT = "redirect:/login";
+	public static final String LANDING = "landing";
 }

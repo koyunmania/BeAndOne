@@ -113,6 +113,7 @@
 										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook"
 											data-url='http://www.beandone.com'
 											data-shares='shares'
+											data-source='{{happening.eventHappeningPhotoUrl}}'
 											data-picture='{{happening.eventHappeningPhotoUrl}}'
 											data-name={{happening.eventName}}
 											data-caption='Be&One'>{{shares}}
