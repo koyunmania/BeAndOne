@@ -7,31 +7,31 @@ UPDATE beonecalendars SET colorcode='#5fc2c4;', buttonClass='btn-international',
 UPDATE beonecalendars SET colorcode='#df6c4f;', buttonClass='btn-national', sortOrder=5 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Ulusal Günler');
 UPDATE beonecalendars SET colorcode='#f7d752;', buttonClass='btn-independence', sortOrder=6 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Bağımsızlık Günleri');
 
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Eclipses');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Equinoxes and Solstices');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Meteor Showers');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Moon Phases');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Rise & Set');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Planetary Retrogrades');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Stars Whisper');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Plants');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Animals');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Weather & Other');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Bahá''í Faith');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Buddhism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Christianity (All Denominations)');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Hinduism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Islam');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Jainism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Judaism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Paganism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Shinto');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Sikhism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Zoroastrianism');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='United Nations International Days');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Other');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Turkey');
-UPDATE beonecalendarsubcategories SET calendaricon='glyphicon glyphicon-adjust' WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Independence Days');
+UPDATE beonecalendarsubcategories SET calendaricon='A' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Eclipses');
+UPDATE beonecalendarsubcategories SET calendaricon='B' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Equinoxes and Solstices');
+UPDATE beonecalendarsubcategories SET calendaricon='C' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Meteor Showers');
+UPDATE beonecalendarsubcategories SET calendaricon='D' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Moon Phases');
+UPDATE beonecalendarsubcategories SET calendaricon='E' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Rise & Set');
+UPDATE beonecalendarsubcategories SET calendaricon='F' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Planetary Retrogrades');
+UPDATE beonecalendarsubcategories SET calendaricon='G' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Stars Whisper');
+UPDATE beonecalendarsubcategories SET calendaricon='H' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Plants');
+UPDATE beonecalendarsubcategories SET calendaricon='I' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Animals');
+UPDATE beonecalendarsubcategories SET calendaricon='J' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Weather & Other');
+UPDATE beonecalendarsubcategories SET calendaricon='K' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Bahá''í Faith');
+UPDATE beonecalendarsubcategories SET calendaricon='L' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Buddhism');
+UPDATE beonecalendarsubcategories SET calendaricon='M' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Christianity (All Denominations)');
+UPDATE beonecalendarsubcategories SET calendaricon='N' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Hinduism');
+UPDATE beonecalendarsubcategories SET calendaricon='O' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Islam');
+UPDATE beonecalendarsubcategories SET calendaricon='P' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Jainism');
+UPDATE beonecalendarsubcategories SET calendaricon='Q' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Judaism');
+UPDATE beonecalendarsubcategories SET calendaricon='R' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Paganism');
+UPDATE beonecalendarsubcategories SET calendaricon='S' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Shinto');
+UPDATE beonecalendarsubcategories SET calendaricon='T' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Sikhism');
+UPDATE beonecalendarsubcategories SET calendaricon='U' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Zoroastrianism');
+UPDATE beonecalendarsubcategories SET calendaricon='V' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='United Nations International Days');
+UPDATE beonecalendarsubcategories SET calendaricon='W' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Other');
+UPDATE beonecalendarsubcategories SET calendaricon='X' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Turkey');
+UPDATE beonecalendarsubcategories SET calendaricon='Y' WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Independence Days');
 
 
 -- Dummy data for the sub category setting
