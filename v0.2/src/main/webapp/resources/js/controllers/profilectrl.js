@@ -1,4 +1,4 @@
-beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileService) {
+beoneApp.controller('ProfileCtrl', function($interval, $scope, $rootScope, $http, ProfileService) {
 	$scope.profilePhoto = "";
 	$scope.allCalendars = [];
 	$scope.allCountries = [];
@@ -31,11 +31,11 @@ beoneApp.controller('ProfileCtrl', function($scope, $rootScope, $http, ProfileSe
 			var d = new Date();
 			var h = pad( d.getHours() );
 			var m = pad( d.getMinutes() );
-			// var s = pad( d.getSeconds() );
+			var s = pad( d.getSeconds() );
 			$scope.current_time = [h,m].join(':');
 		};
 		ticktock();
-		setInterval(ticktock, 1000);
+		$interval(ticktock, 60000, $scope.current_time);
 	}());
 		
 	$scope.greeting = function(){
