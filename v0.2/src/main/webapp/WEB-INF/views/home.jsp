@@ -14,14 +14,14 @@
 				<div class="b-logo">
 					<span>B</span>
 				</div>
-				<div class="mood">
+				<!--  <div class="mood">
 					<h3><spring:message code="label.home.cover.howisyourmood" /></h3>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Awesome" href=''>&#x1F603</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Good" href=''>&#x1F60A</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Neutral" href=''>&#x1F614</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F621</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Crying" href=''>&#x1F62D</a>
-				</div>
+				</div> -->
 				<a href="https://www.instagram.com/benowmehere/" class="btn btn-default" style="background-color:transparent;">
 					<div class="instagram fa fa-instagram">
 						@benowmehere
@@ -159,7 +159,7 @@
 											<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
 												<div class="row">
 													<div class="col-lg-12" style="padding-left:10px;">
-														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil" ng-click="updateExperience(exper, $index)"></button>
+														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil" ng-click="updateExperience(exper, selectedDate, $index)"></button>
 														<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteExperience(exper, $index)"></button>
 													</div>
 												</div>

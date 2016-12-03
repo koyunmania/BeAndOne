@@ -4,6 +4,7 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
     $scope.experience = {};
     $scope.experiences = [];
 	$scope.googleSearch = "";
+	$scope.newExperienceText = "";
 
     $scope.addExperienceOnKeypress = function(event, newExperienceText, selectedDate){
 		if (event.which === 13){
@@ -71,8 +72,18 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
         }
     };
 
-    $scope.deleteExperience = function (experience, experienceScopeId) {
-		if(window.confirm("Delete experience?")){
+    $scope.deleteExperience = function (experience, experienceScopeId, edit) {
+		if(edit){
+			$scope.experiences.splice(experienceScopeId, 1);
+
+			ExperienceService.deleteExperience(experience).then(
+				function (result) {
+				},
+				function (response) {
+					//...
+				}
+			);
+		} else if(window.confirm("Delete experience?")) {
 			ExperienceService.deleteExperience(experience).then(
 				function (result) {
 					$scope.experiences.splice(experienceScopeId, 1);
@@ -87,7 +98,9 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
     };
 
     $scope.updateExperience = function (experience, selectedDate, experienceScopeId) {
-		if( $scope.experiences[experienceScopeId].saveOrEdit === "edit" || !$scope.experiences[experienceScopeId].saveOrEdit ){
+		$scope.newExperienceText = experience.experienceDescription.slice();
+		$scope.deleteExperience(experience, experienceScopeId, true);
+		/* if( $scope.experiences[experienceScopeId].saveOrEdit === "edit" || !$scope.experiences[experienceScopeId].saveOrEdit ){
 			var textarea = document.getElementById("experienceTextbox" + experienceScopeId);
 			textarea.removeAttribute("disabled");
 			textarea.focus();
@@ -112,7 +125,7 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
 					//...
 				}
 			);
-		}
+		} */
     };
 	$scope.$on('reloadAllCalendarEvents', function(event, args){
 		$scope.initExperience();
