@@ -150,10 +150,10 @@
 						</div>
 					</div>
 					<div class="col-md-5">
-						<h2 id="experiences-header">Positif Gunluk</h2>
+						<h2 id="experiences-header" style="padding-top: 60px; margin-bottom: 25px;">Positif Gunluk</h2>
 						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
 							<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
-							<div class="panel-body">
+							<div class="panel-body" style="margin-right: 150px;">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
 									<textarea class="form-control" rows="1" id="experienceTextArea" cols="30"
@@ -237,7 +237,7 @@
 											<span>&lt;&lt;</span>
 										</a>
 									</div>
-									<div class="panel-body">
+									<div class="panel-body" style="margin-right: 150px;">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
 											<textarea class="form-control" rows="2" cols="30"
@@ -268,7 +268,7 @@
 											<span>&lt;&lt;</span>
 										</a>
 									</div>
-									<div class="panel-body">
+									<div class="panel-body" style="margin-right: 150px;">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
 											<textarea class="form-control" rows="2" cols="30"

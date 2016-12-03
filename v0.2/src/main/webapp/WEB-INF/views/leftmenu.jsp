@@ -1,14 +1,21 @@
 <div class="user" ng-controller="ProfileCtrl" ng-init="initProfile()" style="margin-top:60px;">
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
-			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			<div class="info-bar">
+				<div>
+					<a style="color: white; text-decoration: none;" class="fa fa-cog dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href ng-click="openProfileModal();">Profile</a></li>
+						<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
+					</ul>
+					<span class="info-date">{{selectedDate}} | {{current_time}}</span>
+					<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
+				</div>
+			</div>
+			<div class="profile-area" style="position: relative">
 				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'">
-				<!--  <div class="img-thumbnail img-circle fa fa-user profile-picture"></div> -->
-			</a>
-			<ul class="dropdown-menu">
-				<li><a href ng-click="openProfileModal();">Profile</a></li>
-				<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
-			</ul>
+			</div>
 		</li>
 	</ul>
 	
