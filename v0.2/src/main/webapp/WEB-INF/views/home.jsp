@@ -21,10 +21,8 @@
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F621</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Crying" href=''>&#x1F62D</a>
 				</div> -->
-				<a href="https://www.instagram.com/benowmehere/" class="btn btn-default" style="background-color:transparent;">
-					<div class="instagram fa fa-instagram">
-						@benowmehere
-					</div>
+				<a href="https://www.instagram.com/benowmehere/" class="btn btn-default instagram" style="background-color:transparent;font-weight:bold;font-size:16px; border:0px;">
+					<i class="fa fa-instagram"></i> @benowmehere
 				</a>
 			</div>
 			<div class="col-md-2">
@@ -40,8 +38,7 @@
 								<li><a href ng-click="openProfileModal();">Profile</a></li>
 								<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
 							</ul>
-							<span class="info-date">{{selectedDate}} | {{current_time}}</span>
-							<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
+							<span class="info-date">{{convertToReadabledDate(selectedDate)}} | <span id="time"></span> | {{profile.currentCity.cityName}} {{","+ selectedCountry.countryName}}</span>
 						</div>
 					</div>
 				</div>
@@ -111,12 +108,20 @@
 						</div>
 						
 						<div id="happeningModal" class="modal fade" role="dialog">
-							<div class="modal-dialog" style="width: 430px;">
+							<div class="modal-dialog" style="width: 290px;">
 								<!-- Modal content-->
 								<div class="modal-content">
-									<div class="modal-header">
+									<div class="modal-header" style="background-color:{{happening.subCategory.calendar.colorCode}}; color:white; font-weight:bold;">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title happening">{{happening.eventName}}</h4> 
+										<div class="row">
+											<div class="col-lg-2">
+												<h3 class="modal-title happening"><span style="color: white; font-family: 'beone_icons';">{{happening.subCategory.calendarIcon}}</span></h3> 
+											</div>
+											<div class="col-lg-7">
+												<h3 class="modal-title happening">{{happening.eventName}}</h3> 
+												<h4 class="modal-title happening">{{happening.subCategory.calendarSubCategory}}</h4> 
+											</div>
+										</div>
 									</div>
 									<div class="modal-body happening"
 										style="min-height: 300px; background-repeat: no-repeat;">
@@ -125,26 +130,23 @@
 										<img class="img-responsive" src="{{happening.eventHappeningPhotoUrl}}"/>
 									</div>
 									<div class="modal-footer" style="text-align:left;">
-										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook"
+										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook plusc-share-buttons"
 											data-url='http://www.beandone.com'
 											data-shares='shares'
 											data-source='{{happening.eventHappeningPhotoUrl}}'
 											data-picture='{{happening.eventHappeningPhotoUrl}}'
 											data-name={{happening.eventName}}
-											data-caption='Be&One'>{{shares}}
+											data-caption='Be&One'
+											style="font-size:25px;">{{shares}}
 										</a>
-										<a id="twitterButton" 
-											class="btn-twitter"
-											twitter data-lang="en"
+										<a  id="twitterButton" 
+											style="font-size:25px;"
+											class="fa fa-twitter btn btn-primary btn-twitter plusc-share-buttons"
+											data-lang="tr"
 											data-count='horizontal' 
-											data-url='http://beandone.com'
+											data-url='http://www.beandone.com'
 											data-via='{{happening.eventHappeningPhotoUrl}}' 
-											data-size="medium"></a>
-										<!-- <div class="fa fa-twitter btn btn-primary btn-twitter" ng-click="twitterClick($event)">
-												<a id="twitterButton" style="display: none;" twitter data-lang="en" data-count='horizontal' data-url='http://google.com' data-via='notsosleepy' data-size="medium" data-text='Testing Twitter Share' ></a>
-											</div> -->
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
+											data-size="medium" href='https://twitter.com/intent/tweet?text={{happening.eventDescription}} #BeAndOne'></a>
 									</div>
 								</div>
 							</div>
@@ -152,17 +154,22 @@
 					</div>
 					<div class="col-md-5">
 						<h2 id="experiences-header" style="margin-bottom: 25px;">Positif Gunluk</h2>
-						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+						<div class="panel panel-default diary-panel" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
 							<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
 							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
-									<textarea class="form-control" rows="1" id="experienceTextArea" cols="30"
-										ng-model="newExperienceText"
-										ng-keypress="addExperienceOnKeypress($event, newExperienceText, selectedDate)"></textarea>
-									<br />
-									<button class="btn btn-default" type="submit"
-										ng-click="addExperience(newExperienceText, selectedDate)">Save</button>
+									<div class="row">
+										<div class="col-lg-12">
+											<textarea class="form-control" rows="2" id="experienceTextArea" cols="30" ng-model="newExperienceText"></textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12" style="text-align:right; margin-top:10px; background:url('/resources/images/beandone_questions_bigpencil.png') no-repeat;background-position-x:15px;background-position-y:bottom;">
+											<button class="btn btn-default diary-buttons" type="submit"
+												ng-click="addExperience(newExperienceText, selectedDate)">Save</button>
+										</div>
+									</div>
 								</form>
 							</c:if>
 								<div style="overflow-y:scroll; overflow-x:hidden; height:100px;">
@@ -174,13 +181,14 @@
 											<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
 												<div class="row">
 													<div class="col-lg-12" style="padding-left:10px;">
-														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil" ng-click="updateExperience(exper, selectedDate, $index)"></button>
-														<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteExperience(exper, $index)"></button>
+														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)" style="width:35px;"></button>
+														<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteExperience(exper, $index)" style="width:35px;"></button>
 													</div>
 												</div>
 												<div class="row" style="margin-top:5px;">
 													<div class="col-lg-12" style="padding-left:10px;">
-														<button type="button" ng-click="toggleModal(exper)" class="btn btn-block btn-default">+C</button>
+														<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(exper)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
+														src="/resources/images/+C logo-01.png" height="14px"/></button>
 													</div>
 												</div>
 											</div>
@@ -189,7 +197,7 @@
 								</div>
 							</div>
 							<div id="experienceModal" class="modal fade" role="dialog">
-								<div class="modal-dialog" style="width: auto">
+								<div class="modal-dialog" style="width:300px">
 									<!-- Modal content-->
 									<div class="modal-content">
 										<div class="modal-header">
@@ -197,29 +205,26 @@
 											<h4 class="modal-title happening">Guzellikleri paylas</h4> 
 										</div>
 										<div class="modal-body happening"
-											style="min-height: 300px; background-repeat: no-repeat;">
+											style="min-height: 150px; background-repeat: no-repeat;">
 											<div style="height: 40px;"></div>
-											{{happening.eventDescription}}
+											{{experience.experienceDescription}}
 										</div>
 										<div class="modal-footer">
-											<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook"
-												data-url='beandone.com'
+											<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook plusc-share-buttons"
+												data-url='http://www.beandone.com'
 												data-shares='shares'
-												data-picture=''
 												data-name={{experience.experienceDescription}}
-												data-description=""
-												data-caption='beandone.com'>{{shares}}
+												data-caption='Be&One'
+												style="font-size:25px;">
 											</a>
 											<a id="twitterButton" 
-												class="btn-twitter"
-												twitter data-lang="en"
+												style="font-size:25px;"
+												class="fa fa-twitter btn btn-primary btn-twitter plusc-share-buttons"
+												data-lang="tr"
 												data-count='horizontal' 
-												data-url='http://beandone.com'
-												data-via='' 
-												data-size="medium"
-												data-text={{experience.experienceDescription}}></a>
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
+												data-url='http://www.beandone.com'
+												data-text='{{experience.experienceDescription}}'
+												data-size="medium" href="https://twitter.com/intent/tweet?text={{experience.experienceDescription}}"></a>
 										</div>
 									</div>
 								</div>
@@ -229,53 +234,73 @@
 						<h2 id="experiences-header">G&uuml;nl&uuml;k Sorular</h2>
 						<div id="myCarousel" class="carousel slide" data-interval="false">
 							<div ng-controller="QuestionAnswerCtrl" ng-init="initQuestionAnswer('${selectedDate}')" class="carousel-inner" role="listbox">
-								<div class="item panel panel-default active" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+								<div class="item panel panel-default active diary-panel" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
 									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bugun neler ogrendin?
-										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
-											<span>&gt;&gt;</span>
+										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;color:#999; font-size:28px;">
+											<i class="fa fa-chevron-right" aria-hidden="true"></i>
 										</a>
-										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;">
-											<span>&lt;&lt;</span>
+										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;color:#999; font-size:28px;">
+											<i class="fa fa-chevron-left" aria-hidden="true"></i>
 										</a>
 									</div>
-									<div class="panel-body" style="margin-right: 150px;">
+									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
-											<textarea class="form-control" rows="2" cols="30"
-												ng-model="nelerOgrendinQuestion.answerText"></textarea>
-											<br />
-											<button class="btn btn-default" type="submit"
+											<div class="row">
+												<div class="col-lg-12">
+													<textarea class="form-control" rows="2" cols="30"
+														ng-model="nelerOgrendinQuestion.answerText"></textarea>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12" style="text-align:right; margin-top:10px; background:url('/resources/images/beandone_questions_bigpencil.png') no-repeat;background-position-x:15px;background-position-y:bottom;">
+													<button class="btn btn-default diary-buttons" type="submit"
 												ng-click="saveNelerOgrendinAnswer(nelerOgrendinQuestion.answerText, 1)">Save</button>
+												</div>
+											</div>
 										</form>
 									</c:if>
-										<div ng-repeat="userAnswer in nelerOgrendinQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" style="margin-bottom:15px;">
-											<div class="col col-lg-8 answerText">
-												{{userAnswer.userAnswerText}}
+										<div style="overflow-y:scroll; overflow-x:hidden; height:100px;">
+											<div ng-repeat="userAnswer in nelerOgrendinQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" style="margin-bottom:15px;">
+											<div style="border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px; max-width:400px;">
+												<div class="col col-lg-9 answerText">
+													{{userAnswer.userAnswerText}}
+												</div>								
+												<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
+													<div class="row">
+														<div class="col-lg-12" style="padding-left:10px;">
+															<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="editNelerOgrendinAnswer(exper, $index)" style="width:35px;"></button>
+															<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteNelerOgrendinAnswer(userAnswer, $index);" style="width:35px;"></button>
+														</div>
+													</div>
+													<div class="row" style="margin-top:5px;">
+														<div class="col-lg-12" style="padding-left:10px;">
+															<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(userAnswer, $event)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
+															src="/resources/images/+C logo-01.png" height="14px"/></button>
+														</div>
+													</div>
+												</div>
 											</div>
-											<div class="col col-lg-4" style="text-align:right;">
-												<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
-												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-pencil" ng-click="editNelerOgrendinAnswer(exper, $index)"></button>
-												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteNelerOgrendinAnswer(userAnswer, $index);"></button>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="item panel panel-default" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
+								<div class="item panel panel-default diary-panel" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
 									<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n neler diliyorsun?
-										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;">
-											<span>&gt;&gt;</span>
+										<a href="#myCarousel" role="button" data-slide="next" style="float:right;margin-right:5px;color:#999; font-size:28px;">
+											<i class="fa fa-chevron-right" aria-hidden="true"></i>
 										</a>
-										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;">
-											<span>&lt;&lt;</span>
+										<a href="#myCarousel" role="button" data-slide="prev" style="float:right;margin-right:5px;color:#999; font-size:28px;">
+											<i class="fa fa-chevron-left" aria-hidden="true"></i>
 										</a>
 									</div>
-									<div class="panel-body" style="margin-right: 150px;">
+									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
 										<form>
 											<textarea class="form-control" rows="2" cols="30"
 												ng-model="whatIsYourWishQuestion.answerText"></textarea>
 											<br />
-											<button class="btn btn-default" type="submit"
+											<button class="btn btn-default diary-buttons" type="submit"
 												ng-click="saveWhatIsYourWishAnswer(whatIsYourWishQuestion.answerText, 2)">Save</button>
 										</form>
 									</c:if>
@@ -284,7 +309,8 @@
 												{{userAnswer.userAnswerText}}
 											</div>
 											<div class="col col-lg-4" style="text-align:right;">
-												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
+												<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)"></button>
+												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash diary-buttons" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
 												<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
 											</div>
 										</div>
@@ -300,6 +326,21 @@
 
 	<script type="text/javascript">
 		//$('#test').BootSideMenu({ side: "left", autoClose: true });
+		
+		function checkTime(i) {
+        return (i < 10) ? "0" + i : i;
+    }
+
+    function startTime() {
+        var today = new Date(),
+            h = checkTime(today.getHours()),
+            m = checkTime(today.getMinutes());
+        document.getElementById('time').innerHTML = h + ":" + m;
+        t = setTimeout(function () {
+            startTime()
+        }, 500);
+    }
+    startTime();
 	</script>
 	<%@include file="footer.jsp"%>
 </body>

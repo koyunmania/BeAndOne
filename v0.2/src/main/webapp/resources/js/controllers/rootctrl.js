@@ -83,4 +83,45 @@ beoneApp.controller('RootCtrl', function ($http, $scope, $routeParams, $timeout,
 	$scope.$on('reloadAllCalendarEvents', function(event, args){
 		$scope.initRoot();
 	});
+	
+	$scope.convertToReadabledDate = function(formattedDate) {
+		var currentDate = new Date();
+	
+		var converted = ""+
+			currentDate.getDate() + " " + getMonthName(currentDate.getMonth()) + " "+currentDate.getFullYear();
+			
+		return converted;
+	}
+	
+	function getMonthName(monthIndex) {
+		switch(monthIndex) {
+		case 0:
+			return "Ocak";
+			break;
+		case 1:
+			return "Subat";
+		case 2:
+			return "Mart";
+		case 3:
+			return "Nisan";
+		case 4:
+			return "Mayis";
+		case 5:
+			return "Haziran";
+		case 6:
+			return "Temmuz";
+		case 7:
+			return "Agustos";
+		case 8:
+			return "Eylül";
+		case 9:
+			return "Ekim";
+		case 10:
+			return "Kasim";
+		case 11:
+			return "Aralik";
+		default:
+			return (currentDate.getMonth() < 9 ? ("0"+(currentDate.getMonth() + 1)) : (currentDate.getMonth() + 1));
+		}
+	}
 });

@@ -54,6 +54,17 @@ body {
 	word-wrap: break-word;
 }
 
+.diary-buttons {
+	background-color:#818181 !important;
+	color:white;
+	border-width:0px;
+}
+
+.diary-panel {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
 #test {
     text-align:center;
 }

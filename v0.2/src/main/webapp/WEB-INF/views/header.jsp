@@ -6,9 +6,12 @@
     <title>Be&Now</title>
     
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/resources/css/bootstrap-3.2.0/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/font-awesome-4.1.0/font-awesome.min.css"/>
+    <!-- <link rel="stylesheet" href="/resources/css/bootstrap-3.2.0/bootstrap.min.css"/> -->
+    <!-- <link rel="stylesheet" href="/resources/css/font-awesome-4.1.0/font-awesome.min.css"/> -->
 	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://use.fontawesome.com/e1106744cc.js"></script>	
     <link rel="stylesheet" href="/resources/css/BootSideMenu.css">
     <link rel="stylesheet" href="/resources/css/beonestyle.css">
     <link rel="stylesheet" href="/resources/css/bootstrap-datepicker-1.5.0/bootstrap-datepicker.css">

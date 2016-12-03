@@ -324,7 +324,7 @@
 		<property name="tokenDao" ref="userTokenDao"/>
     </bean>
     
-    <bean class="com.${application.package.name}.webapp.app.secure.PublicServicesFilter" id="publicServicesFilter"/>
+    <bean class="com.beone.webapp.app.secure.PublicServicesFilter" id="publicServicesFilter"/>
     
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
