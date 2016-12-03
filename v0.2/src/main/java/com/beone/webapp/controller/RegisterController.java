@@ -144,12 +144,12 @@ public class RegisterController extends AbstractController {
 			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			validationErrors.add(error);
 		}
-		if(user.getUsername() == null || user.getUsername().length() == 0) {
-			ValidationError error = new ValidationError();
-			error.setFieldName("username");
-			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
-			validationErrors.add(error);
-		}
+//		if(user.getUsername() == null || user.getUsername().length() == 0) {
+//			ValidationError error = new ValidationError();
+//			error.setFieldName("username");
+//			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
+//			validationErrors.add(error);
+//		}
 		if(user.getPassword() == null || user.getPassword().length() == 0) {
 			ValidationError error = new ValidationError();
 			error.setFieldName("password");

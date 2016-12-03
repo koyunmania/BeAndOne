@@ -10,7 +10,7 @@
 <body onLoad="window.scroll(0, 350)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
-			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat center center; !important;">
+			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat; !important; background-size:cover; background-position:center center; overflow:hidden; position:relative;">
 				<div class="b-logo">
 					<span>B</span>
 				</div>
@@ -32,6 +32,20 @@
 				<%@include file="leftmenu.jsp"%>
 			</div>
 			<div class="col-md-10">
+				<div class="row info-bar" style="z-index:-20">
+				<div class="col-md-9">
+					<div>
+						<a style="color: white; text-decoration: none;" class="fa fa-cog dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href ng-click="openProfileModal();">Profile</a></li>
+							<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
+						</ul>
+						<span class="info-date">{{selectedDate}} | {{current_time}}</span>
+						<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
+					</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-7" ng-controller="HappeningCtrl" ng-init="initHappenings()">
 						<h2 id="happenings-header">Bugunkuler</h2>

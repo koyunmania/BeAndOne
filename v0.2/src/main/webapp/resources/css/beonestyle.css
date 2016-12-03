@@ -11,17 +11,16 @@ body {
 }
 
 .info-bar {
-  width: 815px;
+  max-width: 815px;
   height: 60px;
-  transform: translate(-20px, -5px);
+  transform: translate(-240px, 0px);
   background-color: #5a5a5a;
   border-bottom-right-radius: 20px;
   line-height: 60px;
-  padding-left: 110%;
+  padding-left: 240px;
   font-size: 38px;
   color: white;
 }
-
 .info-date {
   font-size: 20px;
   padding-left: 20px;
@@ -63,7 +62,7 @@ body {
 }
 
 #happenings-header {
-    padding-top: 60px;
+    /* padding-top: 60px; */
     color:#5f625e;
 }
 

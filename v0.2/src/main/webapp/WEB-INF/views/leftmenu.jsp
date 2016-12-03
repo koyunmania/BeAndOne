@@ -1,4 +1,4 @@
-<div class="user" ng-controller="ProfileCtrl" ng-init="initProfile()">
+<div class="user" ng-controller="ProfileCtrl" ng-init="initProfile()" style="margin-top:60px;">
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
 			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

@@ -157,9 +157,9 @@ public class DataUploadController {
 		ArrayList<String> resultMessages = new ArrayList<String>();
 		
 		// Zero based indexes
-		int columnIndexWhereDatesStart = 40;
-		int columnIndexWherePlusCResidesTr = 34;
-		int columnIndexWherePlusCResidesEn = 35;
+		int columnIndexWhereDatesStart = 38;
+		int columnIndexWherePlusCResidesTr = 32;
+		int columnIndexWherePlusCResidesEn = 33;
 		int columnIndexWhereGoogleIt = 36;
 		
 		int indexOfTimeZoneCell = 13;
@@ -180,11 +180,11 @@ public class DataUploadController {
     	int indexOfPlusC2AppTrCell = 22;
     	
     	int indexOfPlusCDesignNumberEnCell = 17;
-    	int indexOfPlusCMessageNumberEnCell = 24;
-    	int indexOfPlusC2WebEnCell = 25;
-    	int indexOfPlusC2WallEnCell = 26;
-    	int indexOfPlusC2PrintEnCell = 27;
-    	int indexOfPlusC2AppEnCell = 28;
+    	int indexOfPlusCMessageNumberEnCell = 25;
+    	int indexOfPlusC2WebEnCell = 26;
+    	int indexOfPlusC2WallEnCell = 27;
+    	int indexOfPlusC2PrintEnCell = 28;
+    	int indexOfPlusC2AppEnCell = 29;
 		
 		if(file == null) {
 			model.addAttribute("error", "No file could be uploaded");

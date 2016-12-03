@@ -193,6 +193,15 @@ body {
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="email" class="col-sm-3 control-label">Gender</label>
+								<div class="col-sm-9">
+									 <select class="form-control" name="gender">
+									 <option value="Female">Female</option>
+									 <option value="Male">Male</option>
+									 </select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="email" class="col-sm-3 control-label">Email</label>
 								<div class="col-sm-9">
 									<input type="text" class="form-control" id="email" name="email" placeholder="Email">
