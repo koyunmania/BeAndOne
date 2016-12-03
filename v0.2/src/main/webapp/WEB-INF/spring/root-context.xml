@@ -190,6 +190,7 @@
 		<property name="cityDao" ref="cityDao" />
 		<property name="countryDao" ref="countryDao" />
 		<property name="emailService" ref="emailService"/>
+		<property name="registerTokenDao" ref="registerTokenDao"/>
 		<!-- <property name="userCalendarSubCategoryDao" ref="userCalendarSubCategoryDao" /> -->
 	</bean>
 	<bean id="experienceService" class="com.${application.package.name}.webapp.controller.service.ExperienceService">

@@ -10,7 +10,7 @@
 <body onLoad="window.scroll(0, 350)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
-			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat; !important; background-size:cover; background-position:center center; overflow:hidden; position:relative;">
+			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat; !important; background-size:cover !important; background-position:center center; overflow:hidden; position:relative;">
 				<div class="b-logo">
 					<span>B</span>
 				</div>
@@ -153,7 +153,7 @@
 						<h2 id="experiences-header" style="margin-bottom: 25px;">Positif Gunluk</h2>
 						<div class="panel panel-default" ng-controller="ExperienceCtrl" ng-init="initExperience()" style="background: url('/resources/images/beandone_questions_background.png') no-repeat; moz-background-size: cover; -moz-background-size: cover; border:0px; padding-left:25px;">
 							<div class="panel-heading" style="border:0px; background-color:initial !important;">Bug&uuml;n ne gibi g&uuml;zellikler yasadin?</div>
-							<div class="panel-body" style="margin-right: 150px;">
+							<div class="panel-body">
 							<c:if test="${usersCurrentDate.equals(selectedDate)}">
 								<form>
 									<textarea class="form-control" rows="1" id="experienceTextArea" cols="30"

@@ -27,13 +27,13 @@ body {
 								<h2>Hesap Aktivasyon</h2>
 							</div>
 							<div class="row"
-								style="display:${(!verificationResultIsSuccess && loginResultMessage != null) ? "block" : "none"};">
+								style="display:${(!verificationResultIsSuccess) ? "block" : "none"};">
 								<div class="alert alert-danger" role="alert">
 
 									${verificationResultMessage}</div>
 							</div>
 							<div class="row"
-								style="display:${(verificationResultIsSuccess && loginResultMessage != null) ? "block" : "none"};">
+								style="display:${(verificationResultIsSuccess) ? "block" : "none"};">
 								<div class="alert alert-success" role="alert">
 									${verificationResultMessage}</div>
 							</div>
@@ -210,13 +210,13 @@ body {
 							<div class="form-group">
 								<label for="password" class="col-sm-3 control-label">Password</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="password" name="password" placeholder="Password">
+									<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="passwordRepeat" class="col-sm-3 control-label">Repeat your password</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="passwordRepeat" placeholder="Repeat your password">
+									<input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Repeat your password">
 								</div>
 							</div>
 							<div class="col-sm-6 col-md-offset-3">

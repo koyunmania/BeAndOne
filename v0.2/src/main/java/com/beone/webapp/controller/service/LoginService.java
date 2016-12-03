@@ -72,13 +72,13 @@ public class LoginService {
 		
 		if(foundUser != null) {
 			logger.info("Login with credentials is successful, loading user.");
-			if(User.STATUS_PENDING.equals(user.getStatus())) {
+			if(User.STATUS_PENDING.equals(foundUser.getStatus())) {
 				throw new ControllerServiceException(StatusCode.ACCOUNT_NOT_CONFIRMED, 
 						"Your account is not confirmed yet");
-			} else if(User.STATUS_INACTIVE.equals(user.getStatus())) {
+			} else if(User.STATUS_INACTIVE.equals(foundUser.getStatus())) {
 				throw new ControllerServiceException(StatusCode.ACCOUNT_NOT_ACTIVE, 
 						"Your account suspended because you were inactive for a long time");
-			} else if(User.STATUS_SUSPICIOUS.equals(user.getStatus())) {
+			} else if(User.STATUS_SUSPICIOUS.equals(foundUser.getStatus())) {
 				throw new ControllerServiceException(StatusCode.ACCOUNT_SUSPICIOUS, 
 						"Your account suspended because of security reasons");
 			} else {

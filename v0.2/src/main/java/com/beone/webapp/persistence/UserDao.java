@@ -244,7 +244,10 @@ public class UserDao extends AbstractDao {
 	public User checkLoginAndReturnUser (String email, String password, String provider) {
 		// Start of user code special Implementation checkLogin
 		List result = this.localSessionFactory.getCurrentSession()
-				.createQuery("from User user where user.email=:email and password=:password and provider=:provider")
+				.createQuery("select usr from User usr where "
+						+ "usr.email=:email and "
+						+ "usr.password=:password and "
+						+ "usr.provider=:provider")
                 .setParameter("email", email)
                 .setParameter("password", password)
                 .setParameter("provider", provider)

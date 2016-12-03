@@ -67,7 +67,7 @@ public class RegisterController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Locale locale, Model model) {
 		logger.info("register has been called");		
-		return "register";
+		return "landing";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -78,6 +78,7 @@ public class RegisterController extends AbstractController {
 		if(validationErrors.size() == 0) {
 			try {
 				user.setProvider(User.USER_PROVIDER_BEONE);
+				user.setUsername(user.getEmail());
 				profileService.registerUser(user, messageSource, locale);
 				userCalendarSubCategoryService.assignAllSubcategoriesToUser(user);
 				logger.info("User has been created");
@@ -87,7 +88,7 @@ public class RegisterController extends AbstractController {
 				model.addAttribute("creationResultIsSuccess", true);
 				
 			} catch (ControllerServiceException e) {
-				logger.warn("Error occured during registration");
+				logger.warn("Error occured during registration", e);
 				model.addAttribute(
 						"creationResultMessage",
 						MessageTranslator.getStatusMessageTranslation(messageSource, e.getStatusCode(), locale));
