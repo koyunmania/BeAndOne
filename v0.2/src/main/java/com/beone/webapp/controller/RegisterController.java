@@ -141,7 +141,7 @@ public class RegisterController extends AbstractController {
 		
 		if(user.getEmail() == null || user.getEmail().length() == 0) {
 			ValidationError error = new ValidationError();
-			error.setFieldName("email");
+			error.setFieldName("Email");
 			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			validationErrors.add(error);
 		}
@@ -153,19 +153,19 @@ public class RegisterController extends AbstractController {
 //		}
 		if(user.getPassword() == null || user.getPassword().length() == 0) {
 			ValidationError error = new ValidationError();
-			error.setFieldName("password");
+			error.setFieldName("Password");
 			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(messageSource, StatusCode.MISSING_MANDATORY_FIELD, locale));
 			validationErrors.add(error);
 		}
-		if(user.getPassword() == null || !user.getPassword().equals(user.getPasswordRepeat())) {
-			ValidationError error = new ValidationError();
-			error.setFieldName("email");
-			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(
-					messageSource, 
-					StatusCode.PASSWORD_REPETITION_DOESNT_MATCH, 
-					locale));
-			validationErrors.add(error);
-		}
+//		if(user.getPassword() == null || !user.getPassword().equals(user.getPasswordRepeat())) {
+//			ValidationError error = new ValidationError();
+//			error.setFieldName("email");
+//			error.setValidationMessage(MessageTranslator.getStatusMessageTranslation(
+//					messageSource, 
+//					StatusCode.PASSWORD_REPETITION_DOESNT_MATCH, 
+//					locale));
+//			validationErrors.add(error);
+//		}
 		
 		return validationErrors;
 	}

@@ -4,8 +4,7 @@
 <%@include file="header.jsp"%>
 
 <!--  angular social share includes -->
-<link rel='stylesheet'
-	href="/resources/js/facebookSDK/angular-socialshare.css">
+<link rel='stylesheet' href="/resources/js/facebookSDK/angular-socialshare.css">
 
 <body onLoad="window.scroll(0, 350)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
@@ -32,21 +31,21 @@
 				<%@include file="leftmenu.jsp"%>
 			</div>
 			<div class="col-md-10">
-				<div class="row info-bar" style="z-index:-20">
-				<div class="col-md-9">
-					<div>
-						<a style="color: white; text-decoration: none;" class="fa fa-cog dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href ng-click="openProfileModal();">Profile</a></li>
-							<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
-						</ul>
-						<span class="info-date">{{selectedDate}} | {{current_time}}</span>
-						<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
-					</div>
+				<div class="row info-bar" style="z-index:-20;position:absolute;"> 
+					<div class="col-md-12">
+						<div>
+							<a style="color: white; text-decoration: none;" class="fa fa-cog dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href ng-click="openProfileModal();">Profile</a></li>
+								<li><a href="/logout" onclick="window.location.href='/logout'">Logout</a></li>
+							</ul>
+							<span class="info-date">{{selectedDate}} | {{current_time}}</span>
+							<span class="info-date">{{profile.currentCity.cityName}}, {{selectedCountry.countryName}}</span>
+						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="margin-top:60px;">
 					<div class="col-md-7" ng-controller="HappeningCtrl" ng-init="initHappenings()">
 						<h2 id="happenings-header">Bugunkuler</h2>
 						<div ng-repeat="doubleHappening in doubleHappenings" class="row">
@@ -69,8 +68,9 @@
 											<img src="{{doubleHappening[0].eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
-											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
-												<button type="button" class="btn btn-success" ng-click="toggleModal(doubleHappening[0])">+C</button>
+											<div class="col-md-12" style="text-align:left; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
+												<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(doubleHappening[0])"><img style="display: inline; margin-top: 2px;"
+														src="/resources/images/+C logo-01.png" height="14px"/></button>
 												<a href="https://www.google.com/search?q={{doubleHappening[0].eventName}}"
 														target="_blank" class="btn btn-default btn-google"><img style="display: inline; margin-top: 2px;"
 														src="../../resources/images/google-icon.svg" height="14px" /></a> 
@@ -98,8 +98,9 @@
 											<img src="{{doubleHappening[1].eventHappeningPhotoUrl}}" style="width: 85%; display: block; margin: 5% auto 5% auto;">
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
-											<div class="col-md-12" style="text-align:right; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
-												<button type="button" class="btn btn-success" ng-click="toggleModal(doubleHappening[1])">+C</button>
+											<div class="col-md-12" style="text-align:left; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
+												<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(doubleHappening[0])"><img style="display: inline; margin-top: 2px;"
+														src="/resources/images/+C logo-01.png" height="14px"/></button>
 												<a href="https://www.google.com/search?q={{doubleHappening[1].eventName}}"
 														target="_blank" class="btn btn-default btn-google"><img style="display: inline; margin-top: 2px;"
 														src="../../resources/images/google-icon.svg" height="14px" /></a> 
@@ -123,7 +124,7 @@
 										{{happening.eventDescription}}-->
 										<img class="img-responsive" src="{{happening.eventHappeningPhotoUrl}}"/>
 									</div>
-									<div class="modal-footer">
+									<div class="modal-footer" style="text-align:left;">
 										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook"
 											data-url='http://www.beandone.com'
 											data-shares='shares'

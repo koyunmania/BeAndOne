@@ -1,8 +1,8 @@
 <div class="user" ng-controller="ProfileCtrl" ng-init="initProfile()" style="margin-top:60px;">
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
-			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'">
+			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding:0px;text-align:center;">
+				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'" style="width:130px;">
 				<!--  <div class="img-thumbnail img-circle fa fa-user profile-picture"></div> -->
 			</a>
 			<ul class="dropdown-menu">

@@ -11,7 +11,7 @@ body {
 }
 
 .info-bar {
-  max-width: 815px;
+  width: 815px;
   height: 60px;
   transform: translate(-240px, 0px);
   background-color: #5a5a5a;
@@ -20,6 +20,7 @@ body {
   padding-left: 240px;
   font-size: 38px;
   color: white;
+  position:absolute;
 }
 .info-date {
   font-size: 20px;
@@ -217,6 +218,17 @@ body {
 	border:0px !important;
 }
 
+.plusc-button {
+	height:34px;
+	border: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+.plusc-share-buttons {
+	height:44px !important;
+	width:44px !important;
+	border-radius:50%;
+}
+
 /***************************************************************
 ***************************************************************
 *
@@ -226,7 +238,7 @@ body {
 ***************************************************************/
 .btn-international {
   color: #fff;
-  background-color: #5fc2c4;
+  background-color: #65CBBB;
 }
 .btn-international:hover,
 .btn-international:focus,
@@ -257,17 +269,17 @@ fieldset[disabled] .btn-international:active,
 .btn-international.disabled.active,
 .btn-international[disabled].active,
 fieldset[disabled] .btn-international.active {
-  background-color: #5fc2c4;
+  background-color: #65CBBB;
   border-color: #357ebd;
 }
 .btn-international .badge {
-  color: #5fc2c4;
+  color: #65CBBB;
   background-color: #fff;
 }
 /*********/
 .btn-independence {
   color: #fff;
-  background-color: #f7d752;
+  background-color: #3D5B9E;
 }
 .btn-independence:hover,
 .btn-independence:focus,
@@ -298,7 +310,7 @@ fieldset[disabled] .btn-independence:active,
 .btn-independence.disabled.active,
 .btn-independence[disabled].active,
 fieldset[disabled] .btn-independence.active {
-  background-color: #f7d752;
+  background-color: #3D5B9E;
   border-color: #357ebd;
 }
 .btn-independence .badge {
@@ -308,7 +320,7 @@ fieldset[disabled] .btn-independence.active {
 /*********/
 .btn-national {
   color: #fff;
-  background-color: #df6c4f;
+  background-color: #E74C3C;
 }
 .btn-national:hover,
 .btn-national:focus,
@@ -339,7 +351,7 @@ fieldset[disabled] .btn-national:active,
 .btn-national.disabled.active,
 .btn-national[disabled].active,
 fieldset[disabled] .btn-national.active {
-  background-color: #df6c4f;
+  background-color: #E74C3C;
   border-color: #357ebd;
 }
 .btn-national .badge {
@@ -350,7 +362,7 @@ fieldset[disabled] .btn-national.active {
 /*********/
 .btn-holy {
   color: #fff;
-  background-color: #efa759;
+  background-color: #EB9532;
 }
 .btn-holy:hover,
 .btn-holy:focus,
@@ -381,11 +393,11 @@ fieldset[disabled] .btn-holy:active,
 .btn-holy.disabled.active,
 .btn-holy[disabled].active,
 fieldset[disabled] .btn-holy.active {
-  background-color: #efa759;
+  background-color: #EB9532;
   border-color: #357ebd;
 }
 .btn-holy .badge {
-  color: #efa759;
+  color: #EB9532;
   background-color: #fff;
 }
 
@@ -396,7 +408,7 @@ fieldset[disabled] .btn-holy.active {
 }
 .btn-astro {
   color: #fff;
-  background-color: #71719e;
+  background-color: #674172;
 }
 .btn-astro:hover,
 .btn-astro:focus,
@@ -427,18 +439,18 @@ fieldset[disabled] .btn-astro:active,
 .btn-astro.disabled.active,
 .btn-astro[disabled].active,
 fieldset[disabled] .btn-astro.active {
-  background-color: #71719e;
+  background-color: #674172;
   border-color: #357ebd;
 }
 .btn-astro .badge {
-  color: #71719e;
+  color: #674172;
   background-color: #fff;
 }
 
 /*********/
 .btn-nature {
   color: #fff;
-  background-color: #5fc49f;
+  background-color: #66CC99;
 }
 .btn-nature:hover,
 .btn-nature:focus,
@@ -469,11 +481,11 @@ fieldset[disabled] .btn-nature:active,
 .btn-nature.disabled.active,
 .btn-nature[disabled].active,
 fieldset[disabled] .btn-nature.active {
-  background-color: #5fc49f;
+  background-color: #66CC99;
   border-color: #357ebd;
 }
 .btn-nature .badge {
-  color: #5fc49f;
+  color: #66CC99;
   background-color: #fff;
 }
 

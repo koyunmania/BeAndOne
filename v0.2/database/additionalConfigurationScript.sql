@@ -1,11 +1,11 @@
 -- The content of this file is to be executed after the data is imported.
 
-UPDATE beonecalendars SET colorcode='#71719e;', buttonClass='btn-astro', sortOrder=1  WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Astro Olaylar');
-UPDATE beonecalendars SET colorcode='#5fc49f;', buttonClass='btn-nature', sortOrder=2 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Doğa Olayları');
-UPDATE beonecalendars SET colorcode='#efa759;', buttonClass='btn-holy', sortOrder=3 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Kutsal Günler');
-UPDATE beonecalendars SET colorcode='#5fc2c4;', buttonClass='btn-international', sortOrder=4 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Uluslararası Günler');
-UPDATE beonecalendars SET colorcode='#df6c4f;', buttonClass='btn-national', sortOrder=5 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Ulusal Günler');
-UPDATE beonecalendars SET colorcode='#f7d752;', buttonClass='btn-independence', sortOrder=6 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Bağımsızlık Günleri');
+UPDATE beonecalendars SET colorcode='#674172;', buttonClass='btn-astro', sortOrder=1  WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Astro Olaylar');
+UPDATE beonecalendars SET colorcode='#66CC99;', buttonClass='btn-nature', sortOrder=2 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Doğa Olayları');
+UPDATE beonecalendars SET colorcode='#EB9532;', buttonClass='btn-holy', sortOrder=3 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Kutsal Günler');
+UPDATE beonecalendars SET colorcode='#65CBBB;', buttonClass='btn-international', sortOrder=4 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Uluslararası Günler');
+UPDATE beonecalendars SET colorcode='#E74C3C;', buttonClass='btn-national', sortOrder=5 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Ulusal Günler');
+UPDATE beonecalendars SET colorcode='#3D5B9E;', buttonClass='btn-independence', sortOrder=6 WHERE calendarid=(SELECT calendarid from beonecalendartranslations where transname='Bağımsızlık Günleri');
 
 UPDATE beonecalendarsubcategories SET calendaricon='A' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Eclipses');
 UPDATE beonecalendarsubcategories SET calendaricon='B' WHERE subcategoryid=(SELECT subcategoryid from beonecalendarsubcategorytranslations where calendarsubcategorytrans='Equinoxes and Solstices');
