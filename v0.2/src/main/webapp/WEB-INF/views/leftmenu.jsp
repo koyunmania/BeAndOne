@@ -21,9 +21,9 @@
 					<h4 class="modal-title happening">User Profile</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-					<form>
-						<div class="profile-item profile-area">
-							<img src="/resources/images/defaultprofile.png" class="img-thumbnail profile-img" onerror="this.src='/resources/images/defaultprofile.png'"/>
+					<form class="form-horizontal">
+						<div class="profile-item profile-area form-group">
+							<img src="/profile/photo" class="img-thumbnail img-circle" style="width:130px; height:130px;" onerror="this.src='/resources/images/defaultprofile.png'"/>
 							<div class="profileInput hidden">
 								<div class="form-group">
 									<label for="fileUpload">Select a file to upload</label>
@@ -45,56 +45,90 @@
 								<button type="button" class="btn btn-primary" id="photoUploadButton">Upload</button>
 							</div>
 						</div>
-						<div class="profile-item">
-							<div class="row">
-								<div class="col-md-6" style="text-align:right;"><label>Firstname:&nbsp;</label></div>
-								<div class="col-md-6" style="text-align:left;"><span class="profileLabel">{{profile.firstname}}</span> <input
-								type="text" class="profileInput hidden"
-								ng-model="profile.firstname" value="{{profile.firstname}}"></div>
+						
+						<div class="form-group">
+							<label for="firstname" class="col-sm-5 control-label">Firstname</label>
+							<div class="col-sm-7 profile-field-item">
+								<span class="profileLabel">{{profile.firstname}}</span>
+								<input type="text" class="form-control profileInput hidden" id="firstname" name="firstname" placeholder="Firstname" ng-model="profile.firstname">
 							</div>
 						</div>
-						<div class="profile-item">
-							<div class="row">
-								<div class="col-md-6" style="text-align:right;"><label>Lastname:&nbsp;</label></div>
-								<div class="col-md-6" style="text-align:left;"><span class="profileLabel">{{profile.lastname}}</span> <input
-								type="text" class="profileInput hidden"
-								ng-model="profile.lastname" value="{{profile.lastname}}"></div>
+						<div class="form-group">
+							<label for="lastname" class="col-sm-5 control-label">Lastname</label>
+							<div class="col-sm-7 profile-field-item">
+								<span class="profileLabel">{{profile.lastname}}</span>
+								<input type="text" class="form-control profileInput hidden" id="lastname" name="lastname" placeholder="Lastname" ng-model="profile.lastname">
 							</div>
 						</div>
-						<div class="profile-item">
-							<div class="row">
-								<div class="col-md-6" style="text-align:right;"><label>Current Country:&nbsp;</label></div>
-								<div class="col-md-6" style="text-align:left;"><span class="profileLabel">{{selectedCountry.countryName}}</span> <select class="profileInput hidden"
-									ng-model="selectedCountry"
-									ng-change="selectCountry(selectedCountry)"
+						<div class="form-group">
+							<label for="gender" class="col-sm-5 control-label">Gender</label>
+							<div class="col-sm-7 profile-field-item">
+								<span class="profileLabel">{{profile.gender}}</span>
+								<select class="form-control profileInput hidden" name="gender" ng-model="profile.gender">
+									<option value="-1">Select your gender</option>
+									<option value="Female" ng-selected="{{profile.gender === 'Female'}}">Female</option>
+									<option value="Male" ng-selected="{{profile.gender === 'Male'}}">Male</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-5 control-label">Current Country</label>
+							<div class="col-sm-7 profile-field-item">
+								<span class="profileLabel">{{selectedCountry.countryName}}</span>
+								<select class="form-control profileInput hidden" name="country" ng-model="selectedCountry" ng-change="selectCountry(selectedCountry)"
 									ng-options="country.countryName for country in allCountries track by country.countryId">
-								</select></div>
+								</select>
 							</div>
 						</div>
-						<div class="profile-item">
-							<div class="row">
-								<div class="col-md-6" style="text-align:right;"><label>Current City:&nbsp;</label></div>
-								<div class="col-md-6" style="text-align:left;"><span class="profileLabel">{{profile.currentCity.cityName}}</span> <select class="profileInput hidden" 
+						<div class="form-group">
+							<label for="city" class="col-sm-5 control-label">Current Citry</label>
+							<div class="col-sm-7 profile-field-item">
+								<span class="profileLabel">{{profile.currentCity.cityName}}</span>
+								<select class="form-control profileInput hidden" name="city"
 									ng-model="profile.currentCity"
 									ng-options="city.cityName for city in selectedCountry.cities track by city.cityId">
-								</select></div>
+								</select>
 							</div>
 						</div>
-						<div class="profile-item">
-							<div class="row">
-								<div class="col-md-6" style="text-align:right;"><label id="profileLabel">Gender:&nbsp;</label></div>
-								<div class="col-md-6" style="text-align:left;"><span class="profileLabel">{{profile.gender}}</span> <select class="profileInput hidden" ng-model="profile.gender" size="{{profile.gender.length}}">
-								<option ng-selected="{{profile.gender === 'Male'}}" value="Male">Male</option>
-								<option ng-selected="{{profile.gender === 'Female'}}" value="Female">Female</option>
-								</select></div>
-							</div>
-						</div>
-						<div class="profile-item">
-							<div class="row">
-								<div class="col-md-6" style="text-align:right;"><label id="profileLabel">Birthday:&nbsp;</label></div>
-								<div class="col-md-6" style="text-align:left;"><span class="profileLabel">{{profile.birthday}}</span> <div class="profileInput hidden" data-date="{{profile.birthday}}" style="display:inline-block" size="{{profile.birthday.length}}">
-									<input class="datepicker datepicker-input birthday" style="display:inline-block; font-size: 14px; width: 90px; background-color: #ddd;" ng-model="profile.birthday" type="text" value="{{profile.birthday}}">
-								</div></div>
+						<div class="form-group">
+							<label for="birthday-year" class="col-sm-5 control-label">Birthday</label>
+							<div class="col-sm-7 profile-field-item">
+								<div class="row">
+									<div class="col-lg-12">
+										<span class="profileLabel">{{profile.birthday}}</span>
+									</div>
+								</div>
+								<div class="row profileInput hidden">
+									<div class="col-lg-12">
+										<div class="row">
+											<div class="col-lg-4">Year:</div>
+											<div class="col-lg-8">
+												<select class="form-control" name="birthday-year"
+													ng-model="birthday.year"
+													ng-options="y for y in years track by y">
+												</select>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-4">Month:</div>
+											<div class="col-lg-8">
+												<select class="form-control" name="birthday-month"
+													ng-model="birthday.month"
+													ng-options="m for m in months track by m">
+												</select>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-4">Day:</div>
+											<div class="col-lg-8">
+												<select class="form-control" name="birthday-day"
+													ng-model="birthday.day"
+													ng-options="d for d in days track by d">
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">

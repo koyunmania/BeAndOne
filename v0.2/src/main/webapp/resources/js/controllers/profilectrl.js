@@ -11,6 +11,27 @@ beoneApp.controller('ProfileCtrl', function($interval, $scope, $rootScope, $http
 	$scope.userCalendarSubCategories = [];
 	$scope.selectAll = false;
 	$scope.greeting = "";
+	
+	$scope.birthday =  {
+		year:0,
+		month:0,
+		day:0
+	}
+	$scope.years =  [];
+	$scope.months =  [];
+	$scope.days =  [];
+	for(var y=1998; y > 1940; y--) {
+		//$scope.years.push({id:y, name:y});
+		$scope.years.push(""+y);
+	}
+	for(var m=1; m < 13; m++) {
+		//$scope.years.push({id:y, name:y});
+		$scope.months.push(""+m);
+	}
+	for(var m=1; m < 31; m++) {
+		//$scope.years.push({id:y, name:y});
+		$scope.days.push(""+m);
+	}
 
     $scope.initProfile = function(){
 		$scope.greeting();
@@ -317,6 +338,16 @@ beoneApp.controller('ProfileCtrl', function($interval, $scope, $rootScope, $http
 				} else {
 					$scope.$parent.profile = result;
 					$scope.$parent.profile.fullname = $scope.profile.firstname + " " + $scope.profile.lastname;
+					var bd = result.birthday;
+					$scope.birthday.year = bd.substr(0,4);
+					$scope.birthday.month = bd.substr(5, 2);
+					$scope.birthday.day = bd.substr(8, 2);
+					if($scope.birthday.month.startsWith("0")) {
+						$scope.birthday.month = $scope.birthday.month.substr(1, 1);
+					}
+					if($scope.birthday.day.startsWith("0")) {
+						$scope.birthday.day = $scope.birthday.day.substr(1, 1);
+					}
 					
 					var countries = $scope.allCountries;
 					for( var i = 0; i < countries.length; i++ ) {
@@ -423,6 +454,21 @@ beoneApp.controller('ProfileCtrl', function($interval, $scope, $rootScope, $http
 			item.innerHTML = "Save";
 			$scope.profile.saveOrEdit = "save";
 		} else {
+			var bd = $scope.birthday.year;
+			bd += "-";
+			if($scope.birthday.month < 10) {
+				bd += "0" + $scope.birthday.month;
+			} else {
+				bd += $scope.birthday.month;
+			}
+			bd += "-";
+			if($scope.birthday.day < 10) {
+				bd += "0" + $scope.birthday.day;
+			} else {
+				bd += $scope.birthday.day;
+			}
+			$scope.profile.birthday = bd;
+			
 			ProfileService.editProfile($scope.profile).then(
 				function(result){
 					$scope.profileEditToSave();
