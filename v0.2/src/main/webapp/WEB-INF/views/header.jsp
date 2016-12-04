@@ -15,12 +15,15 @@
     <link rel="stylesheet" href="/resources/css/BootSideMenu.css">
     <link rel="stylesheet" href="/resources/css/beonestyle.css">
     <link rel="stylesheet" href="/resources/css/bootstrap-datepicker-1.5.0/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/resources/css/nanoscroller.css">
 
     <style type="text/css">
         .user {
             padding: 5px;
             margin-bottom: 5px;
         }
+		
+		.nano { height: 100px; }
     </style>
 	
 	<script type="text/javascript">

@@ -1,6 +1,8 @@
 @import "../fonts/beone_icons/css/beone_icons.css";
+@import "../fonts/beone_icons/css/Glyphter.css";
 @import "../fonts/SegoeUISymbol/styles.css";
-@font-face { font-family: 'beone-font'; src: url('/resources/fonts/icomoon.ttf') format('truetype'); }
+@font-face { font-family: 'Glyphter'; src: url('/resources/fonts/icomoon.ttf') format('truetype'); }
+@font-face { font-family: 'AYearWithoutRain'; src: url('/resources/fonts/beone_fonts/AYearWithoutRain.ttf') format('truetype'); }
 
 .beone-icon-calendar:before {
 	content:"\e900"
@@ -140,14 +142,14 @@ body {
 }
 
 .title-page {
-	background: url('/resources/images/webapp_cover.png') no-repeat center center;	
-	background-size:100% 100% !important;
 	height: 500px;
 }
 
 .title-page .b-logo {
-  height: 72px;
-  width: 85px;
+  height: 140px;
+  width: 100px;
+  background: url('/resources/images/beandone-logo-06.png') no-repeat center center;
+  background-size: cover;
   margin-left: 65px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -500,3 +502,30 @@ fieldset[disabled] .btn-nature.active {
   background-color: #fff;
 }
 
+.beone-instagram {
+	background-color:transparent;
+	font-weight:bold;
+	font-size:16px;
+	border:0px;
+}
+
+@media(max-width:700px) {
+	.title-page  {
+		text-align:center;
+		background-position: center center !important;
+		height:300px;
+	}
+	
+	.title-page .instagram {
+		float: none;
+		position: inherit;
+	}
+}
+
+@media(min-width:701px) {
+	.title-page  {
+		text-align:center;
+		background-position: center center !important;
+		height:400px;
+	}
+}

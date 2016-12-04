@@ -9,9 +9,8 @@
 <body onLoad="window.scroll(0, 350)">
 	<div ng-app="beone" ng-controller="RootCtrl" ng-init="initRoot()" class="container-fluid">
 		<div class="row">
-			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat; !important; background-size:cover !important; background-position:center center; overflow:hidden; position:relative;">
+			<div class="title-page col-md-12" style="background: url('http://d3sljlta800p6s.cloudfront.net/Cover/${coverPhoto.photoFileName}') no-repeat; !important; background-size:cover !important;">
 				<div class="b-logo">
-					<span>B</span>
 				</div>
 				<!--  <div class="mood">
 					<h3><spring:message code="label.home.cover.howisyourmood" /></h3>
@@ -21,7 +20,7 @@
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Sad" href=''>&#x1F621</a>
 					<a class="emoji" data-toggle="tooltip" data-placement="bottom" title="Crying" href=''>&#x1F62D</a>
 				</div> -->
-				<a href="https://www.instagram.com/benowmehere/" class="btn btn-default instagram" style="background-color:transparent;font-weight:bold;font-size:16px; border:0px;">
+				<a href="https://www.instagram.com/benowmehere/" class="btn btn-default instagram beone-instagram" style="background-color:transparent;font-weight:bold;font-size:16px; border:0px;">
 					<i class="fa fa-instagram"></i> @benowmehere
 				</a>
 			</div>
@@ -50,7 +49,7 @@
 								<div style="font-size:40px; margin-right: 0px; background-color: transparent; margin-right: 10px;">
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color:{{doubleHappening[0].subCategory.calendar.colorCode}}; padding-top: 15px; padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 15px;">
 											<div class="col-md-2">
-												<span style="color: white; font-family: 'beone_icons';">{{doubleHappening[0].subCategory.calendarIcon}}</span>
+												<span style="color: white; font-family: 'Glyphter';">{{doubleHappening[0].subCategory.calendarIcon}}</span>
 											</div>
 											<div class="col-md-10">
 												<span style="color: white; font-size:20px; vertical-align:middle">
@@ -80,7 +79,7 @@
 								<div style="font-size:40px; margin-right: 0px; background-color: transparent; margin-right: 10px;">
 										<div class="row" style="box-shadow: 2px 2px 5px #999999; background-color:{{doubleHappening[1].subCategory.calendar.colorCode}}; padding-top: 15px; padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 15px;">
 											<div class="col-md-2">
-												<span style="color: white; font-family: 'beone_icons';">{{doubleHappening[1].subCategory.calendarIcon}}</span>
+												<span style="color: white; font-family: 'Glyphter';">{{doubleHappening[1].subCategory.calendarIcon}}</span>
 											</div>
 											<div class="col-md-10">
 												<span style="color: white; font-size:20px; vertical-align:middle">
@@ -96,7 +95,7 @@
 										</div>
 										<div class="row" style="box-shadow: 2px 2px 5px #999999;">
 											<div class="col-md-12" style="text-align:left; background-color: white; padding-right: 7.5%; padding-left: 7.5%;">
-												<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(doubleHappening[0])"><img style="display: inline; margin-top: 2px;"
+												<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(doubleHappening[1])"><img style="display: inline; margin-top: 2px;"
 														src="/resources/images/+C logo-01.png" height="14px"/></button>
 												<a href="https://www.google.com/search?q={{doubleHappening[1].eventName}}"
 														target="_blank" class="btn btn-default btn-google"><img style="display: inline; margin-top: 2px;"
@@ -115,7 +114,7 @@
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<div class="row">
 											<div class="col-lg-2">
-												<h3 class="modal-title happening"><span style="color: white; font-family: 'beone_icons';">{{happening.subCategory.calendarIcon}}</span></h3> 
+												<h3 class="modal-title happening"><span style="color: white; font-family: 'Glyphter';">{{happening.subCategory.calendarIcon}}</span></h3> 
 											</div>
 											<div class="col-lg-7">
 												<h3 class="modal-title happening">{{happening.eventName}}</h3> 
@@ -172,9 +171,10 @@
 									</div>
 								</form>
 							</c:if>
-								<div style="overflow-y:scroll; overflow-x:hidden; height:100px;">
+							<div class="nano">
+								<div style="height:100px;" class="nano-content">
 									<div ng-repeat="exper in experiences track by exper.experienceId" class="row" style="margin-bottom:15px;">
-										<div style="border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px; max-width:400px;">
+										<div style="margin-bottom:15px; border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px; padding-right:25px;">
 											<div class="col col-lg-9 experienceText">
 											{{exper.experienceDescription}}
 											</div>
@@ -195,6 +195,7 @@
 										</div>
 									</div>
 								</div>
+							</div>
 							</div>
 							<div id="experienceModal" class="modal fade" role="dialog">
 								<div class="modal-dialog" style="width:300px">
@@ -260,27 +261,28 @@
 											</div>
 										</form>
 									</c:if>
-										<div style="overflow-y:scroll; overflow-x:hidden; height:100px;">
-											<div ng-repeat="userAnswer in nelerOgrendinQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" style="margin-bottom:15px;">
-											<div style="border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px; max-width:400px;">
-												<div class="col col-lg-9 answerText">
-													{{userAnswer.userAnswerText}}
-												</div>								
-												<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
-													<div class="row">
-														<div class="col-lg-12" style="padding-left:10px;">
-															<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="editNelerOgrendinAnswer(exper, $index)" style="width:35px;"></button>
-															<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteNelerOgrendinAnswer(userAnswer, $index);" style="width:35px;"></button>
+										<div class="nano">
+											<div style="height:100px;" class="nano-content">
+												<div ng-repeat="userAnswer in nelerOgrendinQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" 
+												style="margin-bottom:15px; border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px;padding-right:25px;">
+													<div class="col col-lg-9 answerText">
+														{{userAnswer.userAnswerText}}
+													</div>								
+													<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
+														<div class="row">
+															<div class="col-lg-12" style="padding-left:10px;">
+																<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="editNelerOgrendinAnswer(exper, $index)" style="width:35px;"></button>
+																<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteNelerOgrendinAnswer(userAnswer, $index);" style="width:35px;"></button>
+															</div>
 														</div>
-													</div>
-													<div class="row" style="margin-top:5px;">
-														<div class="col-lg-12" style="padding-left:10px;">
-															<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(userAnswer, $event)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
-															src="/resources/images/+C logo-01.png" height="14px"/></button>
+														<div class="row" style="margin-top:5px;">
+															<div class="col-lg-12" style="padding-left:10px;">
+																<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(userAnswer, $event)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
+																src="/resources/images/+C logo-01.png" height="14px"/></button>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 											</div>
 										</div>
 									</div>
@@ -296,22 +298,34 @@
 									</div>
 									<div class="panel-body">
 									<c:if test="${usersCurrentDate.equals(selectedDate)}">
-										<form>
-											<textarea class="form-control" rows="2" cols="30"
-												ng-model="whatIsYourWishQuestion.answerText"></textarea>
-											<br />
-											<button class="btn btn-default diary-buttons" type="submit"
+										<form>												
+											<div class="row">
+												<div class="col-lg-12">
+													<textarea class="form-control" rows="2" cols="30"
+														ng-model="whatIsYourWishQuestion.answerText"></textarea>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12" style="text-align:right; margin-top:10px; background:url('/resources/images/beandone_questions_bigpencil.png') no-repeat;background-position-x:15px;background-position-y:bottom;">
+													<button class="btn btn-default diary-buttons" type="submit"
 												ng-click="saveWhatIsYourWishAnswer(whatIsYourWishQuestion.answerText, 2)">Save</button>
+												</div>
+											</div>
 										</form>
 									</c:if>
-										<div ng-repeat="userAnswer in whatIsYourWishQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" style="margin-bottom:15px;">
-											<div class="col col-lg-8">
-												{{userAnswer.userAnswerText}}
-											</div>
-											<div class="col col-lg-4" style="text-align:right;">
-												<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)"></button>
-												<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash diary-buttons" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
-												<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
+										<div class="nano">
+											<div style="height:100px;" class="nano-content">
+												<div ng-repeat="userAnswer in whatIsYourWishQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" 
+												style="margin-bottom:15px; border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px;padding-right:25px;">
+													<div class="col col-lg-8">
+														{{userAnswer.userAnswerText}}
+													</div>
+													<div class="col col-lg-4" style="text-align:right;">
+														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)"></button>
+														<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash diary-buttons" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
+														<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -325,11 +339,11 @@
 	</div>
 
 	<script type="text/javascript">
-		//$('#test').BootSideMenu({ side: "left", autoClose: true });
+	//$('#test').BootSideMenu({ side: "left", autoClose: true });
 		
-		function checkTime(i) {
-        return (i < 10) ? "0" + i : i;
-    }
+	function checkTime(i) {
+		return (i < 10) ? "0" + i : i;
+	}
 
     function startTime() {
         var today = new Date(),
@@ -341,8 +355,33 @@
         }, 500);
     }
     startTime();
+	
 	</script>
 	<%@include file="footer.jsp"%>
+	<script src="https://raw.githubusercontent.com/jamesflorentino/nanoScrollerJS/master/bin/javascripts/jquery.nanoscroller.min.js"></script>
+	
+	<script type="text/javascript">
+	$(".nano").nanoScroller({ alwaysVisible: true });
+		
+	function parallax(){
+		var scrolled = $(window).scrollTop();
+		//$('.title-page').css('top', (scrolled * 0.2) + 'px');
+		
+		var velocity = 0.5;
+		var pos = $(window).scrollTop(); 
+    $('.title-page').each(function() { 
+        var $element = $(this);
+        // subtract some from the height b/c of the padding
+        var height = $element.height()-18;
+        $(this).css('background-position', '50% ' + Math.round((height - pos) * velocity) + 'px'); 
+    }); 
+	}
+	
+	$(window).scroll(function(e){
+		parallax();
+	});
+	
+	</script>
 </body>
 
 </html>

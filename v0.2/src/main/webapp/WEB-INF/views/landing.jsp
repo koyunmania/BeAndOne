@@ -19,8 +19,17 @@ body {
 		<div class="intro-header">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-md-offset-2 loginframe">
-						<div class="intro-message">        
+					<div class="col-md-6 loginframe">
+						<div class="intro-message" style="font-size:20px; text-align:left;">
+							<div style="font-family: AYearWithoutRain";>
+								<p>Bir tutam <span style="font-size:35px; color:#49C1D2;">farkindalilik</span>, bir fiske <span style="font-size:35px; color:#E89169;">sevgi</span>;</p>
+								<p>Daha iyi bir evren icin....</p>
+							</div>
+							<div style="margin-top:20px;">
+								<p>Her gün enerji seviyemizi etkileyen bir sürü seyler oluyor.</p>
+								<p>Bunlari takip etmeye ne dersin?</p>
+							</div>
+							<p><button type="button" class="btn btn-default" style="background-color:transparent; width:180px; height:40px; border-radius:40px; color:white; font-weight:bold; font-size:16px;">Bize katilin</button></p>
                     	</div>
 					</div>
 				</div>
