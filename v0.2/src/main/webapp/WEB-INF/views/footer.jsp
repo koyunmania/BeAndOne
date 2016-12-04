@@ -5,10 +5,10 @@
                 <div class="col-lg-12">
                     <ul class="list-inline">
                         <li style="margin-right:30px;">
-                            <a href="#">Turkish</a>
+                            <a href="#">Hakkimizda</a>
                         </li>
                         <li>
-                            <a href="#">English</a>
+                            <a href="#">Iletisim</a>
                         </li>
                     </ul>                    
                 </div>

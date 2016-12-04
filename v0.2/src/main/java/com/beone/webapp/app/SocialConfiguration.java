@@ -189,6 +189,7 @@ public class SocialConfiguration {
 		    	signInAdapter);
 		cont.setSignUpUrl("/login?error=noaccount&");
 		cont.setPostSignInUrl("/home");
+		cont.setApplicationUrl("http://www.beandone.com");
 	    return cont;
 	}
 	
@@ -207,6 +208,7 @@ public class SocialConfiguration {
 		cont.addInterceptor(inter);
 		cont.setViewPath("/");		
 		cont.setLoginService(loginService);
+		cont.setApplicationUrl("http://www.beandone.com");
 		
 	    return cont;
 	}

@@ -191,6 +191,8 @@ public class ProfileService {
                     email.setLocale(user.getLocale());
                     email.setUserName(user.getEmail());
                     emailService.sendVerificationEmail(user, email);
+                } else {
+                	logger.info("User could not be created, so no email is sent.");
                 }
                 logger.info("User has been created, assigning him all of the subcategories.");
 
@@ -214,7 +216,7 @@ public class ProfileService {
             throw new ControllerServiceException(StatusCode.MISSING_MANDATORY_FIELD, "Username cannot be empty");
         } else if (user.getPassword() == null || user.getPassword().length() == 0) {
             throw new ControllerServiceException(StatusCode.MISSING_MANDATORY_FIELD, "Password cannot be empty");
-        } else if (user.getGender() != null && (user.getGender().equalsIgnoreCase("female") || user.getGender().equalsIgnoreCase("male"))) {
+        } else if (user.getGender() != null && !user.getGender().equalsIgnoreCase("female") && !user.getGender().equalsIgnoreCase("male")) {
             throw new ControllerServiceException(StatusCode.MISSING_MANDATORY_FIELD, "Please select your gender from the list.");
         } else {
             return true;

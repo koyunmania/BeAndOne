@@ -81,6 +81,12 @@ public class BeOneCalendarUtil {
 					? "http://d3sljlta800p6s.cloudfront.net/PlusC/1.jpg"
 					: "http://d3sljlta800p6s.cloudfront.net/PlusC/"+trans.getPlusCToWeb()+".jpg");
 		
+		String eventTime = cal.getEventDate().toString();
+		
+		converted.setEventTimeDisplayable(
+				""+eventTime.substring(11, 13)+
+				":"+eventTime.substring(14, 16));
+		
 		return converted;
 	}
 

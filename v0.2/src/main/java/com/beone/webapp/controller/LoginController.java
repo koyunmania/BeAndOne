@@ -2,14 +2,11 @@ package com.beone.webapp.controller;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,12 +19,19 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.beone.constants.Constants;
 import com.beone.webapp.controller.service.LoginService;
@@ -40,7 +44,6 @@ import com.beone.webapp.model.exceptions.ControllerServiceException;
 import com.beone.webapp.model.exceptions.ValidationError;
 import com.beone.webapp.persistence.UserDao;
 import com.beone.webapp.persistence.UserTokenDao;
-import com.beone.webapp.utils.GeneralUtils;
 import com.beone.webapp.utils.MessageTranslator;
 import com.beone.webapp.utils.UrlUtils;
 
@@ -62,6 +65,9 @@ public class LoginController extends AbstractController {
 	public void setLocalSessionFactory(SessionFactory localSessionFactory) {
 		this.localSessionFactory = localSessionFactory;
 	}
+	
+	@Autowired
+	protected ConnectionFactoryRegistry connectionFactoryLocator;
 
 //	private Facebook facebook;
 	
@@ -141,6 +147,26 @@ public class LoginController extends AbstractController {
 		}
 		return "landing";
 	}
+	
+//	@RequestMapping(value = "/face-login", method = RequestMethod.GET)
+//	public ModelAndView login(ModelAndView mv,
+//			HttpServletRequest httpServletRequest) {
+//		
+//		FacebookConnectionFactory facebookConnectionFactory = (FacebookConnectionFactory)
+//				connectionFactoryLocator.getConnectionFactory(Facebook.class);
+//
+//		OAuth2Operations oauthOperations = facebookConnectionFactory.getOAuthOperations();
+//		OAuth2Parameters params = new OAuth2Parameters();
+//
+//		params.setRedirectUri("http://localhost:8080/signin/facebook");
+//		params.setScope("public_profile,email,user_birthday,publish_actions");
+//		String authorizeUrl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, params);
+//		
+//		RedirectView rv = new RedirectView(authorizeUrl);
+//		logger.info("url= {}", authorizeUrl);
+//		mv.setView(rv);
+//		return mv;
+//	}
 	
 	/**
 	 * When user logs in, then insert new entries for each wish of the user<br/>

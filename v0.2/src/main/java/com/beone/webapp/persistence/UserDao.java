@@ -82,6 +82,7 @@ public class UserDao extends AbstractDao {
 //	}
 	
 	public boolean checkExistingInsertNewFromProfile (User user) throws EntityExistsException {
+		logger.debug("checkExistingInsertNewFromProfile called for user.");
 		Session session = this.localSessionFactory.getCurrentSession();
 		List items = session.createQuery("from User where (username=:username or email=:email) and provider=:provider")
 				.setParameter("username", user.getUsername())
@@ -92,14 +93,19 @@ public class UserDao extends AbstractDao {
 		boolean querySuccess=false;
 		
 		if(items == null || items.size() == 0) {
+			logger.debug("There is no user existing, creating allowed.");
 			//session.saveOrUpdate(user);
 			if(User.USER_PROVIDER_BEONE.equals(user.getProvider())) {
 				user.setStatus(User.STATUS_PENDING); //setting the default value to active user as false for email verification
 			} else {
+				// Users from external connections automatically set to active
 				user.setStatus(User.STATUS_ACTIVE);
 			}
 			session.save(user);
 			querySuccess=true;
+		} else {
+			logger.debug("There is already a user existing with given data.");
+			throw new EntityExistsException("There is already a user with given data");
 		}
 		
 		if(user.getExternalConnections() != null && user.getExternalConnections().size() > 0) {

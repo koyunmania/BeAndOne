@@ -53,7 +53,7 @@
 											</div>
 											<div class="col-md-10">
 												<span style="color: white; font-size:20px; vertical-align:middle">
-													<label>{{doubleHappening[0].eventName}}</label>
+													<label>{{doubleHappening[0].eventName}} {{(doubleHappening[0].eventType != 'FullDayEvent' ? doubleHappening[0].eventTimeDisplayable : '')}}</label>
 												</span><br/>
 												<span style="color: white; font-size:12px; vertical-align:middle">
 													<label>{{doubleHappening[0].subCategory.calendarSubCategory}}</label>
@@ -83,7 +83,7 @@
 											</div>
 											<div class="col-md-10">
 												<span style="color: white; font-size:20px; vertical-align:middle">
-													<label>{{doubleHappening[1].eventName}}</label>
+													<label>{{doubleHappening[1].eventName}} {{(doubleHappening[1].eventType != 'FullDayEvent' ? doubleHappening[1].eventTimeDisplayable : '')}}</label>
 												</span><br/>
 												<span style="color: white; font-size:12px; vertical-align:middle">
 													<label>{{doubleHappening[1].subCategory.calendarSubCategory}}</label>
@@ -107,26 +107,24 @@
 						</div>
 						
 						<div id="happeningModal" class="modal fade" role="dialog">
-							<div class="modal-dialog" style="width: 290px;">
+							<div class="modal-dialog" style="width: 440px;">
 								<!-- Modal content-->
 								<div class="modal-content">
 									<div class="modal-header" style="background-color:{{happening.subCategory.calendar.colorCode}}; color:white; font-weight:bold;">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<div class="row">
 											<div class="col-lg-2">
-												<h3 class="modal-title happening"><span style="color: white; font-family: 'Glyphter';">{{happening.subCategory.calendarIcon}}</span></h3> 
+												<h3 class="modal-title happening"><span style="color: white; font-family: 'Glyphter'; font-size:45px;">{{happening.subCategory.calendarIcon}}</span></h3> 
 											</div>
 											<div class="col-lg-7">
-												<h3 class="modal-title happening">{{happening.eventName}}</h3> 
-												<h4 class="modal-title happening">{{happening.subCategory.calendarSubCategory}}</h4> 
+												<h3 class="modal-title happening">{{happening.eventName}} {{(happening.eventType != 'FullDayEvent' ? happening.eventTimeDisplayable : '')}}</h3> 
 											</div>
 										</div>
 									</div>
-									<div class="modal-body happening"
-										style="min-height: 300px; background-repeat: no-repeat;">
+									<div class="modal-body happening happening-modal-body">
 										<!-- <div style="height: 40px;"></div>
 										{{happening.eventDescription}}-->
-										<img class="img-responsive" src="{{happening.eventHappeningPhotoUrl}}"/>
+										<img class="img-responsive" src="{{happening.eventHappeningPhotoUrl}}" style="width:400px;"/>
 									</div>
 									<div class="modal-footer" style="text-align:left;">
 										<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook plusc-share-buttons"
@@ -171,31 +169,36 @@
 									</div>
 								</form>
 							</c:if>
-							<div class="nano">
-								<div style="height:100px;" class="nano-content">
-									<div ng-repeat="exper in experiences track by exper.experienceId" class="row" style="margin-bottom:15px;">
-										<div style="margin-bottom:15px; border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px; padding-right:25px;">
-											<div class="col col-lg-9 experienceText">
-											{{exper.experienceDescription}}
-											</div>
-											<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
-												<div class="row">
-													<div class="col-lg-12" style="padding-left:10px;">
-														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)" style="width:35px;"></button>
-														<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteExperience(exper, $index)" style="width:35px;"></button>
+								<div class="nano">
+									<div style="height:100px;" class="nano-content">
+										<div ng-repeat="exper in experiences track by exper.experienceId" style="margin-bottom:15px;">
+											<div class="row answer-text-container" style="margin-bottom:15px; padding-bottom:10px; min-height:85px; overflow:hidden;">
+												<div class="col col-lg-9 experienceText">
+												{{exper.experienceDescription}}
+												</div>
+												<div class="col col-lg-3" style="text-align:right;padding-right:0px;">
+													<div class="row">
+														<div class="col-lg-12" style="padding-left:10px;">
+															<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)" style="width:35px;"></button>
+															<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteExperience(exper, $index)" style="width:35px;"></button>
+														</div>
+													</div>
+													<div class="row" style="margin-top:5px;">
+														<div class="col-lg-12" style="padding-left:10px;">
+															<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(exper)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
+															src="/resources/images/+C logo-01.png" height="14px"/></button>
+														</div>
 													</div>
 												</div>
-												<div class="row" style="margin-top:5px;">
-													<div class="col-lg-12" style="padding-left:10px;">
-														<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(exper)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
-														src="/resources/images/+C logo-01.png" height="14px"/></button>
-													</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													<hr width="75%" style="border-color:#BBB; border-width:2px;"/>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 							</div>
 							<div id="experienceModal" class="modal fade" role="dialog">
 								<div class="modal-dialog" style="width:300px">
@@ -205,8 +208,8 @@
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title happening">Guzellikleri paylas</h4> 
 										</div>
-										<div class="modal-body happening"
-											style="min-height: 150px; background-repeat: no-repeat;">
+										<div class="modal-body happening happening-modal-body"
+											style="min-height: 150px !important;">
 											<div style="height: 40px;"></div>
 											{{experience.experienceDescription}}
 										</div>
@@ -262,24 +265,30 @@
 										</form>
 									</c:if>
 										<div class="nano">
-											<div style="height:100px;" class="nano-content">
-												<div ng-repeat="userAnswer in nelerOgrendinQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" 
-												style="margin-bottom:15px; border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px;padding-right:25px;">
-													<div class="col col-lg-9 answerText">
-														{{userAnswer.userAnswerText}}
-													</div>								
-													<div class="col col-lg-3" style="text-align:right;padding-right:5px;">
-														<div class="row">
-															<div class="col-lg-12" style="padding-left:10px;">
-																<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="editNelerOgrendinAnswer(exper, $index)" style="width:35px;"></button>
-																<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteNelerOgrendinAnswer(userAnswer, $index);" style="width:35px;"></button>
+											<div style="height:100px;" class="nano-content row">
+												<div ng-repeat="userAnswer in nelerOgrendinQuestion.foundAnswers track by userAnswer.userAnswerId" class="col-lg-12 answer-text-container">
+													<div class="row" style="margin-bottom:15px; padding-bottom:10px; min-height:85px; overflow:hidden;">
+														<div class="col col-lg-9 answerText">
+															{{userAnswer.userAnswerText}}
+														</div>								
+														<div class="col col-lg-3" style="text-align:right;">
+															<div class="row">
+																<div class="col-lg-12" style="padding-left:10px;">
+																	<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="editNelerOgrendinAnswer(exper, $index)" style="width:35px;"></button>
+																	<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteNelerOgrendinAnswer(userAnswer, $index);" style="width:35px;"></button>
+																</div>
+															</div>
+															<div class="row" style="margin-top:5px;">
+																<div class="col-lg-12" style="padding-left:10px;">
+																	<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(userAnswer, $event)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
+																	src="/resources/images/+C logo-01.png" height="14px"/></button>
+																</div>
 															</div>
 														</div>
-														<div class="row" style="margin-top:5px;">
-															<div class="col-lg-12" style="padding-left:10px;">
-																<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(userAnswer, $event)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
-																src="/resources/images/+C logo-01.png" height="14px"/></button>
-															</div>
+													</div>
+													<div class="row">
+														<div class="col-lg-12">
+															<hr width="75%" style="border-color:#BBB; border-width:2px;"/>
 														</div>
 													</div>
 												</div>
@@ -314,22 +323,72 @@
 										</form>
 									</c:if>
 										<div class="nano">
-											<div style="height:100px;" class="nano-content">
-												<div ng-repeat="userAnswer in whatIsYourWishQuestion.foundAnswers track by userAnswer.userAnswerId" class="row" 
-												style="margin-bottom:15px; border-bottom-width:2px; border-bottom-style:solid; border-bottom-color:#AAA;padding-bottom:10px;min-height:85px;padding-right:25px;">
-													<div class="col col-lg-8">
-														{{userAnswer.userAnswerText}}
+											<div style="height:100px;" class="nano-content row">
+												<div ng-repeat="userAnswer in whatIsYourWishQuestion.foundAnswers track by userAnswer.userAnswerId" class="col-lg-12 answer-text-container">
+													<div class="row" style="margin-bottom:15px; padding-bottom:10px; min-height:85px;">
+														<div class="col col-lg-9">
+															{{userAnswer.userAnswerText}}
+														</div>														
+														<div class="col col-lg-3" style="text-align:right;">
+															<div class="row">
+																<div class="col-lg-12" style="padding-left:10px;">
+																	<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info fa fa-pencil diary-buttons" ng-click="editWhatIsYourWishAnswer(userAnswer, $index)" style="width:35px;"></button>
+																	<button type="button" id="experienceDeleteButton{{$index}}" class="btn btn-small btn-danger fa fa-trash-o diary-buttons" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);" style="width:35px;"></button>
+																</div>
+															</div>
+															<div class="row" style="margin-top:5px;">
+																<div class="col-lg-12" style="padding-left:10px;">
+																	<button type="button" class="btn btn-default plusc-button" ng-click="toggleModal(userAnswer, $event)" style="width:75px;"><img style="display: inline; margin-top: 2px;"
+																	src="/resources/images/+C logo-01.png" height="14px"/></button>
+																</div>
+															</div>
+														</div>
 													</div>
-													<div class="col col-lg-4" style="text-align:right;">
-														<button type="button" id="experienceEditButton{{$index}}" class="btn btn-small btn-info glyphicon glyphicon-pencil diary-buttons" ng-click="updateExperience(exper, selectedDate, $index)"></button>
-														<button type="button" class="btn btn-small btn-danger glyphicon glyphicon-trash diary-buttons" ng-click="deleteWhatIsYourWishAnswer(userAnswer, $index);"></button>
-														<button type="button" class="btn btn-small" ng-click="toggleModal(userAnswer, $event)">+C</button>
+													<div class="row">
+														<div class="col-lg-12">
+															<hr width="75%" style="border-color:#BBB; border-width:2px;"/>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+							
+							<div id="answerModal" class="modal fade" role="dialog">
+								<div class="modal-dialog" style="width:300px">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title happening">Guzellikleri paylas</h4> 
+										</div>
+										<div class="modal-body happening happening-modal-body"
+											style="min-height: 150px !important;">
+											<div style="height: 40px;"></div>
+											{{userAnswer.userAnswerText}}
+										</div>
+										<div class="modal-footer">
+											<a facebook-feed-share class="fa fa-facebook btn btn-primary btn-facebook plusc-share-buttons"
+												data-url='http://www.beandone.com'
+												data-shares='shares'
+												data-name={{userAnswer.userAnswerText}}
+												data-caption='Be&One'
+												style="font-size:25px;">
+											</a>
+											<a id="twitterButton" 
+												style="font-size:25px;"
+												class="fa fa-twitter btn btn-primary btn-twitter plusc-share-buttons"
+												data-lang="tr"
+												data-count='horizontal' 
+												data-url='http://www.beandone.com'
+												data-text='{{userAnswer.userAnswerText}}'
+												data-size="medium" href="https://twitter.com/intent/tweet?text={{experience.experienceDescription}}"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 							</div>
 						</div>
 					</div>
@@ -362,7 +421,8 @@
 	
 	<script type="text/javascript">
 	$(".nano").nanoScroller({ alwaysVisible: true });
-		
+	
+	/*
 	function parallax(){
 		var scrolled = $(window).scrollTop();
 		//$('.title-page').css('top', (scrolled * 0.2) + 'px');
@@ -380,6 +440,7 @@
 	$(window).scroll(function(e){
 		parallax();
 	});
+	*/
 	
 	</script>
 </body>

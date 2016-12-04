@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	
-	<bean name="applicationSettings" class="com.${application.package.name}.webapp.app.ApplicationSettings">
+	<bean name="applicationSettings" class="com.beone.webapp.app.ApplicationSettings">
 		<property name="settingsMap">
 			<map>
 				<entry key="photoAlbumsUploadLocation" value="/tmp/beoneweb/resources/"/>
@@ -72,32 +72,32 @@
 		<!-- OR mapping files. -->
 		<property name="mappingResources">
 			<list>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/City.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/Country.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/CoverPhoto.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/ProfileEntry.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserCalendars.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/NewsFeed.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/User.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserFriends.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserLikedNews.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserProfile.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserToken.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserExperience.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserWish.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserWishDailyCheck.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendar.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarTranslation.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarSubCategory.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarSubCategoryTranslation.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarEvent.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/BeOneCalendarEventTranslation.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/PossibleAnswer.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/Question.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserAnswer.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserCalendarSubCategory.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserAlbum.hbm.xml</value>
-				<value>/com/${application.package.name}/webapp/persistence/hbm/UserPhoto.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/City.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/Country.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/CoverPhoto.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/ProfileEntry.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserCalendars.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/NewsFeed.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/User.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserFriends.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserLikedNews.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserProfile.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserToken.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserExperience.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserWish.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserWishDailyCheck.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/BeOneCalendar.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/BeOneCalendarTranslation.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/BeOneCalendarSubCategory.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/BeOneCalendarSubCategoryTranslation.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/BeOneCalendarEvent.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/BeOneCalendarEventTranslation.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/PossibleAnswer.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/Question.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserAnswer.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserCalendarSubCategory.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserAlbum.hbm.xml</value>
+				<value>/com/beone/webapp/persistence/hbm/UserPhoto.hbm.xml</value>
 				<value>/com/beone/webapp/persistence/hbm/RegisterToken.hbm.xml</value>
 			</list>
 		</property>
@@ -109,81 +109,81 @@
 		<property name="sessionFactory" ref="localSessionFactory" />
     </bean>
     
-    <bean id="countryDao" class="com.${application.package.name}.webapp.persistence.CountryDao">
+    <bean id="countryDao" class="com.beone.webapp.persistence.CountryDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="cityDao" class="com.${application.package.name}.webapp.persistence.CityDao">
+	<bean id="cityDao" class="com.beone.webapp.persistence.CityDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userDao" class="com.${application.package.name}.webapp.persistence.UserDao">
+	<bean id="userDao" class="com.beone.webapp.persistence.UserDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userFriendDao" class="com.${application.package.name}.webapp.persistence.UserFriendDao">
+	<bean id="userFriendDao" class="com.beone.webapp.persistence.UserFriendDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="profileEntryDao" class="com.${application.package.name}.webapp.persistence.ProfileEntryDao">
+	<bean id="profileEntryDao" class="com.beone.webapp.persistence.ProfileEntryDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="newsFeedDao" class="com.${application.package.name}.webapp.persistence.NewsFeedDao">
+	<bean id="newsFeedDao" class="com.beone.webapp.persistence.NewsFeedDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userTokenDao" class="com.${application.package.name}.webapp.persistence.UserTokenDao">
+	<bean id="userTokenDao" class="com.beone.webapp.persistence.UserTokenDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userExperienceDao" class="com.${application.package.name}.webapp.persistence.UserExperienceDao">
+	<bean id="userExperienceDao" class="com.beone.webapp.persistence.UserExperienceDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userWishDao" class="com.${application.package.name}.webapp.persistence.UserWishDao">
+	<bean id="userWishDao" class="com.beone.webapp.persistence.UserWishDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="checkDao" class="com.${application.package.name}.webapp.persistence.WishDailyCheckDao">
+	<bean id="checkDao" class="com.beone.webapp.persistence.WishDailyCheckDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="calendarDao" class="com.${application.package.name}.webapp.persistence.CalendarDao">
+	<bean id="calendarDao" class="com.beone.webapp.persistence.CalendarDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="calendarEventDao" class="com.${application.package.name}.webapp.persistence.CalendarEventDao">
+	<bean id="calendarEventDao" class="com.beone.webapp.persistence.CalendarEventDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="calendarSubCategoryDao" class="com.${application.package.name}.webapp.persistence.CalendarSubCategoryDao">
+	<bean id="calendarSubCategoryDao" class="com.beone.webapp.persistence.CalendarSubCategoryDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="questionDao" class="com.${application.package.name}.webapp.persistence.QuestionDao">
+	<bean id="questionDao" class="com.beone.webapp.persistence.QuestionDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="possibleAnswerDao" class="com.${application.package.name}.webapp.persistence.PossibleAnswerDao">
+	<bean id="possibleAnswerDao" class="com.beone.webapp.persistence.PossibleAnswerDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userAnswerDao" class="com.${application.package.name}.webapp.persistence.UserAnswerDao">
+	<bean id="userAnswerDao" class="com.beone.webapp.persistence.UserAnswerDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="userCalendarSubCategoryDao" class="com.${application.package.name}.webapp.persistence.UserCalendarSubCategoryDao">
+	<bean id="userCalendarSubCategoryDao" class="com.beone.webapp.persistence.UserCalendarSubCategoryDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="photoAlbumDao" class="com.${application.package.name}.webapp.persistence.UserAlbumDao">
+	<bean id="photoAlbumDao" class="com.beone.webapp.persistence.UserAlbumDao">
 		<property name="localSessionFactory" ref="localSessionFactory"/>
 	</bean>
-	<bean id="registerTokenDao" class="com.${application.package.name}.webapp.persistence.RegisterTokenDao">
+	<bean id="registerTokenDao" class="com.beone.webapp.persistence.RegisterTokenDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
-	<bean id="coverPhotoDao" class="com.${application.package.name}.webapp.persistence.CoverPhotoDao">
+	<bean id="coverPhotoDao" class="com.beone.webapp.persistence.CoverPhotoDao">
 		<property name="localSessionFactory" ref="localSessionFactory" />
 	</bean>
 
 	
 	
 	
-	<bean id="loginService" class="com.${application.package.name}.webapp.controller.service.LoginService">
+	<bean id="loginService" class="com.beone.webapp.controller.service.LoginService">
 		<property name="userDao" ref="userDao" />
 		<property name="tokenDao" ref="userTokenDao" />
 	</bean>
 
-	<bean id="emailService" class="com.${application.package.name}.webapp.controller.service.EmailService">
+	<bean id="emailService" class="com.beone.webapp.controller.service.EmailService">
 		<property name="registerTokenDao" ref="registerTokenDao"/>
 		<property name="userDao" ref="userDao"/>
 	</bean>
 
-	<bean id="profileService" class="com.${application.package.name}.webapp.controller.service.ProfileService">
+	<bean id="profileService" class="com.beone.webapp.controller.service.ProfileService">
 		<property name="profileEntryDao" ref="profileEntryDao" />
 		<property name="userDao" ref="userDao" />
 		<property name="tokenDao" ref="userTokenDao" />
@@ -193,65 +193,65 @@
 		<property name="registerTokenDao" ref="registerTokenDao"/>
 		<!-- <property name="userCalendarSubCategoryDao" ref="userCalendarSubCategoryDao" /> -->
 	</bean>
-	<bean id="experienceService" class="com.${application.package.name}.webapp.controller.service.ExperienceService">
+	<bean id="experienceService" class="com.beone.webapp.controller.service.ExperienceService">
 		<property name="userExperienceDao" ref="userExperienceDao" />
 	</bean>
-	<bean id="wishService" class="com.${application.package.name}.webapp.controller.service.WishService">
+	<bean id="wishService" class="com.beone.webapp.controller.service.WishService">
 		<property name="userWishDao" ref="userWishDao" />
 	</bean>
-	<bean id="checkService" class="com.${application.package.name}.webapp.controller.service.WishDailyCheckService">
+	<bean id="checkService" class="com.beone.webapp.controller.service.WishDailyCheckService">
 		<property name="checkDao" ref="checkDao" />
 	</bean>
-	<bean id="countryService" class="com.${application.package.name}.webapp.controller.service.CountryService">
+	<bean id="countryService" class="com.beone.webapp.controller.service.CountryService">
 		<property name="countryDao" ref="countryDao" />
 		<property name="cityDao" ref="cityDao" />
 	</bean>
-	<bean id="cityService" class="com.${application.package.name}.webapp.controller.service.CityService">
+	<bean id="cityService" class="com.beone.webapp.controller.service.CityService">
 		<property name="cityDao" ref="cityDao" />
 		<property name="countryDao" ref="countryDao" />
 	</bean>
-	<bean id="calendarService" class="com.${application.package.name}.webapp.controller.service.BeOneCalendarService">
+	<bean id="calendarService" class="com.beone.webapp.controller.service.BeOneCalendarService">
 		<property name="calendarDao" ref="calendarDao" />
 		<property name="calendarEventDao" ref="calendarEventDao" />
 	</bean>
-	<bean id="calendarEventService" class="com.${application.package.name}.webapp.controller.service.BeOneCalendarEventService">
+	<bean id="calendarEventService" class="com.beone.webapp.controller.service.BeOneCalendarEventService">
 		<property name="calendarEventDao" ref="calendarEventDao" />
 	</bean>
-	<bean id="calendarSubCategoryService" class="com.${application.package.name}.webapp.controller.service.BeOneCalendarSubCategoryService">
+	<bean id="calendarSubCategoryService" class="com.beone.webapp.controller.service.BeOneCalendarSubCategoryService">
 		<property name="calendarSubCategoryDao" ref="calendarSubCategoryDao" />
 	</bean>
-	<bean id="userservice" class="com.${application.package.name}.webapp.controller.service.UserService">
+	<bean id="userservice" class="com.beone.webapp.controller.service.UserService">
 		<property name="userDao" ref="userDao" />
 		<property name="cityDao" ref="cityDao" />
 		<property name="countryDao" ref="countryDao" />
 	</bean>
-	<bean id="userCalendarSubCategoryService" class="com.${application.package.name}.webapp.controller.service.UserCalendarSubCategoryService">
+	<bean id="userCalendarSubCategoryService" class="com.beone.webapp.controller.service.UserCalendarSubCategoryService">
 		<property name="userCalendarSubCategoryDao" ref="userCalendarSubCategoryDao" />
 	</bean>	
-	<bean id = "customAuthManagerUserService" class = "com.${application.package.name}.webapp.app.secure.CustomAuthManagerUserService">
+	<bean id = "customAuthManagerUserService" class = "com.beone.webapp.app.secure.CustomAuthManagerUserService">
 		<property name="userDao" ref="userDao"/>
 	</bean>
-	<bean id = "questionService" class = "com.${application.package.name}.webapp.controller.service.QuestionService">
+	<bean id = "questionService" class = "com.beone.webapp.controller.service.QuestionService">
 		<property name="questionDao" ref="questionDao"/>
 		<property name="userAnswerDao" ref="userAnswerDao"/>
 		<property name="possibleAnswerDao" ref="possibleAnswerDao"/>
 	</bean>
-	<bean id = "userAlbumService" class = "com.${application.package.name}.webapp.controller.service.UserAlbumService">
+	<bean id = "userAlbumService" class = "com.beone.webapp.controller.service.UserAlbumService">
 		<property name="photoAlbumDao" ref="photoAlbumDao"/>
 	</bean>
-	<bean id = "coverPhotoService" class = "com.${application.package.name}.webapp.controller.service.CoverPhotoService">
+	<bean id = "coverPhotoService" class = "com.beone.webapp.controller.service.CoverPhotoService">
 		<property name="coverPhotoDao" ref="coverPhotoDao"/>
 	</bean>
 
 
-	<bean id="securityAspect" class="com.${application.package.name}.webapp.app.secure.Secure" />
-    <bean id="tokenUtils" class="com.${application.package.name}.webapp.app.secure.TokenUtils">
+	<bean id="securityAspect" class="com.beone.webapp.app.secure.Secure" />
+    <bean id="tokenUtils" class="com.beone.webapp.app.secure.TokenUtils">
     	<property name="userTokenDao" ref="userTokenDao"/>
     </bean>
     
     
     <!-- Root Context: defines shared resources visible to all other web components -->
-	<bean class="com.${application.package.name}.webapp.app.SocialConfiguration">
+	<bean class="com.beone.webapp.app.SocialConfiguration">
 		<property name="dataSource" ref="dataSource" />
 		<property name="connectionFactoryLocator" ref="connectionFactoryLocator" />
 		<property name="loginService" ref="loginService" />
@@ -315,9 +315,9 @@
 	
 	<!-- These beans are required for token authentication part -->
 	<bean id="customAuthenticationEntryPoint"
-              class="com.${application.package.name}.webapp.app.secure.CustomAuthenticationEntryPoint" />
+              class="com.beone.webapp.app.secure.CustomAuthenticationEntryPoint" />
 
-    <bean class="com.${application.package.name}.webapp.app.secure.AuthenticationTokenProcessingFilter"
+    <bean class="com.beone.webapp.app.secure.AuthenticationTokenProcessingFilter"
               id="authenticationTokenProcessingFilter">
 		<property name="tokenUtils" ref="tokenUtils"/>
 		<property name="userDao" ref="userDao"/>

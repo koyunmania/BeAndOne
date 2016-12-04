@@ -2,7 +2,7 @@
 	<ul class="nav nav-pills">
 		<li role="presentation" class="dropdown" style="width:100%;">
 			<a class="dropdown-toggle profile-area" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding:0px;text-align:center;">
-				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'" style="width:130px;">
+				<img src="/profile/photo" class="img-thumbnail img-circle" onerror="this.src='/resources/images/defaultprofile.svg'" style="width:130px; height:130px;">
 				<!--  <div class="img-thumbnail img-circle fa fa-user profile-picture"></div> -->
 			</a>
 			<ul class="dropdown-menu">
@@ -130,7 +130,7 @@
 									<div ng-repeat="subCategory in selectedCalendar.subCategories | filter:query | orderBy:subCategory.calendarSubCategory">
 										<input id="subCategoryCheckbox{{subCategory.subcategoryId}}" type="checkbox" ng-click="addToSelectedSubCategoryList(subCategory, $index)" ng-model="checkboxValues[$index]" ng-checked="isUserSubCategory(subCategory) || selectAll">
 										<label  class="checkbox-inline" style="color:{{selectedCalendar.colorCode}}; font-weight:bold;">
-										<span style="font-family: 'beone_icons';">{{subCategory.calendarIcon}}</span>
+										<span style="font-family: 'Glyphter';">{{subCategory.calendarIcon}}</span>
 											{{subCategory.calendarSubCategory}}
 										</label>
 									</div>

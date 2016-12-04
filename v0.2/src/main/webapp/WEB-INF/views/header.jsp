@@ -3,7 +3,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Be&Now</title>
+    <title>Be&One</title>
     
     <!-- Bootstrap -->
     <!-- <link rel="stylesheet" href="/resources/css/bootstrap-3.2.0/bootstrap.min.css"/> -->
@@ -58,6 +58,7 @@
 			document.getElementById("locale").options.selectedIndex = localeIndex;
 		} */
 		
+		/*
 		function translatePageLang(pageLocale)
 		{
 			if(null!=pageLocale && null!=document.getElementById(pageLocale))
@@ -72,6 +73,7 @@
 				}
 			}			
 		}
+		*/
 	</script>
     
     <!-- Latest compiled and minified JavaScript -->

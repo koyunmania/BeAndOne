@@ -29,7 +29,7 @@ body {
 								<p>Her gün enerji seviyemizi etkileyen bir sürü seyler oluyor.</p>
 								<p>Bunlari takip etmeye ne dersin?</p>
 							</div>
-							<p><button type="button" class="btn btn-default" style="background-color:transparent; width:180px; height:40px; border-radius:40px; color:white; font-weight:bold; font-size:16px;">Bize katilin</button></p>
+							<p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#registrationModal" style="background-color:transparent; width:180px; height:40px; border-radius:40px; color:white; font-weight:bold; font-size:16px;">Bize katilin</button></p>
                     	</div>
 					</div>
 				</div>

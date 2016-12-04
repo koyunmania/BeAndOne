@@ -11,6 +11,7 @@ public class BeOneCalendarEventTO {
 	private int eventId;
 	private BeOneCalendarSubCategoryTO subCategory;
 	private String eventHappeningPhotoUrl;
+	private String eventTimeDisplayable;
 	
 	public String getEventName() {
 		return eventName;
@@ -60,5 +61,11 @@ public class BeOneCalendarEventTO {
 	public void setEventHappeningPhotoUrl(
 			String eventHappeningPhotoUrl) {
 		this.eventHappeningPhotoUrl = eventHappeningPhotoUrl;
+	}
+	public String getEventTimeDisplayable() {
+		return eventTimeDisplayable;
+	}
+	public void setEventTimeDisplayable(String eventTimeDisplayable) {
+		this.eventTimeDisplayable = eventTimeDisplayable;
 	}
 }
