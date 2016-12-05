@@ -158,13 +158,15 @@
 								<form>
 									<div class="row">
 										<div class="col-lg-12">
-											<textarea class="form-control" rows="2" id="experienceTextArea" cols="30" ng-model="newExperienceText"></textarea>
+											<textarea class="form-control" rows="2" id="experienceTextArea" cols="30" ng-model="experienceToAddOrEdit.experienceDescription"></textarea>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-lg-12" style="text-align:right; margin-top:10px; background:url('/resources/images/beandone_questions_bigpencil.png') no-repeat;background-position-x:15px;background-position-y:bottom;">
-											<button class="btn btn-default diary-buttons" type="submit"
-												ng-click="addExperience(newExperienceText, selectedDate)">Save</button>
+											<button class="btn btn-default diary-buttons" type="button"
+												ng-click="addExperience(selectedDate)">Save</button>
+											<button class="btn btn-default diary-buttons hidden" type="button"
+												ng-click="cancelEdit()">Cancel</button>
 										</div>
 									</div>
 								</form>

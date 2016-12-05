@@ -5,6 +5,12 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
     $scope.experiences = [];
 	$scope.googleSearch = "";
 	$scope.newExperienceText = "";
+	$scope.experienceToAddOrEdit = {
+		experienceDescription: "",
+		experienceId: null,
+		selectedIndex: null
+	};
+	
 
     $scope.addExperienceOnKeypress = function(event, newExperienceText, selectedDate){
 		if (event.which === 13){
@@ -53,28 +59,64 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
 		selectedBox.removeAttribute("disabled");
 	};
 
-    $scope.addExperience = function (newExperienceText, selectedDate) {
-        if(newExperienceText == null || newExperienceText == "") {
+    $scope.addExperience = function (selectedDate) {
+        if($scope.experienceToAddOrEdit.experienceDescription == "") {
         	alert("Experience cannot be empty");
         } else {
-			var newExperience = { experienceDescription: newExperienceText };
-        	ExperienceService.addExperience(newExperience, selectedDate).then(
-        		function(result){
-	            	newExperience.experienceId = result.userExperienceId;
-	                $scope.experiences.unshift(JSON.parse(JSON.stringify(newExperience)));
-					var textArea = document.getElementById("experienceTextArea");
-					textArea.value = "";
-        		},
-        		function(){
-        			//...
-        		}
-        	);
+			if($scope.experienceToAddOrEdit.experienceId != 0 && $scope.experienceToAddOrEdit.experienceId) {
+				ExperienceService.updateExperience($scope.experienceToAddOrEdit, selectedDate).then(
+					function(result){
+						/*
+						var experienceDbObject = result;
+						experienceDbObject.experienceDescription = $scope.experienceToAddOrEdit.experienceDescription;
+						delete experienceDbObject.user;
+						*/
+						/*
+						document.getElementById("experienceTextbox" + experienceIndexId).setAttribute("disabled", "disabled");
+						var selectedItem = document.getElementById("experienceEditButton" + experienceIndexId);
+						selectedItem.classList.remove("glyphicon-floppy-disk");
+						selectedItem.classList.add("glyphicon-pencil");
+						$scope.experiences[experienceIndexId].saveOrEdit = "edit";
+						*/
+						
+						$scope.experiences[$scope.experienceToAddOrEdit.selectedIndex].experienceDescription = result.experienceDescription;
+						
+						$scope.experienceToAddOrEdit = {
+							experienceDescription: "",
+							experienceId: null,
+							selectedIndex: null
+						};
+					}, 
+					function(response){
+						//...
+					});
+			} else {
+				ExperienceService.addExperience($scope.experienceToAddOrEdit, selectedDate).then(
+					function(result){
+						var newExperience = {
+							experienceId: result.userExperienceId,
+							experienceDescription: $scope.experienceToAddOrEdit.experienceDescription
+						}
+						
+						$scope.experiences.unshift(newExperience);
+						var textArea = document.getElementById("experienceTextArea");
+						textArea.value = "";
+						$scope.experienceToAddOrEdit = {
+							experienceDescription: "",
+							experienceId: null
+						};
+					},
+					function(){
+						//...
+					}
+				);
+			}
         }
     };
 
-    $scope.deleteExperience = function (experience, experienceScopeId, edit) {
+    $scope.deleteExperience = function (experience, experienceIndexId, edit) {
 		if(edit){
-			$scope.experiences.splice(experienceScopeId, 1);
+			$scope.experiences.splice(experienceIndexId, 1);
 
 			ExperienceService.deleteExperience(experience).then(
 				function (result) {
@@ -86,7 +128,7 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
 		} else if(window.confirm("Delete experience?")) {
 			ExperienceService.deleteExperience(experience).then(
 				function (result) {
-					$scope.experiences.splice(experienceScopeId, 1);
+					$scope.experiences.splice(experienceIndexId, 1);
 				},
 				function (response) {
 					//...
@@ -97,17 +139,24 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
 		}
     };
 
-    $scope.updateExperience = function (experience, selectedDate, experienceScopeId) {
-		$scope.newExperienceText = experience.experienceDescription.slice();
-		$scope.deleteExperience(experience, experienceScopeId, true);
-		/* if( $scope.experiences[experienceScopeId].saveOrEdit === "edit" || !$scope.experiences[experienceScopeId].saveOrEdit ){
-			var textarea = document.getElementById("experienceTextbox" + experienceScopeId);
+    $scope.updateExperience = function (experience, selectedDate, experienceIndexId) {
+		//$scope.newExperienceText = experience.experienceDescription.slice();
+		//$scope.deleteExperience(experience, experienceIndexId, true);
+		$scope.experienceToAddOrEdit = {
+			experienceDescription: experience.experienceDescription,
+			experienceId: experience.experienceId,
+			selectedIndex: experienceIndexId
+		}
+		
+		/*
+		if( $scope.experiences[experienceIndexId].saveOrEdit === "edit" || !$scope.experiences[experienceIndexId].saveOrEdit ){
+			var textarea = document.getElementById("experienceTextbox" + experienceIndexId);
 			textarea.removeAttribute("disabled");
 			textarea.focus();
-			var selectedItem = document.getElementById("experienceEditButton" + experienceScopeId);
-			selectedItem.classList.remove("glyphicon-pencil");
+			var selectedItem = document.getElementById("experienceEditButton" + experienceIndexId);
+			selectedItem.classList.remove("fa fa-pencil-o");
 			selectedItem.classList.add("glyphicon-floppy-disk");
-			$scope.experiences[experienceScopeId].saveOrEdit = "save";
+			$scope.experiences[experienceIndexId].saveOrEdit = "save";
 		} else {
 			ExperienceService.updateExperience(experience, selectedDate).then(
 				function(result){
@@ -115,17 +164,18 @@ beoneApp.controller('ExperienceCtrl', function ($http, $scope, $routeParams, $ti
 					experienceDbObject.experienceDescription = experience.experienceDescription;
 					delete experienceDbObject.user;
 					
-					document.getElementById("experienceTextbox" + experienceScopeId).setAttribute("disabled", "disabled");
-					var selectedItem = document.getElementById("experienceEditButton" + experienceScopeId);
+					document.getElementById("experienceTextbox" + experienceIndexId).setAttribute("disabled", "disabled");
+					var selectedItem = document.getElementById("experienceEditButton" + experienceIndexId);
 					selectedItem.classList.remove("glyphicon-floppy-disk");
 					selectedItem.classList.add("glyphicon-pencil");
-					$scope.experiences[experienceScopeId].saveOrEdit = "edit";
+					$scope.experiences[experienceIndexId].saveOrEdit = "edit";
 				}, 
 				function(response){
 					//...
 				}
 			);
-		} */
+		}
+		*/
     };
 	$scope.$on('reloadAllCalendarEvents', function(event, args){
 		$scope.initExperience();
