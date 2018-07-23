@@ -116,7 +116,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
     		}
     		
     		
-    		if (!strToken.equals("")) {
+    		if (!strToken.equals("") && !strToken.equals("null")) {
     			if (tokenUtils.validate(strToken, userDao)) {
     				authenticateContext(request, strToken);
     			} else {
